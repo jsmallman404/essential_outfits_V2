@@ -12,8 +12,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Homepage Launcher (Defult Page)
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/aboutus') -> name('products.about');
 
 //Shopping Cart Logic
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
