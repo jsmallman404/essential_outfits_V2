@@ -1,0 +1,117 @@
+/* General Styles */
+body {
+    background-color: #ded4c0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Container */
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+    color: #5a4a42;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #7a6652;
+    border-color: #7a6652;
+}
+
+.btn-primary:hover {
+    background-color: #5a4a42;
+    border-color: #5a4a42;
+}
+
+.btn-success {
+    background-color: #4e6b50;
+    border-color: #4e6b50;
+}
+
+.btn-success:hover {
+    background-color: #3a533e;
+    border-color: #3a533e;
+}
+
+.btn-danger {
+    background-color: #b04040;
+    border-color: #b04040;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #8a3131;
+}
+
+/* Table */
+.table {
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #7a6652;
+    color: white;
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Alerts */
+.alert-success, .alert-danger {
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #4e6b50;
+    color: white;
+}
+
+.alert-danger {
+    background-color: #b04040;
+    color: white;
+}
+
+/* Total Price */
+h4 {
+    color: #5a4a42;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+.navbar-brand {
+    display: block; /* Ensures it takes full width */
+    margin-bottom: 20px; /* Adds space below the logo */
+}
