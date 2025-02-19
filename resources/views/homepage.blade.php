@@ -72,17 +72,10 @@
       <a href="/brands/Jadeddldn.html">Jadedldn</a>
     </div>
   </div>
-  <div class="dropdown">
-    <a href="#">Sale</a>
-    <div class="dropdown-content">
-      <a href="/sale/clearance">Clearance</a>
-      <a href="/sale/discount">Discount</a>
-      <a href="/sale/new">New Arrivals</a>
-    </div>
-  </div>
+ 
 
     <!-- Added Contact and About buttons -->
-    <a href="/contact.html" class="nav-link">Contact</a>
+    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
     <a href=" {{ route('products.about') }}" class="nav-link">About</a>
 </nav>
 
@@ -92,11 +85,12 @@
       <div class="account-actions">
         <input type="text" class="search-bar" placeholder="Search">
         <a href="racer worldwide/wishlist.html" class="wishlist">
-          <i class="fas fa-heart"></i> Wishlist
+          <i class="fas fa-heart"></i> 
         </a>
-        <a href="cart.html" class="cart">
-          <i class="fas fa-shopping-cart"></i> Cart
+        <a href="{{ route('cart.index') }}" class="cart">
+          <i class="fas fa-shopping-cart"></i> 
         </a>
+
         <a href="{{ route('login') }}" class="nav-link">
           <i class="fas fa-user"></i> my account
         </a>
@@ -112,11 +106,10 @@
       <a href="#products" class="view-products-btn">View Products</a>
     </div>
     <div class="slideshow-images">
-      <img src="images/osb4tt.png" alt="Slide 1">
-      <img src="images/glogang.png" alt="Slide 2">
-      <img src="images/jaded.png" alt="Slide 3">
-      <img src="images/thuggunnababy.png" alt="Slide 4">
-
+    <img src="{{ asset('images/osb4tt.png') }}" alt="Slide 1">
+    <img src="{{ asset('images/glogang.png') }}" alt="Slide 2">
+    <img src="{{ asset('images/jaded.png') }}" alt="Slide 3">
+    <img src="{{ asset('images/thuggunnababy.png') }}" alt="Slide 4">
     </div>
   </section>
 
@@ -152,8 +145,7 @@
     </div>
     <!-- Add more products as needed -->
   </main>
-  <script src="slideshow.js"></script>
-  <script src="racer worldwide/wishlist.js"></script>
+  
 
   <footer class="footer">
     <div class="footer-container">
@@ -163,7 +155,7 @@
       </div>
       <div class="footer-contact">
         <h4>Contact Us</h4>
-        <p> <a href="mailto:esssentialsenquiries@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
+        <p> <a href="mailto:queriesessential@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
       </div>
       <div class="footer-socials">
         <h4>Follow Us</h4>
@@ -174,5 +166,20 @@
       <p>&copy; 2024 Essential Outfits. All Rights Reserved.</p>
     </div>
   </footer>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    let images = document.querySelectorAll(".slideshow-images img");
+    let currentIndex = 0;
+
+    function changeSlide() {
+        images[currentIndex].classList.remove("active"); // Remove active class from current image
+        currentIndex = (currentIndex + 1) % images.length; // Move to next image
+        images[currentIndex].classList.add("active"); // Show new active image
+    }
+
+    setInterval(changeSlide, 3000); // Change image every 3 seconds
+});
+</script>
+
 </body>
 </html>
