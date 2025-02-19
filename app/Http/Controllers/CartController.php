@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductVariant;
 
@@ -44,6 +46,40 @@ class CartController extends Controller
         session()->put('cart', $cart);
         return redirect()->route('cart.index')->with('success', 'Product added to cart!');
     }
+
+    public function checkout(Request $request)
+{
+
+    $user = Auth::user();  
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'You must be logged in to checkout.');
+    }
+
+    $cartItems = Cart::where('user_id', $user->id)->get();
+    if ($cartItems->isEmpty()) {
+        return redirect()->back()->with('error', 'Your cart is empty.');
+    }
+
+    $order = new Order();
+    $order->user_id = $user->id;
+    $order->total_price = $cartItems->sum(function ($cartItem) {
+        return $cartItem->product->price * $cartItem->quantity;
+    });
+    $order->status = 'Pending';
+    $order->save();
+
+    foreach ($cartItems as $cartItem) {
+        OrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $cartItem->product_id,
+            'quantity' => $cartItem->quantity,
+            'price' => $cartItem->product->price,
+        ]);
+    }
+
+    Cart::where('user_id', $user->id)->delete();
+    return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
+}
 
     public function removeFromCart($key)
     {

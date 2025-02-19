@@ -9,12 +9,10 @@
 </head>
 <body>
     <div class="container mt-5">
-       <!-- Logo and Homepage Link -->
        <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/essentiallogo1.png') }}" alt="Your Brand Logo" height="50">
         </a>
 
-      <!-- Back Button -->
         <div class="mb-3">
           <button class="btn btn-secondary" onclick="history.back()">← Back</button>
         </div>
@@ -70,7 +68,10 @@
 
             <div class="d-flex justify-content-between mt-3">
                 <a href="{{ route('products.index') }}" class="btn btn-primary">Continue Shopping</a>
-                <button class="btn btn-success">Proceed to Checkout</button>
+                <form action="{{ route('cart.checkout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary">Checkout</button>
+                </form>
             </div>
         @endif
     </div>
