@@ -83,7 +83,7 @@
 
     <!-- Added Contact and About buttons -->
     <a href="/contact.html" class="nav-link">Contact</a>
-    <a href=" {{ route('products.about') }}" class="nav-link">About</a>
+    <a href="{{ route('about') }}">About Us</a>
 </nav>
 
 
