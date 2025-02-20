@@ -11,10 +11,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/about', function () {
-    return view('products/about');
-})->name('about');
-
+Route::get('/aboutus') -> name('products.about');
 
 //Shopping Cart Logic
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
