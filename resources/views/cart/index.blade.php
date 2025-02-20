@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 </head>
 <body>
     <div class="container mt-5">
+       <!-- Logo and Homepage Link -->
+       <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{ asset('images/essentiallogo1.png') }}" alt="Your Brand Logo" height="50">
+        </a>
+
+      <!-- Back Button -->
+        <div class="mb-3">
+          <button class="btn btn-secondary" onclick="history.back()">← Back</button>
+        </div>
+
         <h2 class="text-center">Shopping Cart</h2>
 
         @if(session('success'))
