@@ -26,10 +26,12 @@
 
                             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                 @csrf
-                                <label for="size">Select Size:</label>
-                                <select name="size" class="form-control mb-2" required>
+                                <label for="variant_id">Select Size:</label>
+                                <select name="variant_id" class="form-control mb-2" required>
                                     @foreach($product->variants as $variant)
-                                        <option value="{{ $variant->size }}">{{ $variant->size }} ({{ $variant->stock }} left)</option>
+                                        <option value="{{ $variant->id }}">
+                                            {{ $variant->size }} ({{ $variant->stock }} left)
+                                        </option>
                                     @endforeach
                                 </select>
                                 <button type="submit" class="btn btn-primary w-100">Add to Cart</button>

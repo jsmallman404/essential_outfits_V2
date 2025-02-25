@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
+
 class OrderController extends Controller
 {
     public function index(Request $request) {
@@ -16,6 +17,7 @@ class OrderController extends Controller
 
         return view('admin.orders.index', compact('orders', "status"));
     }
+    
     public function show(Order $order)
     {
         return view('admin.orders.show', compact('order'));
@@ -40,4 +42,11 @@ class OrderController extends Controller
 
         return redirect()->back()->with('error', 'Order cannot be canceled.');
     }
+    public function destroy($id)
+{
+    $order = Order::findOrFail($id);
+    $order->orderItems()->delete();
+    $order->delete();
+    return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully.');
+}
 }

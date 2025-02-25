@@ -28,7 +28,7 @@
                 <tr>
                     <td>{{ $item->product->name }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>${{ number_format($item->price, 2) }}</td>
+                    <td>${{ number_format($item->product->price, 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -48,6 +48,15 @@
             <button type="submit" class="btn btn-danger">Cancel Order</button>
         </form>
         @endif
+        
+        <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">
+                Delete Order
+            </button>
+        </form>
+
 
         <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Back to Orders</a>
     </div>
