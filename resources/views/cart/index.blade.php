@@ -9,19 +9,13 @@
 </head>
 <body>
     <div class="container mt-5">
-        <!-- Brand Logo -->
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/essentiallogo1.png') }}" alt="Your Brand Logo" height="50">
         </a>
-
-        <!-- Back Button -->
         <div class="mb-3">
             <button class="btn btn-secondary" onclick="history.back()">← Back</button>
         </div>
-
         <h2 class="text-center">Shopping Cart</h2>
-
-        <!-- Success & Error Messages -->
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -30,14 +24,12 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        <!-- If Cart is Empty -->
         @if($cartItems->isEmpty())
             <p class="text-center">Your cart is empty.</p>
             <a href="{{ route('products.index') }}">
                 <button class="btn btn-primary">Return to Products</button>
             </a>
         @else
-            <!-- Cart Table -->
             <table class="table">
                 <thead>
                     <tr>
@@ -79,8 +71,6 @@
                     @endforeach
                 </tbody>
             </table>
-
-            <!-- Total Price -->
             <h4 class="text-end">Total: £{{ number_format($total, 2) }}</h4>
 
             <div class="d-flex justify-content-between mt-3">
