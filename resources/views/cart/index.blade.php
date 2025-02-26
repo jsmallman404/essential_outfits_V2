@@ -9,30 +9,26 @@
 </head>
 <body>
     <div class="container mt-5">
-       <!-- Logo and Homepage Link -->
-       <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/essentiallogo1.png') }}" alt="Your Brand Logo" height="50">
         </a>
-
-      <!-- Back Button -->
         <div class="mb-3">
-          <button class="btn btn-secondary" onclick="history.back()">← Back</button>
+            <button class="btn btn-secondary" onclick="history.back()">← Back</button>
         </div>
-
         <h2 class="text-center">Shopping Cart</h2>
-
         @if(session('success'))
-            <div class="alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
         @if(session('error'))
-            <div class="alert-danger">{{ session('error') }}</div>
+            <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        @if(empty($cart))
+        @if($cartItems->isEmpty())
             <p class="text-center">Your cart is empty.</p>
             <a href="{{ route('products.index') }}">
-            <button class="btn btn-primary">Return to Products</button> </a>
+                <button class="btn btn-primary">Return to Products</button>
+            </a>
         @else
             <table class="table">
                 <thead>
@@ -48,29 +44,41 @@
                 </thead>
                 <tbody>
                     @php $total = 0; @endphp
-                    @foreach($cart as $key => $item)
-                        @php $subtotal = $item['price'] * $item['quantity']; @endphp
+                    @foreach($cartItems as $cartItem)
+                        @php 
+                            $product = optional($cartItem->product);
+                            $variant = optional($cartItem->productVariant);
+                            $subtotal = ($product->price ?? 0) * $cartItem->quantity; 
+                        @endphp
                         <tr>
-                            <td><img src="{{ asset('images/' . $item['image']) }}" width="50"></td>
-                            <td>{{ $item['name'] }}</td>
-                            <td>{{ $item['size'] }}</td>
-                            <td>£{{ $item['price'] }}</td>
-                            <td>{{ $item['quantity'] }}</td>
+                            <td>
+                                <img src="{{ asset('storage/images/' . $product->image) }}" width="50" alt="{{ $product->name }}">
+                            </td>
+                            <td>{{ $product->name ?? 'Unknown Product' }}</td>
+                            <td>{{ $variant->size ?? 'N/A' }}</td>
+                            <td>£{{ number_format($product->price ?? 0, 2) }}</td>
+                            <td>{{ $cartItem->quantity }}</td>
                             <td>£{{ number_format($subtotal, 2) }}</td>
                             <td>
-                                <a href="{{ route('cart.remove', $key) }}" class="btn-danger">Remove</a>
+                                <form action="{{ route('cart.remove', $cartItem->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
                             </td>
                         </tr>
                         @php $total += $subtotal; @endphp
                     @endforeach
                 </tbody>
             </table>
-
             <h4 class="text-end">Total: £{{ number_format($total, 2) }}</h4>
 
             <div class="d-flex justify-content-between mt-3">
                 <a href="{{ route('products.index') }}" class="btn btn-primary">Continue Shopping</a>
-                <button class="btn btn-success">Proceed to Checkout</button>
+                <form action="{{ route('cart.checkout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">Checkout</button>
+                </form>
             </div>
         @endif
     </div>

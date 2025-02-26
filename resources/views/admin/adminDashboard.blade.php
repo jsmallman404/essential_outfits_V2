@@ -12,6 +12,9 @@
         <div class="text-center mt-4">
             <a href="{{ route('admin.products') }}" class="btn btn-primary">Manage Products</a>
         </div>
+        <div class="text-center mt-4">
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-primary">Manage Orders</a>
+        </div>
     </div>
 </body>
 </html>

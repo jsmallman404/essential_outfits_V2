@@ -145,7 +145,6 @@
         <button class="add-to-wishlist-btn" data-product="Racer Worldwide - Cargo Coated Pants">Add to Wishlist</button>
       </div>
     </div>
-    <!-- Add more products as needed -->
   </main>
   
 
