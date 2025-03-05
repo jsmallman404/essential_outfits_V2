@@ -14,7 +14,7 @@
     <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a href="homepage.html">
+        <a href="#">
           <img src="images/essentiallogo1.png" alt="Logo">
         </a>
       </div>

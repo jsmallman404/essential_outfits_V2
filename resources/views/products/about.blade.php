@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>Essential Outfits</title>
-    <link rel="stylesheet" href="css/project.css">
+    <link rel="stylesheet" href="css/brandstyles.css">
 </head>
 <body>
+    @include('header')
     <main>
         <div class="text-container">
             <header>
