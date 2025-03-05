@@ -76,3 +76,42 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//brand pages
+Route::get('/brands', [ProductController::class, 'index'])->name('products.index');
+Route::get('/brands/nike', function () {
+    return view('brands.Nike');
+})->name('brands.nike');
+Route::get('/brands/adidas', function () {
+    return view('brands.adida');
+})->name('brands.adidas');
+Route::get('/brands/jordan', function () {
+    return view('brands.Jordan');
+})->name('brands.jordan');
+Route::get('/brands/underarmour', function () {
+    return view('brands.Under Armour');
+})->name('brands.underarmour');
+Route::get('/brands/vans', function () {
+    return view('brands.Vans');
+})->name('brands.vans');
+Route::get('/brands/northface', function () {
+    return view('brands.The North Face');
+})->name('brands.northface');
+Route::get('/brands/9inedouble0we', function () {
+    return view('brands.9inedouble0we');
+})->name('brands.9inedouble0we');
+Route::get('/brands/jadeddldn', function () {
+    return view('brands.Jadeddldn');
+})->name('brands.jadeddldn');
+Route::get('/brands/glofwang', function () {
+    return view('brands.Glofwang');
+})->name('brands.glofwang');
+Route::get('/brands/glogangworldwide', function () {
+    return view('brands.Glogangworldwide');
+})->name('brands.glogangworldwide');
+Route::get('/brands/racerworldwide', function () {
+    return view('brands.Racerworldwide');
+})->name('brands.racerworldwide');
+Route::get('/brands/osbatt', function () {
+    return view('brands.Osbatt');
+})->name('brands.osbatt');

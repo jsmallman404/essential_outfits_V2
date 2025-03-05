@@ -70,8 +70,19 @@
       <a href="/brands/Glofwang.html">Glofwang</a>
       <a href="/brands/9inedouble0we.html">9inedouble0we</a>
       <a href="/brands/Jadeddldn.html">Jadedldn</a>
+    <a href="{{ route('brands.nike') }}">Nike</a>
+            <a href="{{ route('brands.adidas') }}">Adidas</a>
+            <a href="{{ route('brands.jordan') }}">Jordan</a>
+            <a href="{{ route('brands.northface') }}">The North Face</a>
+            <a href="{{ route('brands.underarmour') }}">Under Armor</a>
+            <a href="{{ route('brands.vans') }}">Vans</a>
+            <a href="{{ route('brands.osbatt') }}">Osbatt</a>
+            <a href="{{ route('brands.racerworldwide') }}">Racer worldwide</a>
+            <a href="{{ route('brands.glogangworldwide') }}">Glogang worldwide</a>
+            <a href="{{ route('brands.glofwang') }}">Glofwang</a>
+            <a href="{{ route('brands.9inedouble0we') }}">9inedouble0we</a>
+            <a href="{{ route('brands.jadeddldn') }}">Jadedldn</a>
     </div>
-  </div>
  
 
     <!-- Added Contact and About buttons -->
