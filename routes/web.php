@@ -49,13 +49,17 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
+
+
 //admin
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products');
 Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.createProduct');
-Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.store');
+
 Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
 Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
+Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
+
 
 
 //contact 
