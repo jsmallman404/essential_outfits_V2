@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('homepage');
@@ -76,3 +76,15 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//password change 
+use App\Http\Controllers\PasswordController;
+
+Route::get('/change-password', [PasswordController::class, 'showChangePasswordForm'])->name('password.change.form');
+Route::post('/change-password', [PasswordController::class, 'changePassword'])->name('password.change');
+
+//search bar 
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+
+//home controller
+Route::get('/home', [HomeController::class, 'index'])->name('home');

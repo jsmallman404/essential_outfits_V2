@@ -63,9 +63,10 @@
             </div>
 
             <div class="mb-3">
-                <label>Image</label>
-                <input type="file" name="image" class="form-control">
+                <label>Images</label>
+                <input type="file" name="images[]" class="form-control" multiple>
             </div>
+
 
             <div class="mb-3">
                 <label>Sizes & Stock</label>
