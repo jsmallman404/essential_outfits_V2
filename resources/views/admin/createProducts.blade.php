@@ -48,10 +48,16 @@
 
             <!-- Image Upload Section -->
             <div class="mb-3">
+change-password
+                <label>Images</label>
+                <input type="file" name="images[]" class="form-control" multiple>
+
                 <label>Image</label>
                 <input type="file" name="image" class="form-control" accept="image/*" id="imageInput">
                 <div id="imagePreview" class="mt-2"></div> <!-- For preview -->
+
             </div>
+
 
             <div class="mb-3">
                 <label>Sizes & Stock</label>

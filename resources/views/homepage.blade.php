@@ -85,7 +85,11 @@
 
       <!-- Account and Cart Actions -->
       <div class="account-actions">
-        <input type="text" class="search-bar" placeholder="Search">
+      <form action="{{ route('product.search') }}" method="GET">
+        <input type="text" name="query" class="search-bar" placeholder="Search for products..." value="{{ request('query') }}">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
         <a href="racer worldwide/wishlist.html" class="wishlist">
           <i class="fas fa-heart"></i> 
         </a>
@@ -140,7 +144,7 @@
       <img src="images/jadedhoodie.png" alt="Product 3">
       <div class="product-info">
         <h2> Jaded London - Deep Red Fade Mini Monster Hoodie        </h2>
-        <p>£68 £63</p>
+        <p>£68</p>
         <button>View Details</button>
         <button class="add-to-wishlist-btn" data-product="Racer Worldwide - Cargo Coated Pants">Add to Wishlist</button>
       </div>
