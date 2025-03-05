@@ -14,7 +14,7 @@
     <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a href="homepage.html">
+        <a href="#">
           <img src="images/essentiallogo1.png" alt="Logo">
         </a>
       </div>
@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="dropdown">
-    <a href="#">Women</a>
+  <a href="#">Women</a>
     <div class="dropdown-content">
       <a href="/women/shopall">Shop All</a>
       <a href="/women/Jackets&coats">Jackets & Coats</a>
