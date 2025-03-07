@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>Essential Outfits</title>
-    <link rel="stylesheet" href="css/project.css">
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+
 </head>
-<body>
+<body class="about-page">
+    @include('header')
     <main>
         <div class="text-container">
             <header>
@@ -13,7 +15,7 @@
             </header>
             <p>At Essential Outfits, we’re all about streetwear that speaks to the bold, creative spirit of today’s youth. Our mission is to provide stylish, affordable clothing that empowers you to express your individuality and make a statement wherever you go. Whether you’re hitting the streets or chilling with friends, we’ve got the perfect pieces to elevate your look.</p>
         </div>
-        <img src=https://m.media-amazon.com/images/I/71EpLvEI5vL._AC_UY1000_.jpg alt="Essential Outfits">
+        <img src="images/aboutus.jpg" id="fashion">
     </main>
 </body>
 </html>
