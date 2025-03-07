@@ -104,4 +104,19 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
+
+    public function productView(Request $request)
+{
+    // Retrieve product details from the query parameters
+    $product_id = $request->query('id', 'Unknown');
+    $product_name = urldecode($request->query('name', 'Unknown Product'));
+    $product_price = $request->query('price', 'N/A');
+    $product_image = urldecode($request->query('image', 'placeholder.jpg'));
+    $product_description = $request->query('description', 'N/A');
+
+    // Return the view and pass product data
+    return view('products.viewproducts', compact('product_id', 'product_name', 'product_price', 'product_image'));
+}
+
+
 }

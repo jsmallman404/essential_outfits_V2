@@ -26,6 +26,8 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
+Route::get('/viewproducts', [ProductController::class, 'productView'])->name('products.viewproducts');
+
 
 
 //admin
