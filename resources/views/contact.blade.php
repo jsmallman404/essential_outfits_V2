@@ -3,10 +3,8 @@
 @section('title', 'Contact Us')
 
 @section('content')
-
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/contactstyle.css') }}">
-@endpush
+    <link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
+@include('header')
 
 <div class="container">
     <h1>Contact Us</h1>
