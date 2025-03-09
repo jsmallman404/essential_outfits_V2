@@ -85,6 +85,11 @@
                             <h5>{{ $product->name }}</h5>
                             <p>£{{ $product->price }}</p>
                             <p><strong>Category:</strong> {{ $product->category }}</p>
+
+                            <!-- Wishlist Button -->
+                         <a href="{{ route('wishlist.index') }}" class="wishlist-btn" data-product-id="{{ $product->id }}">
+                           <i class="fas fa-heart"></i>
+                         </a>
                             
                             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                 @csrf
