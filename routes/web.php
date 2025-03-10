@@ -33,6 +33,60 @@ Route::post('/admin/orders/{order}/accept', [AdminOrderController::class, 'accep
 Route::post('/admin/orders/{order}/cancel', [AdminOrderController::class, 'cancel'])->name('admin.orders.cancel');
 Route::delete('/admin/orders/{order}', [AdminOrderController::class, 'destroy'])->name('admin.orders.delete');
 
+Route::get('/products/about', function () {
+    return view('products.about');
+})->name('products.about');
+
+//brand page Logic
+Route::get('/brands', [ProductController::class, 'index'])->name('products.index');
+
+Route::get('/brands/Nike', function () {
+    return view('brands.Nike');
+})->name('brands.Nike');
+
+Route::get('/brands/adida', function () {
+    return view('brands.adida');
+})->name('brands.adida');
+
+Route::get('/brands/jordan', function () {
+    return view('brands.Jordan');
+})->name('brands.jordan');
+
+Route::get('/brands/underarmour', function () {
+    return view('brands.Under Armour');
+})->name('brands.underarmour');
+
+Route::get('/brands/vans', function () {
+    return view('brands.Vans');
+})->name('brands.vans');
+
+Route::get('/brands/northface', function () {
+    return view('brands.The North Face');
+})->name('brands.northface');
+
+Route::get('/brands/9inedouble0we', function () {
+    return view('brands.9inedouble0we');
+})->name('brands.9inedouble0we');
+
+Route::get('/brands/jadeddldn', function () {
+    return view('brands.Jadeddldn');
+})->name('brands.jadeddldn');
+
+Route::get('/brands/glofwang', function () {
+    return view('brands.Glofwang');
+})->name('brands.glofwang');
+
+Route::get('/brands/glogangworldwide', function () {
+    return view('brands.Glogangworldwide');
+})->name('brands.glogangworldwide');
+
+Route::get('/brands/racerworldwide', function () {
+    return view('brands.Racerworldwide');
+})->name('brands.racerworldwide');
+
+Route::get('/brands/osbatt', function () {
+    return view('brands.Osbatt');
+})->name('brands.osbatt');
 
 //Shopping Cart Logic
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
