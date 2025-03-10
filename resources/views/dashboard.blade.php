@@ -6,6 +6,7 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container mt-4">
         <h2>Welcome to Your Dashboard</h2>
@@ -19,6 +20,9 @@
         </form>
         <form action="{{ route('customer.orders') }}" method="GET">
             <button type="submit" class="btn btn-primary">My Orders</button>
+        </form>
+        <form action="{{ route('password.change') }}" method="GET">
+            <button type="submit" class="btn btn-warning">Change Password</button>
         </form>
 </form>
     </div>

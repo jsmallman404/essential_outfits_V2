@@ -76,3 +76,15 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//change passowrd controller
+use App\Http\Controllers\Auth\ChangePasswordController;
+
+Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
+Route::post('/change-password', [ChangePasswordController::class, 'updatePassword'])->name('password.update');
+
+
+//wishlist
+use App\Http\Controllers\WishlistController;
+
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
