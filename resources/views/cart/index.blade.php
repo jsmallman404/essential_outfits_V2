@@ -6,15 +6,16 @@
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+     <!-- Header CSS -->
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 </head>
 <body>
+@include('header')
     <div class="container mt-5">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('images/essentiallogo1.png') }}" alt="Your Brand Logo" height="50">
-        </a>
-        <div class="mb-3">
-            <button class="btn btn-secondary" onclick="history.back()">← Back</button>
-        </div>
+        
         <h2 class="text-center">Shopping Cart</h2>
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
