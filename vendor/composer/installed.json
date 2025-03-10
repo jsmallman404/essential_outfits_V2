@@ -2864,17 +2864,17 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.5.20",
-            "version_normalized": "3.5.20.0",
+            "version": "v3.6.1",
+            "version_normalized": "3.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "509f2258c51741f6d06deb65d4437654520694e6"
+                "reference": "0df0a762698176d714e42e2dfed92b6b9e24b8e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/509f2258c51741f6d06deb65d4437654520694e6",
-                "reference": "509f2258c51741f6d06deb65d4437654520694e6",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/0df0a762698176d714e42e2dfed92b6b9e24b8e4",
+                "reference": "0df0a762698176d714e42e2dfed92b6b9e24b8e4",
                 "shasum": ""
             },
             "require": {
@@ -2897,7 +2897,7 @@
                 "phpunit/phpunit": "^10.4|^11.5",
                 "psy/psysh": "^0.11.22|^0.12"
             },
-            "time": "2025-02-13T21:05:24+00:00",
+            "time": "2025-03-04T21:48:52+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2909,7 +2909,7 @@
                     ]
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "src/helpers.php"
@@ -2931,7 +2931,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.5.20"
+                "source": "https://github.com/livewire/livewire/tree/v3.6.1"
             },
             "funding": [
                 {

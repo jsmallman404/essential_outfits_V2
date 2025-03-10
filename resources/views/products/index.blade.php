@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store - Products</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+
     <style>
         body {
             background-color: #ded4c0;
@@ -69,6 +71,7 @@
     </style>
 </head>
 <body>
+    @include('header')
     <div class="container">
         <h2>Clothing Collection</h2>
         
