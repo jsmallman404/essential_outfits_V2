@@ -47,8 +47,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [OrderController::class, 'customerOrders'])->name('customer.orders');
     Route::get('/my-orders/{order}', [OrderController::class, 'customerOrderDetails'])->name('customer.orders.show');
     Route::post('/my-orders/{order}/cancel', [OrderController::class, 'cancelOrder'])->name('customer.orders.cancel');
+
     Route::get('/customer/profile', [CustomerController::class, 'edit'])->name('customer.editProfile');
     Route::put('/customer/profile/{id}', [CustomerController::class, 'updateProfile'])->name('customer.updateProfile');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [CartController::class, 'updateQuantity'])->name('cart.update');
+
+    Route::get('/checkoutPage', [CartController::class, 'checkoutPage'])->name('cart.checkoutPage'); // View checkout page
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout'); // Process checkout
 });
 
 // Admin Orders

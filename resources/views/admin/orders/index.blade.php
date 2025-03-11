@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user->name }}</td>
-                    <td>${{ number_format($order->total_price, 2) }}</td>
+                    <td>£{{ number_format($order->total_price, 2) }}</td>
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>

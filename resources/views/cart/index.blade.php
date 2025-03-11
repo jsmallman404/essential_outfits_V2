@@ -58,7 +58,14 @@
                             <td>{{ $product->name ?? 'Unknown Product' }}</td>
                             <td>{{ $variant->size ?? 'N/A' }}</td>
                             <td>£{{ number_format($product->price ?? 0, 2) }}</td>
-                            <td>{{ $cartItem->quantity }}</td>
+                            <td>
+                                <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" class="d-flex">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" class="form-control w-50 me-2">
+                                    <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                </form>
+                            </td>
                             <td>£{{ number_format($subtotal, 2) }}</td>
                             <td>
                                 <form action="{{ route('cart.remove', $cartItem->id) }}" method="POST">
@@ -76,10 +83,7 @@
 
             <div class="d-flex justify-content-between mt-3">
                 <a href="{{ route('products.index') }}" class="btn btn-primary">Continue Shopping</a>
-                <form action="{{ route('cart.checkout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-primary">Checkout</button>
-                </form>
+                <a href="{{ route('cart.checkoutPage') }}" class="btn btn-primary">Proceed to Checkout</a>
             </div>
         @endif
     </div>
