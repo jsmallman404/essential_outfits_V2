@@ -72,4 +72,16 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
+
+    public function show($id)
+{
+    $product = Product::find($id);
+
+    if (!$product) {
+        return redirect()->back()->with('error', 'Product not found.');
+    }
+
+    return view('products.show', compact('product'));
+}
+
 }
