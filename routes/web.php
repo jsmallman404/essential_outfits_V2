@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
+use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
@@ -15,6 +16,26 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::middleware([CheckAdmin::class])->group(function () {
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/admin/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+    Route::post('/admin/orders/{order}/accept', [AdminOrderController::class, 'accept'])->name('admin.orders.accept');
+    Route::post('/admin/orders/{order}/cancel', [AdminOrderController::class, 'cancel'])->name('admin.orders.cancel');
+    Route::delete('/admin/orders/{order}', [AdminOrderController::class, 'destroy'])->name('admin.orders.delete');
+    Route::get('/admin/products/{id}/edit-stock', [ProductController::class, 'editStock'])->name('admin.editStock');
+    Route::put('/admin/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('admin.updateStock');
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/{id}', [AdminController::class, 'viewUser'])->name('admin.viewUser');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::put('/admin/users/{id}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products');
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.createProduct');
+    Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
+    Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
+});
 
 Route::get('/about', function () {
     return view('products/about');
@@ -28,13 +49,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Admin Orders
-Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
-Route::get('/admin/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
-Route::post('/admin/orders/{order}/accept', [AdminOrderController::class, 'accept'])->name('admin.orders.accept');
-Route::post('/admin/orders/{order}/cancel', [AdminOrderController::class, 'cancel'])->name('admin.orders.cancel');
-Route::delete('/admin/orders/{order}', [AdminOrderController::class, 'destroy'])->name('admin.orders.delete');
-Route::get('/admin/products/{id}/edit-stock', [ProductController::class, 'editStock'])->name('admin.editStock');
-Route::put('/admin/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('admin.updateStock');
+
 
 
 //Shopping Cart Logic
@@ -53,15 +68,6 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
 
-
-//admin
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('admin.products');
-Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.createProduct');
-
-Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
-Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
-Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
 
 
 
