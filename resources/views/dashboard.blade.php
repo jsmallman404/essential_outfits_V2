@@ -15,7 +15,7 @@
 <body>
 @include('header')
     <div class="container mt-4">
-        <h2>Welcome to Your Dashboard</h2>
+        <h2>Welcome {{ auth()->user()->name }} to Your Dashboard</h2>
         <p>You have successfully registered and logged in.</p>
         <form method="POST" action="{{ route('logout') }}">
         @csrf
@@ -26,6 +26,9 @@
         </form>
         <form action="{{ route('customer.orders') }}" method="GET">
             <button type="submit" class="btn btn-primary">My Orders</button>
+        </form>
+        <form action="{{ route('customer.editProfile') }}" method="GET">
+            <button type="submit" class="btn btn-primary">Edit Details</button>
         </form>
         <form action="{{ route('password.change') }}" method="GET">
             <button type="submit" class="btn btn-warning">Change Password</button>
