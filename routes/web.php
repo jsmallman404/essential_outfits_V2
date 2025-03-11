@@ -88,8 +88,3 @@ Route::post('/change-password', [ChangePasswordController::class, 'updatePasswor
 use App\Http\Controllers\WishlistController;
 
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
-Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'removeFromWishlist'])
-    ->name('wishlist.remove');
-
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');

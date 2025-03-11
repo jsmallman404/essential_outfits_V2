@@ -8,7 +8,7 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- Header CSS -->
+     <!-- Header CSS -->
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
     <style>
@@ -93,23 +93,11 @@
                             <p>£{{ $product->price }}</p>
                             <p><strong>Category:</strong> {{ $product->category }}</p>
 
-                            @php
-                              $inWishlist = Auth::check() && Auth::user()->wishlist()->where('product_id', $product->id)->exists();
-                           @endphp
-
-                         <!-- Wishlist Button (Always Visible) -->
-                          <form action="{{ $inWishlist ? route('wishlist.remove', $product->id) : route('wishlist.add', $product->id) }}" 
-                             method="POST" style="display: inline;">
-                           @csrf
-                            @if($inWishlist)
-                            @method('DELETE')
-                           @endif
-                           <button type="submit" class="wishlist-btn" style="border: none; background: none;">
-                             <i class="{{ $inWishlist ? 'fas' : 'far' }} fa-heart" style="color: {{ $inWishlist ? 'red' : 'black' }};"></i>
-                           </button>
-                          </form>
-
-
+                            <!-- Wishlist Button -->
+                         <a href="{{ route('wishlist.index') }}" class="wishlist-btn" data-product-id="{{ $product->id }}">
+                           <i class="fas fa-heart"></i>
+                         </a>
+                            
                             <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                 @csrf
                                 <label for="variant_id">Select Size:</label>
@@ -132,6 +120,5 @@
             <a href="{{ route('cart.index') }}" class="btn btn-warning">View Cart</a>
         </div>
     </div>
-
 </body>
 </html>
