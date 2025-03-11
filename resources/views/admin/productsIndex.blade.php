@@ -9,6 +9,9 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Manage Products</h1>
+        <div class="text-center mt-4">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
 
         <div class="text-center mb-4">
             <a href="{{ route('admin.createProduct') }}" class="btn btn-success">Add New Product</a>

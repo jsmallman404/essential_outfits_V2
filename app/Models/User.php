@@ -30,7 +30,7 @@ class User extends Authenticatable
         'address',
         'post_code',
         'city',
-        'user_level',
+        'role',
     ];
 
     /**

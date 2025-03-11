@@ -30,6 +30,11 @@
         <form action="{{ route('password.change') }}" method="GET">
             <button type="submit" class="btn btn-warning">Change Password</button>
         </form>
+        @if(auth()->check() && auth()->user()->role == 'admin')
+        <form action="{{ route('admin.dashboard') }}" method="GET">
+            <button type="submit" class="btn btn-warning">Admin</button>
+        </form>
+        @endif
 </form>
     </div>
 </body>
