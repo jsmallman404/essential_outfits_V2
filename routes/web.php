@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
 use App\Http\Middleware\CheckAdmin;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
@@ -46,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', [OrderController::class, 'customerOrders'])->name('customer.orders');
     Route::get('/my-orders/{order}', [OrderController::class, 'customerOrderDetails'])->name('customer.orders.show');
     Route::post('/my-orders/{order}/cancel', [OrderController::class, 'cancelOrder'])->name('customer.orders.cancel');
+    Route::get('/customer/profile', [CustomerController::class, 'edit'])->name('customer.editProfile');
+    Route::put('/customer/profile/{id}', [CustomerController::class, 'updateProfile'])->name('customer.updateProfile');
 });
 
 // Admin Orders
