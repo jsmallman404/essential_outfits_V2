@@ -110,7 +110,12 @@
                           </form>
 
 
-                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+    <div class="product-info">
+      
+      <h2 >{{ $product->name }}</h2>
+  
+      <p>£{{ $product->price }}</p>
+      <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                 @csrf
                                 <label for="variant_id">Select Size:</label>
                                 <select name="variant_id" class="form-control mb-2" required>
