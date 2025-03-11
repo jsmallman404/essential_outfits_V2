@@ -104,4 +104,53 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
+
+    public function updateStock(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        if ($request->has('remove_variants')) {
+            ProductVariant::whereIn('id', $request->remove_variants)->delete();
+        }
+
+        
+        // ✅ Update existing variants
+        if ($request->has('variants')) {
+            foreach ($request->variants as $variantId => $variantData) {
+                $variant = ProductVariant::find($variantId);
+                if ($variant) {
+                    $variant->update([
+                        'size' => $variantData['size'],
+                        'stock' => $variantData['stock'],
+                    ]);
+                }
+            }
+        }
+    
+        // ✅ Add new variants
+        if ($request->has('new_variants')) {
+            foreach ($request->new_variants as $newVariant) {
+                if (!empty($newVariant['size']) && isset($newVariant['stock'])) {
+                    ProductVariant::create([
+                        'product_id' => $product->id,
+                        'size' => $newVariant['size'],
+                        'stock' => $newVariant['stock'],
+                    ]);
+                }
+            }
+        }
+    
+        return redirect()->route('admin.products')->with('success', 'Stock updated successfully!');
+    }
+
+    public function editStock($id)
+{
+    $product = Product::with('variants')->find($id);
+
+    if (!$product) {
+        abort(404, 'Product Not Found');
+    }
+
+    return view('admin.edit_stock', compact('product'));
 }
+}
+

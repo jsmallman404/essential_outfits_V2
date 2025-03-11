@@ -30,6 +30,9 @@ class FortifyServiceProvider extends ServiceProvider
         // Set custom login and registration views
         Fortify::loginView(fn () => view('auth.login'));
         Fortify::registerView(fn () => view('auth.register'));
+        
+        Fortify::redirects('register', '/dashboard');  
+        Fortify::redirects('login', '/dashboard');    
 
         // Custom authentication logic
         Fortify::authenticateUsing(function (Request $request) {
