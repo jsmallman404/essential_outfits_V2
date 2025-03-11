@@ -1,32 +1,15 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <h2>My Wishlist</h2>
-    @if($wishlistItems->isEmpty())
-        <p>Your wishlist is empty.</p>
-    @else
-        <div class="row">
-            @foreach($wishlistItems as $wishlistItem)
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="{{ asset('storage/' . $wishlistItem->product->image) }}" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $wishlistItem->product->name }}</h5>
-                            <p class="card-text">£{{ $wishlistItem->product->price }}</p>
-                            <a href="{{ route('product.show', $wishlistItem->product->id) }}" class="btn btn-primary">View Product</a>
-
-                            <!-- Remove from Wishlist -->
-                            <form action="{{ route('wishlist.remove', $wishlistItem->product->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Remove</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @endif
-</div>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>My Wishlist</h2>
+        <p>This is your wishlist page.</p>
+    </div>
+</body>
+</html>
