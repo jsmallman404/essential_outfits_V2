@@ -12,9 +12,35 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Display the user's cart items.
-     */
+
+    public function updateQuantity(Request $request, $id)
+{
+    $request->validate([
+        'quantity' => 'required|integer|min:1',
+    ]);
+
+    $cartItem = Cart::where('user_id', Auth::id())->where('id', $id)->first();
+
+    if (!$cartItem) {
+        return redirect()->route('cart.index')->with('error', 'Item not found.');
+    }
+
+    // Update quantity
+    $cartItem->update(['quantity' => $request->quantity]);
+
+    return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
+}
+
+     public function checkoutPage()
+     {
+         $cartItems = Cart::where('user_id', Auth::id())->get();
+     
+         if ($cartItems->isEmpty()) {
+             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
+         }
+     
+         return view('/cart/checkoutPage', compact('cartItems'));
+     }
     public function addToCart(Request $request, $id)
 {
     $user = Auth::user();
@@ -30,21 +56,18 @@ class CartController extends Controller
         return redirect()->back()->with('error', 'Selected product variant is out of stock!');
     }
 
-    // Check if item already exists in the cart
     $cartItem = Cart::where('user_id', $user->id)
         ->where('product_variant_id', $variant->id)
         ->first();
 
     if ($cartItem) {
-        // Update quantity if already in cart
         $cartItem->quantity += 1;
         $cartItem->save();
     } else {
-        // Add new item to the cart
         Cart::create([
             'user_id' => $user->id,
             'product_id' => $id,
-            'product_variant_id' => $variant->id, // ✅ Storing variant ID instead of size
+            'product_variant_id' => $variant->id,
             'quantity' => 1,
         ]);
     }
@@ -82,11 +105,15 @@ public function index()
         return redirect()->route('cart.index')->with('error', 'Item not found in your cart.');
     }
 
-    /**
-     * Checkout: Create an order and move cart items into the order.
-     */
-    public function checkout()
+    public function checkout(Request $request)
 {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'city' => 'required|string|max:255',
+        'post_code' => 'required|string|max:10',
+    ]);
+
     $user = Auth::user();
     if (!$user) {
         return redirect()->route('login')->with('error', 'You must be logged in to checkout.');
@@ -97,14 +124,15 @@ public function index()
         return redirect()->back()->with('error', 'Your cart is empty.');
     }
 
-    // Create a new order
-    $order = new Order();
-    $order->user_id = $user->id;
-    $order->total_price = $cartItems->sum(function ($cartItem) {
-        return $cartItem->product->price * $cartItem->quantity;
-    });
-    $order->status = 'Pending';
-    $order->save();
+    $order = Order::create([
+        'user_id' => Auth::id(),
+        'name' => $request->name,
+        'address' => $request->address,
+        'city' => $request->city,
+        'post_code' => $request->post_code,
+        'total_price' => $cartItems->sum(fn($cartItem) => $cartItem->product->price * $cartItem->quantity),
+        'status' => 'Pending',
+    ]);
 
     // Move cart items to order items and update stock
     foreach ($cartItems as $cartItem) {

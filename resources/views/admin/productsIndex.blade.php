@@ -9,6 +9,9 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Manage Products</h1>
+        <div class="text-center mt-4">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
 
         <div class="text-center mb-4">
             <a href="{{ route('admin.createProduct') }}" class="btn btn-success">Add New Product</a>
@@ -35,19 +38,17 @@
                         <td><img src="{{ asset('storage/' . $product->image) }}" width="50"></td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category }}</td>
-                        <td>${{ $product->price }}</td>
+                        <td>£{{ $product->price }}</td>
                         <td>
                             @foreach($product->variants as $variant)
                                 {{ $variant->size }} ({{ $variant->stock }} left)<br>
                             @endforeach
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editStockModal{{ $product->id }}">
-                            Edit Stock
-                            </button>
+                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
                             <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
-                            @csrf    
-                            @method('DELETE')
+                                @csrf    
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
                                 Delete</button>
                             </form>

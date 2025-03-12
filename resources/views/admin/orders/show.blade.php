@@ -10,7 +10,12 @@
     <div class="container mt-4">
         <h2>Order #{{ $order->id }} Details</h2>
         <p><strong>User:</strong> {{ $order->user->name }}</p>
-        <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
+        <p><strong>Shipping Details:</strong> </p>
+        <p><i>{{ $order->name}}</i></p>
+        <p><i>{{$order->address}}</i></p>
+        <p><i>{{$order->city}}</i></p>
+        <p><i>{{$order->post_code}}</i></p>
+        <p><strong>Total Price:</strong> £{{ number_format($order->total_price, 2) }}</p>
         <p><strong>Status:</strong> {{ $order->status }}</p>
         <p><strong>Placed At:</strong> {{ $order->created_at->format('Y-m-d H:i') }}</p>
 
@@ -28,13 +33,13 @@
                 <tr>
                     <td>{{ $item->product->name }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>${{ number_format($item->product->price, 2) }}</td>
+                    <td>£{{ number_format($item->product->price, 2) }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <!-- Accept or Cancel Buttons -->
+
         @if($order->status == 'Pending')
         <form action="{{ route('admin.orders.accept', $order->id) }}" method="POST" class="d-inline">
             @csrf

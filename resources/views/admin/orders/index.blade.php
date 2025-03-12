@@ -9,8 +9,10 @@
 <body>
     <div class="container mt-4">
         <h2>All Orders</h2>
+        <div class="text-center mt-4">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
 
-        <!-- Filter Orders by Status -->
         <form method="GET" action="{{ route('admin.orders.index') }}" class="mb-3">
             <select name="status" class="form-select" onchange="this.form.submit()">
                 <option value="">All Orders</option>
@@ -36,7 +38,7 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->user->name }}</td>
-                    <td>${{ number_format($order->total_price, 2) }}</td>
+                    <td>£{{ number_format($order->total_price, 2) }}</td>
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>

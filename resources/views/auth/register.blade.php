@@ -29,6 +29,21 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="mt-4">
+                <x-label for="address" value="{{ __('Address') }}" />
+                <x-input id="address" class="block mt-1 w-full" type="text" name="address" required autocomplete="address" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="post_code" value="{{ __('Post Code') }}" />
+                <x-input id="post_code" class="block mt-1 w-full" type="text" name="post_code" required autocomplete="post_code" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="city" value="{{ __('City') }}" />
+                <x-input id="city" class="block mt-1 w-full" type="text" name="city" required autocomplete="city" />
+            </div>
+
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
