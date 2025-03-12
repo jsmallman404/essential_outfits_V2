@@ -313,15 +313,15 @@ header {
                               $inWishlist = Auth::check() && Auth::user()->wishlist()->where('product_id', $product->id)->exists();
                            @endphp
 
-<form action="{{ $inWishlist ? route('wishlist.remove', $product->id) : route('wishlist.add', $product->id) }}" 
-      method="POST" style="display: inline;">
+<form id="wishlist-form-{{ $product->id }}" action="{{ $inWishlist ? route('wishlist.remove', $product->id) : route('wishlist.add', $product->id) }}" 
+      method="POST" style="display: inline;" class="wishlist-form">
     @csrf
     @if($inWishlist)
         @method('DELETE')
     @endif
-    <button type="submit" class="btn">
-        <i class="{{ $inWishlist ? 'fas' : 'far' }} fa-heart" style="color: {{ $inWishlist ? 'red' : 'black' }};"></i>
-        WishList
+    <button type="submit" class="wishlist-btn" style="border: none; background: none; cursor: pointer;">
+        <i id="wishlist-icon-{{ $product->id }}" class="{{ $inWishlist ? 'fas' : 'far' }} fa-heart" 
+           style="font-size: 24px; color: {{ $inWishlist ? 'red' : 'black' }};"></i>
     </button>
 </form>
 
