@@ -43,23 +43,7 @@
       <a href="/accessories/women">Women accessories</a>
     </div>
   </div>
-  <div class="dropdown">
-    <a href="#">Brands</a>
-    <div class="dropdown-content">
-      <a href="/brands/Nike.html">Nike</a>
-      <a href="/brands/adidas.html">Adidas</a>
-      <a href="/brands/Jordan.html">Jordan</a>
-      <a href="/brands/The North Face.html">The north face</a>
-      <a href="/brands/Under Armour.html">Under armor</a>
-      <a href="/brands/Vans.html">Vans</a>
-      <a href="/brands/Osbatt.html">Osbatt</a>
-      <a href="/brands/Racerworldwide.html">Racer worldwide</a>
-      <a href="/brands/Glogangworldwide.html">Glogang worldwide</a>
-      <a href="/brands/Glofwang.html">Glofwang</a>
-      <a href="/brands/9inedouble0we.html">9inedouble0we</a>
-      <a href="/brands/Jadeddldn.html">Jadedldn</a>
-    </div>
-  </div>
+
  
 
     <!-- Added Contact and About buttons -->
