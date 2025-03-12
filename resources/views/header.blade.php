@@ -74,9 +74,11 @@
       <!-- Account and Cart Actions -->
       <div class="account-actions">
         <input type="text" class="search-bar" placeholder="Search">
-        <a href="racer worldwide/wishlist.html" class="wishlist">
-          <i class="fas fa-heart"></i> 
+
+        <a href="{{ route('wishlist.index') }}" class="wishlist">
+          <i class="fas fa-heart"></i>
         </a>
+        
         <a href="{{ route('cart.index') }}" class="cart">
           <i class="fas fa-shopping-cart"></i> 
         </a>
