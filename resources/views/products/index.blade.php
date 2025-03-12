@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store - Products</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <!-- Header CSS -->
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-
     <style>
         body {
             background-color: #ded4c0;
@@ -75,7 +69,6 @@
     </style>
 </head>
 <body>
-    @include('header')
     <div class="container">
         <h2>Clothing Collection</h2>
         
@@ -109,13 +102,7 @@
                            </button>
                           </form>
 
-
-    <div class="product-info">
-      
-      <h2 >{{ $product->name }}</h2>
-  
-      <p>£{{ $product->price }}</p>
-      <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                 @csrf
                                 <label for="variant_id">Select Size:</label>
                                 <select name="variant_id" class="form-control mb-2" required>
@@ -137,6 +124,5 @@
             <a href="{{ route('cart.index') }}" class="btn btn-warning">View Cart</a>
         </div>
     </div>
-
 </body>
 </html>
