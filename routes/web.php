@@ -118,5 +118,3 @@ Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'remov
     ->name('wishlist.remove');
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
-
-Route::get('/products/view', [ProductController::class, 'viewProducts'])->name('products.viewproducts');
