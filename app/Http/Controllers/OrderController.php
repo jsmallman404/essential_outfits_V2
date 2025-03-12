@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a list of the customer's orders.
-     */
+
     public function customerOrders()
     {
         $user = Auth::user();
@@ -23,19 +21,20 @@ class OrderController extends Controller
         return view('customer.orders.index', compact('orders'));
     }
 
-    /**
-     * Display the details of a specific order.
-     */
     public function customerOrderDetails($id)
     {
-        $order = Order::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+    $order = Order::with([
+        'orderItems.productVariant', 
+        'returnRequests.orderItem.productVariant'
+    ])
+    ->where('id', $id)
+    ->where('user_id', Auth::id())
+    ->firstOrFail();
 
-        return view('customer.orders.show', compact('order'));
+    return view('customer.orders.show', compact('order'));
     }
 
-    /**
-     * Allow the customer to cancel an order if it is still pending.
-     */
+
     public function cancelOrder($id)
     {
         $order = Order::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
