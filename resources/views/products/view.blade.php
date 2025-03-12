@@ -16,6 +16,7 @@ $product_description = isset($_GET['description']) ? htmlspecialchars($_GET['des
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
+    
     <style>
 /* General Reset */
 body, h1, h2, h3, p, a, div {
@@ -262,108 +263,7 @@ header {
     </style>
 </head>
 
-
-
-
-
-
-
-
-
-<header>
-  <div class="header-content">
-    <!-- Logo -->
-    <div class="logo">
-      <a href="homepage.html">
-        <img src="images/essentiallogo1.png" alt="Logo">
-      </a>
-            
-
-    </div>
-
-    <!-- Navigation Bar -->
-    <nav class="nav-buttons">
-      <div class="dropdown">
-        <a href="#">Men</a>
-        <div class="dropdown-content">
-          <a href="MensShopAll.html">Shop All</a>
-          <a href="/men/Jackets&coats">Jackets & Coats</a>
-          <a href="/men/Hoodies">Hoodies</a>
-          <a href="/men/Sweatshit">Sweatshits</a>
-          <a href="/men/T-shirts">T-shirts</a>
-          <a href="/men/Tracksuit Bottoms">Tracksuit Bottoms</a>
-          <a href="/men/Jeans">Jeans</a>
-          <a href="/men/shoes">Shoes</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <a href="#">Women</a>
-        <div class="dropdown-content">
-          <a href="/women/shopall">Shop All</a>
-          <a href="/women/Jackets&coats">Jackets & Coats</a>
-          <a href="/women/Hoodies">Hoodies</a>
-          <a href="/women/Sweatshit">Sweatshits</a>
-          <a href="/women/T-shirts">T-shirts</a>
-          <a href="/women/Tracksuit Bottoms">Tracksuit Bottoms</a>
-          <a href="/women/Jeans">Jeans</a>
-          <a href="/women/shoes">Shoes</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <a href="#">Accessories</a>
-        <div class="dropdown-content">
-          <a href="/accessories/Shopall">Shop All</a>
-          <a href="/accessories/men">Men's Accessories</a>
-          <a href="/accessories/women">Women's Accessories</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <a href="#">Brands</a>
-        <div class="dropdown-content">
-          <a href="/brands/Nike.html">Nike</a>
-          <a href="/brands/adidas.html">Adidas</a>
-          <a href="/brands/Jordan.html">Jordan</a>
-          <a href="/brands/The North Face.html">The North Face</a>
-          <a href="/brands/Under Armour.html">Under Armour</a>
-          <a href="/brands/Vans.html">Vans</a>
-          <a href="/brands/Osbatt.html">Osbatt</a>
-          <a href="/brands/Racerworldwide.html">Racer Worldwide</a>
-          <a href="/brands/Glogangworldwide.html">Glogang Worldwide</a>
-          <a href="/brands/Glofwang.html">Glofwang</a>
-          <a href="/brands/9inedouble0we.html">9inedouble0we</a>
-          <a href="/brands/Jadeddldn.html">Jadedldn</a>
-        </div>
-      </div>
-      <div class="dropdown">
-        <a href="#">Sale</a>
-        <div class="dropdown-content">
-          <a href="/sale/clearance">Men's Sales</a>
-          <a href="/sale/discount">Women's Sales</a>
-          <a href="/sale/new">All Sales</a>
-        </div>
-      </div>
-      <!-- Added Contact and About buttons -->
-      <a href="/contact.html" class="nav-link">Contact</a>
-      <a href="/about.html" class="nav-link">About Us</a>
-    </nav>
-
-    <!-- Account and Cart Actions -->
-    <div class="account-actions">
-      <input type="text" class="search-bar" placeholder="Search">
-      <a href="racer worldwide/wishlist.html" class="wishlist">
-        <i class="fas fa-heart"></i> Wishlist
-      </a>
-      <a href="cart.html" class="cart">
-        <i class="fas fa-shopping-cart"></i> Cart
-      </a>
-      <a href="login.html" class="signup-login">
-        <i class="fas fa-user"></i> My Account
-      </a>
-    </div>
-  </div>
-</header>
-
-
+@include('header')
 
 <div>
   <h2 class="centered-heading">Shop All Mens</h2>
