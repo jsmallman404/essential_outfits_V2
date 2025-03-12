@@ -1,7 +1,19 @@
+<?php
+// Retrieve product details from URL parameters
+$product_id = isset($_GET['id']) ? $_GET['id'] : 'Unknown';
+$product_name = isset($_GET['name']) ? urldecode($_GET['name']) : 'Unknown Product';
+$product_price = isset($_GET['price']) ? $_GET['price'] : 'N/A';
+$product_image = isset($_GET['image']) ? urldecode($_GET['image']) : 'placeholder.jpg';
+$product_description = isset($_GET['description']) ? htmlspecialchars($_GET['description']) : 'N/A';
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
     <style>
@@ -164,60 +176,7 @@ header {
 }
 
 
-/* Slideshow Section */
-.slideshow {
-    position: relative;
-    width: 100%;
-    height: 80vh; /* Full viewport height */
-    overflow: hidden;
-  }
-  
-  .slideshow-images {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .slideshow-images img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 1s ease-in-out; /* Smooth fade transition */
-  }
-  
-  .slideshow-images img.active {
-    opacity: 1; /* Show active image */
-  }
-  
-  .slideshow-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 2; /* Ensures content is above the images */
-    color: #ded4c0;
-    animation: fadeIn 2s ease-out; /* Fade-in animation for text */
-  }
-  
-  .slideshow-content h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Shadow for better visibility */
-  }
-  
-  .slideshow-content p {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Shadow for better visibility */
-  }
+
   
   .view-products-btn {
     display: inline-block;
@@ -236,18 +195,7 @@ header {
     transform: scale(1.05); /* Slight scale effect on hover */
   }
   
-  /* Background Overlay */
-  .slideshow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Dark overlay for text visibility */
-    z-index: 1;
-  }
-  
+
   /* Animation for Text */
   @keyframes fadeIn {
     0% {
@@ -260,76 +208,56 @@ header {
     }
   }
   
-  
-  /* Optional: Prevent text from overlapping during loading */
-  .slideshow-content {
-    pointer-events: none;
-  }
-
   .product-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem;
-  }
-  
-  .product-card {
-    background-color: #ded4c0;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 300px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .product-info {
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  .product-info h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .product-info p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 1rem;
-  }
-  
-  .product-info button {
-    padding: 0.5rem 1.5rem;
-    border: none;
-    background-color: #222;
-    color: #ded4c0;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .product-info button:hover {
-    background-color: #444;
-  }
-  .bestsellers {
-    text-align: center;
-    font-size: 2rem;
+    flex-wrap: wrap; /* Allows content to wrap when space is tight */
+    gap: 20px; /* Adds space between items */
+    justify-content: space-between; /* Distribute space between the card and the description */
+    max-width: 1000px; /* Optional: limits the max width of the container */
+    margin: 0 auto; /* Centers the product container horizontally */
+    padding: 20px;
+}
+
+.product-card {
+    flex: 1 1 45%; /* Makes the product card take up 45% of the container width */
+    min-width: 300px; /* Ensures the card doesn't shrink too much */
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border: 1px solid #ddd; /* Border around the product card */
+    border-radius: 8px; /* Rounded corners for the card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for effect */
+}
+
+.product-card h1 {
+    margin-bottom: 10px; /* Adds space between title and image */
+    font-size: 24px; /* Adjust title font size */
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px; /* Adds space below the image */
+}
+
+.product-card p {
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 1rem;
-    color: #795809;
-  }
+}
+
+.product-description {
+    flex: 1 1 45%; /* Makes the description take up 45% of the container width */
+    min-width: 300px;
+    background-color: #f9f9f9; /* Light background for description */
+    padding: 20px;
+    border: 1px solid #ddd; /* Border around the description */
+    border-radius: 8px; /* Rounded corners for description */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+}
+
+.product-description p {
+    font-size: 16px; /* Font size for description */
+}
+
 
     </style>
 </head>
@@ -454,44 +382,171 @@ header {
 @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
+<body>
 
-<main id="products" class="product-container">
-@foreach($products as $product)
+<div class="product-container">
+    <div class="product-card">
+        <h1><?php echo htmlspecialchars($product_name); ?></h1>
+        <img src="<?php echo htmlspecialchars($product_image); ?>" alt="Product Image" style="max-width: 300px;">
+        <p>Price: £<?php echo htmlspecialchars($product_price); ?></p>
+    </div>
 
-  <div class="product-card">
-  <img src="{{ asset($product->image) }}" class="product-card img">
-
-    <div class="product-info">
-      
-      <h2 >{{ $product->name }}</h2>
-      
-  
-      <p>£{{ $product->price }}</p>
-      <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                @csrf
-                                <label for="size">Select Size:</label>
-                                <select name="size" class="form-control mb-2" required>
-                                    @foreach($product->variants as $variant)
-                                        <option value="{{ $variant->size }}">{{ $variant->size }} ({{ $variant->stock }} left)</option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-primary w-100">Add to Cart</button>
-                            </form>
-                            <form action="{{ route('products.viewproducts') }}" method="GET" target="_blank">
-    <input type="hidden" name="id" value="{{ $product->id }}">
-    <input type="hidden" name="name" value="{{ urlencode($product->name) }}">
-    <input type="hidden" name="price" value="{{ $product->price }}">
-    <input type="hidden" name="image" value="{{ urlencode(asset($product->image)) }}">
-    <input type="hidden" name="description" value="{{$product->description}}">
-    <button type="submit" class="btn btn-primary w-100">View</button>
-</form>
+    <div class="product-description">
+        <p>Description: <?php echo htmlspecialchars($product_description); ?></p>
+    </div>
+</div>
 
 
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        .stars {
+            display: flex;
+            justify-content: space-between;
+            width: 180px;
+            margin-bottom: 12px;
+        }
+        .star {
+            cursor: pointer;
+            font-size: 24px;
+            color: #FFD700;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
 
 
-                          </div>
-  </div>
+<div class="container">
+    <h1>Submit Your Review</h1>
+    <form id="reviewForm" action="#" method="post">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
 
-  @endforeach
-</main>  
+        <label for="stars">Rating:</label>
+        <div class="stars" id="stars">
+            <span class="star" onclick="rate(1)">&#9733;</span>
+            <span class="star" onclick="rate(2)">&#9733;</span>
+            <span class="star" onclick="rate(3)">&#9733;</span>
+            <span class="star" onclick="rate(4)">&#9733;</span>
+            <span class="star" onclick="rate(5)">&#9733;</span>
+        </div>
+
+        <label for="description">Review Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <div class="reviews" id="reviews">
+        <h2>Customer Reviews</h2>
+        <!-- Reviews will be dynamically added here -->
+    </div>
+</div>
+
+<script>
+    let rating = 0;
+
+    // Rate function to change star color on click
+    function rate(starCount) {
+        rating = starCount;
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            if (index < starCount) {
+                star.style.color = '#FFD700'; // Gold color for selected stars
+            } else {
+                star.style.color = '#ddd'; // Light grey color for unselected stars
+            }
+        });
+    }
+
+    // Handle form submission and display the review
+    document.getElementById("reviewForm").addEventListener("submit", function(event) {
+        event.preventDefault();  // Prevent the form from submitting the usual way
+        
+        // Get the values from the form
+        const name = document.getElementById("name").value;
+        const description = document.getElementById("description").value;
+
+        if (name && description && rating > 0) {
+            // Create a new review element
+            const review = document.createElement("div");
+            review.classList.add("review");
+
+            const reviewContent = `
+                <h3>${name}</h3>
+                <p class="stars-view">Rating: ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</p>
+                <p>${description}</p>
+            `;
+
+            review.innerHTML = reviewContent;
+
+            // Append the new review to the reviews section
+            document.getElementById("reviews").appendChild(review);
+
+            // Clear the form
+            document.getElementById("reviewForm").reset();
+            rating = 0;
+
+            // Reset stars after submission (set all to default grey color)
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => star.style.color = '#ddd');
+        } else {
+            alert("Please fill out all fields and provide a rating.");
+        }
+    });
+</script>
+
+</script>
+</body>
 </html>
