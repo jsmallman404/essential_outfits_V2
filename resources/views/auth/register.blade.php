@@ -29,21 +29,6 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="address" value="{{ __('Address') }}" />
-                <x-input id="address" class="block mt-1 w-full" type="text" name="address" required autocomplete="address" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="post_code" value="{{ __('Post Code') }}" />
-                <x-input id="post_code" class="block mt-1 w-full" type="text" name="post_code" required autocomplete="post_code" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="city" value="{{ __('City') }}" />
-                <x-input id="city" class="block mt-1 w-full" type="text" name="city" required autocomplete="city" />
-            </div>
-
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
@@ -62,7 +47,7 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('customer.editProfile') }}">
                     {{ __('Already registered?') }}
                 </a>
 
