@@ -217,7 +217,7 @@ header {
         <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a href="#">
+        <a href="{{ url('/') }}">
           <img src="images/essentiallogo1.png" alt="Logo">
         </a>
       </div>
@@ -337,6 +337,15 @@ header {
                                 </select>
                                 <button type="submit" class="btn">Add to Cart</button>
                             </form>
+                            </form>
+                            <form action="{{ route('product.show', $product->id) }}" method="GET" target="_blank">
+    <input type="hidden" name="id" value="{{ $variant->id }}">
+    <input type="hidden" name="name" value="{{ urlencode($product->name) }}">
+    <input type="hidden" name="price" value="{{ $product->price }}">
+    <input type="hidden" name="image" value="{{ urlencode(asset($product->image)) }}">
+    <input type="hidden" name="description" value="{{$product->description}}">
+    <button type="submit" class="btn btn-primary w-100">View</button>
+</form>
                         </div>
                     </div>
                 </div>

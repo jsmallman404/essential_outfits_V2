@@ -152,5 +152,18 @@ class ProductController extends Controller
 
     return view('admin.edit_stock', compact('product'));
 }
+
+
+public function show($id)
+{
+    // Fetch the product by its ID
+    $product = Product::findOrFail($id);
+
+    // Return the product to the 'product.show' view
+    return view('products.show', compact('product'));
+}
+
+
+
 }
 
