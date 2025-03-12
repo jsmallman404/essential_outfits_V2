@@ -36,6 +36,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
     Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
+    Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
 });
 
 Route::get('/about', function () {
