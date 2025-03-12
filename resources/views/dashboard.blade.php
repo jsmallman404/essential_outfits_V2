@@ -72,6 +72,17 @@
             <form action="{{ route('password.change') }}" method="GET">
                 <button type="submit" class="btn btn-warning"><i class="fas fa-key"></i> Change Password</button>
             </form>
+
+            <form action="{{ route('customer.editProfile') }}" method="GET">
+                <button type="submit" class="btn btn-warning"><i class="fas fa-key"></i> Edit Details</button>
+            </form>
+
+            @if(auth()->check() && auth()->user()->role == 'admin')
+        <form action="{{ route('admin.dashboard') }}" method="GET">
+            <button type="submit" class="btn btn-warning">Admin</button>
+        </form>
+        @endif
+
         </div>
 
     </div>
