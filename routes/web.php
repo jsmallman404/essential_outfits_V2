@@ -37,6 +37,10 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
     Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.editProduct');
+    Route::post('/admin/products/{id}/update', [ProductController::class, 'update'])->name('admin.updateProduct');
+    Route::post('/admin/products/{id}/add-image', [ProductController::class, 'addImage'])->name('admin.addProductImage');
+    Route::delete('/admin/products/{id}/remove-image', [ProductController::class, 'removeImage'])->name('admin.removeProductImage');
 });
 
 Route::get('/about', function () {
