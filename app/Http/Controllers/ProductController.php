@@ -27,83 +27,72 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // ✅ Validate Request
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'category' => 'required|string',
-            'brand' => 'required|string',
-            'color' => 'required|string',
-            'sizes' => 'nullable|array',
-            'sizes.*.size' => 'required_with:sizes|string',
-            'sizes.*.stock' => 'required_with:sizes|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'category' => 'required|string',
+        'brand' => 'required|string',
+        'color' => 'required|string',
+        'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'sizes' => 'nullable|array',
+        'sizes.*.size' => 'required|string',
+        'sizes.*.stock' => 'required|integer|min:0',
+    ]);
+
+    try {
+        // Create the product first
+        $product = Product::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'price' => $validated['price'],
+            'category' => $validated['category'],
+            'brand' => $validated['brand'],
+            'color' => $validated['color'],
+            'images' => [] // Default empty array
         ]);
 
-        // ✅ Handle Image Upload (Only if the file is present)
-        $imagePath = 'No Image'; // Default image path
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName); // Store in public/images
-            $imagePath = 'images/' . $imageName; // Save relative path in DB
+        // Handle Multiple Image Uploads
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public'); // Store in 'storage/app/public/products'
+                $imagePaths[] = $path;
+            }
+            $product->update(['images' => $imagePaths]); // Use update() instead of save()
         }
 
-        // ✅ Create Product
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category' => $request->category,
-            'brand' => $request->brand,
-            'color' => $request->color,
-            'image' => 'images/' . $imageName,  // Store relative path
-        ]);
-
-        // ✅ Handle Product Variants if Sizes are provided
-        if ($request->has('sizes')) {
-            foreach ($request->sizes as $size) {
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'size' => $size['size'],
-                    'stock' => $size['stock'],
+        // Handle Sizes & Stock
+        if (!empty($validated['sizes'])) {
+            foreach ($validated['sizes'] as $sizeData) {
+                $product->variants()->create([
+                    'size' => $sizeData['size'],
+                    'stock' => $sizeData['stock']
                 ]);
             }
         }
 
+        return response()->json(['success' => true, 'message' => 'Product added successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+    }
+}
 
-        // ✅ Return JSON Response if it's an AJAX request
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Product created successfully!',
-                'imagePath' => asset($imagePath ?? 'images/no-image.jpg') // Fallback image if no image was uploaded
-            ]);
+public function destroy($id)
+{
+    $product = Product::findOrFail($id);
+
+    if (!empty($product->images)) {
+        foreach ($product->images as $imagePath) {
+            Storage::disk('public')->delete($imagePath);
         }
-    
-        // If it's a regular HTTP request, perform the redirect
-        return redirect()->route('admin.products')->with('success', 'Product created successfully.');
     }
 
-    public function destroy($id)
-    {
-        $product = Product::findOrFail($id);
+    $product->delete();
 
-        // ✅ Delete Image from Storage
-        if ($product->image && $product->image !== 'No Image') {
-            // Remove the image from the 'images' folder
-            $imagePath = public_path($product->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-
-        // ✅ Delete Product
-        $product->delete();
-        return redirect()->back()->with('success', 'Product deleted successfully.');
-    }
+    return redirect()->back()->with('success', 'Product deleted successfully.');
+}
 
     public function updateStock(Request $request, $id)
     {
