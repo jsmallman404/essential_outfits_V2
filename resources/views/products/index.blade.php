@@ -360,7 +360,16 @@ header {
             @foreach($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="product-card">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top">
+                    @php
+                  // Decode JSON if it's stored as a JSON string
+                  $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                    @endphp
+
+                    @if(!empty($images) && is_array($images) && isset($images[0]))
+                        <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="100" height="100" style="object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/default-placeholder.png') }}" width="100" height="100" style="object-fit: cover;">
+                    @endif
                         <div class="product-info">
                             <h5>{{ $product->name }}</h5>
                             <p>£{{ $product->price }}</p>

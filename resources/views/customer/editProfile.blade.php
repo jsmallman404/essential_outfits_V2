@@ -69,6 +69,13 @@
                         <label for="post_code" class="form-label">Post Code</label>
                         <input type="text" class="form-control" id="post_code" name="post_code" value="{{ auth()->user()->post_code ?? '' }}">
                     </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                        </select>
+                    </div>
 
                     <button type="submit" class="btn btn-success w-100">Save Changes</button>
                     <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100 mt-2">Back to Dashboard</a>
