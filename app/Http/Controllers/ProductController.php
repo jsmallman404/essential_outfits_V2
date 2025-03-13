@@ -18,6 +18,12 @@ class ProductController extends Controller
 public function index(Request $request)
 {
     $query = Product::query();
+    
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        $query->where('name', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('description', 'LIKE', "%{$searchTerm}%");
+    }
 
     if ($request->has('product_id')) {
         $query->where('id', $request->input('product_id'));
