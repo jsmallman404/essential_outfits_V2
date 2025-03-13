@@ -244,7 +244,7 @@ textarea {
 }
 
 /* Submit Button */
-button2 {
+.button2 {
     width: 100%;
     padding: 12px;
     background-color: #333;
@@ -257,7 +257,7 @@ button2 {
     margin-top: 15px;
 }
 
-button2:hover {
+.button2:hover {
     background-color: #555;
 }
 
