@@ -74,7 +74,7 @@
             </form>
 
             <form action="{{ route('customer.editProfile') }}" method="GET">
-                <button type="submit" class="btn btn-warning"><i class="fas fa-key"></i> Edit Details </button>
+                <button type="submit" class="btn btn-warning"><i class="fas fa-edit"></i> Edit Details </button>
             </form>
 
             @if(auth()->check() && auth()->user()->role == 'admin')

@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Crypt;
 
 // Import necessary relationships
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,11 +19,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -33,11 +29,6 @@ class User extends Authenticatable
         'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -45,20 +36,10 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array<int, string>
-     */
     protected $appends = [
         'profile_photo_url',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -67,13 +48,41 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Wishlist Relationship: A user can have multiple wishlist items.
-     */
     public function wishlist(): HasMany
     {
         return $this->hasMany(Wishlist::class, 'user_id');
     }
+
+    public function setAddressAttribute($value)
+    {
+        $this->attributes['address'] = Crypt::encryptString($value);
+    }
+
+    public function getAddressAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;;
+    }
+
+    public function setPostCodeAttribute($value)
+    {
+        $this->attributes['post_code'] = Crypt::encryptString($value);
+    }
+
+    public function getPostCodeAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;;
+    }
+
+    public function setCityAttribute($value)
+    {
+        $this->attributes['city'] = Crypt::encryptString($value);
+    }
+
+    public function getCityAttribute($value)
+    {
+        return $value ? Crypt::decryptString($value) : null;;
+    }
+
 }
 
 

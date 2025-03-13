@@ -9,11 +9,31 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $products = Product::with('variants')->get();
-        return view('products.index', compact('products'));
+    public function show($id)
+{
+    $product = Product::findOrFail($id); // Fetch the product or return 404
+    return view('products.show', compact('product'));
+}
+
+public function index(Request $request)
+{
+    $query = Product::query();
+    
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        $query->where('name', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('description', 'LIKE', "%{$searchTerm}%");
     }
+
+    if ($request->has('product_id')) {
+        $query->where('id', $request->input('product_id'));
+    }
+
+    $products = $query->get();
+
+    return view('products.index', compact('products'));
+}
+
 
     public function adminIndex()
     {
@@ -27,83 +47,69 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // ✅ Validate Request
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'category' => 'required|string',
-            'brand' => 'required|string',
-            'color' => 'required|string',
-            'sizes' => 'nullable|array',
-            'sizes.*.size' => 'required_with:sizes|string',
-            'sizes.*.stock' => 'required_with:sizes|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'category' => 'required|string',
+        'brand' => 'required|string',
+        'color' => 'required|string',
+        'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'sizes' => 'nullable|array',
+        'sizes.*.size' => 'required|string',
+        'sizes.*.stock' => 'required|integer|min:0',
+    ]);
 
-        // ✅ Handle Image Upload (Only if the file is present)
-        $imagePath = 'No Image'; // Default image path
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName); // Store in public/images
-            $imagePath = 'images/' . $imageName; // Save relative path in DB
+    try {
+        // Create the product first
+        $product = Product::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'price' => $validated['price'],
+            'category' => $validated['category'],
+            'brand' => $validated['brand'],
+            'color' => $validated['color'],
+            'images' => [] 
+        ]);
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+                $imagePaths[] = $path;
+            }
+            $product->update(['images' => $imagePaths]);
         }
 
-        // ✅ Create Product
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'category' => $request->category,
-            'brand' => $request->brand,
-            'color' => $request->color,
-            'image' => 'images/' . $imageName,  // Store relative path
-        ]);
-
-        // ✅ Handle Product Variants if Sizes are provided
-        if ($request->has('sizes')) {
-            foreach ($request->sizes as $size) {
-                ProductVariant::create([
-                    'product_id' => $product->id,
-                    'size' => $size['size'],
-                    'stock' => $size['stock'],
+        if (!empty($validated['sizes'])) {
+            foreach ($validated['sizes'] as $sizeData) {
+                $product->variants()->create([
+                    'size' => $sizeData['size'],
+                    'stock' => $sizeData['stock']
                 ]);
             }
         }
 
+        return response()->json(['success' => true, 'message' => 'Product added successfully']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+    }
+}
 
-        // ✅ Return JSON Response if it's an AJAX request
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Product created successfully!',
-                'imagePath' => asset($imagePath ?? 'images/no-image.jpg') // Fallback image if no image was uploaded
-            ]);
+public function destroy($id)
+{
+    $product = Product::findOrFail($id);
+
+    if (!empty($product->images)) {
+        foreach ($product->images as $imagePath) {
+            Storage::disk('public')->delete($imagePath);
         }
-    
-        // If it's a regular HTTP request, perform the redirect
-        return redirect()->route('admin.products')->with('success', 'Product created successfully.');
     }
 
-    public function destroy($id)
-    {
-        $product = Product::findOrFail($id);
+    $product->delete();
 
-        // ✅ Delete Image from Storage
-        if ($product->image && $product->image !== 'No Image') {
-            // Remove the image from the 'images' folder
-            $imagePath = public_path($product->image);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-
-        // ✅ Delete Product
-        $product->delete();
-        return redirect()->back()->with('success', 'Product deleted successfully.');
-    }
+    return redirect()->back()->with('success', 'Product deleted successfully.');
+}
 
     public function updateStock(Request $request, $id)
     {
@@ -113,7 +119,6 @@ class ProductController extends Controller
         }
 
         
-        // ✅ Update existing variants
         if ($request->has('variants')) {
             foreach ($request->variants as $variantId => $variantData) {
                 $variant = ProductVariant::find($variantId);
@@ -126,7 +131,6 @@ class ProductController extends Controller
             }
         }
     
-        // ✅ Add new variants
         if ($request->has('new_variants')) {
             foreach ($request->new_variants as $newVariant) {
                 if (!empty($newVariant['size']) && isset($newVariant['stock'])) {
@@ -152,6 +156,7 @@ class ProductController extends Controller
 
     return view('admin.edit_stock', compact('product'));
 }
+<<<<<<< HEAD
 
 
 public function show($id)
@@ -165,5 +170,65 @@ public function show($id)
 
 
 
+=======
+public function edit($id)
+{
+    $product = Product::findOrFail($id);
+    return view('admin.editProduct', compact('product'));
+}
+public function update(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'category' => 'required|string',
+        'brand' => 'required|string',
+        'color' => 'required|string',
+    ]);
+
+    $product->update($validated);
+
+    return redirect()->route('admin.products')->with('success', 'Product updated successfully.');
+}
+public function addImage(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+    $validated = $request->validate([
+        'images.*' => 'image|mimes:jpg,jpeg,png|max:2048'
+    ]);
+
+    $imagePaths = $product->images ?? [];
+
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('products', 'public');
+            $imagePaths[] = $path;
+        }
+    }
+
+    $product->update(['images' => $imagePaths]);
+
+    return redirect()->back()->with('success', 'Images added successfully.');
+}
+public function removeImage(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+    $imageToRemove = $request->input('image');
+
+    $images = array_filter($product->images, function ($image) use ($imageToRemove) {
+        return $image !== $imageToRemove;
+    });
+
+    Storage::disk('public')->delete($imageToRemove);
+    $product->update(['images' => array_values($images)]);
+
+    return redirect()->back()->with('success', 'Image removed successfully.');
+}
+
+
+>>>>>>> main
 }
 

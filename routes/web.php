@@ -9,6 +9,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\AdminReturnController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
@@ -36,6 +38,16 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
     Route::get('/admin/products/{id}', [ProductController::class, 'destroy'])->name('admin.deleteProduct');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.store');
+    Route::post('/admin/products/store', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{id}/edit', [ProductController::class, 'edit'])->name('admin.editProduct');
+    Route::post('/admin/products/{id}/update', [ProductController::class, 'update'])->name('admin.updateProduct');
+    Route::post('/admin/products/{id}/add-image', [ProductController::class, 'addImage'])->name('admin.addProductImage');
+    Route::delete('/admin/products/{id}/remove-image', [ProductController::class, 'removeImage'])->name('admin.removeProductImage');
+    Route::get('/admin/returns', [AdminReturnController::class, 'index'])->name('admin.returns.index');
+    Route::get('/admin/returns/{returnRequest}', [AdminReturnController::class, 'show'])->name('admin.returns.show');
+    Route::post('/admin/returns/{returnRequest}/accept', [AdminReturnController::class, 'accept'])->name('admin.returns.accept');
+    Route::post('/admin/returns/{returnRequest}/reject', [AdminReturnController::class, 'reject'])->name('admin.returns.reject');
+    Route::post('/admin/returns/{returnRequest}/received', [AdminReturnController::class, 'markAsReceived'])->name('admin.returns.received');
 });
 
 Route::get('/about', function () {
@@ -56,8 +68,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     Route::put('/cart/update/{id}', [CartController::class, 'updateQuantity'])->name('cart.update');
 
-    Route::get('/checkoutPage', [CartController::class, 'checkoutPage'])->name('cart.checkoutPage'); // View checkout page
-    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout'); // Process checkout
+    Route::get('/checkoutPage', [CartController::class, 'checkoutPage'])->name('cart.checkoutPage'); 
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout'); 
+
+    Route::get('/orders/{order}/returns', [ReturnController::class, 'showReturnPage'])->name('customer.orders.returns');
+Route::post('/orders/{order}/returns', [ReturnController::class, 'processReturn'])->name('customer.orders.process_return');
 });
 
 // Admin Orders
@@ -78,6 +93,7 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 //Product Page Logic
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
 
@@ -117,4 +133,6 @@ Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addToWishl
 Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'removeFromWishlist'])
     ->name('wishlist.remove');
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+
+

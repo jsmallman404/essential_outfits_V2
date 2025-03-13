@@ -35,7 +35,17 @@
             <tbody>
                 @foreach($products as $product)
                     <tr>
-                        <td><img src="{{ asset('storage/' . $product->image) }}" width="50"></td>
+                    <td>
+    @php
+        $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+    @endphp
+
+    @if(is_array($images))
+        @foreach($images as $image)
+            <img src="{{ asset('storage/' . ltrim($image, '/') ) }}" width="50">
+        @endforeach
+    @endif
+</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category }}</td>
                         <td>£{{ $product->price }}</td>
@@ -45,6 +55,7 @@
                             @endforeach
                         </td>
                         <td>
+                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit Product</a>   
                             <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
                             <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
                                 @csrf    

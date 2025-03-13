@@ -19,6 +19,9 @@
             <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Manage Users</a>
         </div>
         <div class="text-center mt-4">
+            <a href="{{ route('admin.returns.index') }}" class="btn btn-primary">Manage Returns</a>
+        </div>
+        <div class="text-center mt-4">
             <a href="{{ route('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
         </div>
     </div>
