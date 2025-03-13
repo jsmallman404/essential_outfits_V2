@@ -120,7 +120,11 @@ body {
                             <h5 class="card-title">{{ $wishlistItem->product->name }}</h5>
                             <p class="card-text">£{{ $wishlistItem->product->price }}</p>
                             
-                            <a href="{{ route('product.show', $wishlistItem->product->id) }}" class="btn btn-primary">View Product</a>
+                            <a href="{{ url('/products?product_id=' . $wishlistItem->product->id) }}" class="btn btn-primary">
+    View Product
+</a>
+
+
 
                             <!-- Remove from Wishlist -->
                             <form action="{{ route('wishlist.remove', $wishlistItem->product->id) }}" method="POST" style="display:inline;">

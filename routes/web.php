@@ -93,6 +93,7 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 //Product Page Logic
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
 
@@ -132,4 +133,6 @@ Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addToWishl
 Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'removeFromWishlist'])
     ->name('wishlist.remove');
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+
+
