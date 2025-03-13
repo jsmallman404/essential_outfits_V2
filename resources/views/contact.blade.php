@@ -244,7 +244,7 @@ textarea {
 }
 
 /* Submit Button */
-button {
+button2 {
     width: 100%;
     padding: 12px;
     background-color: #333;
@@ -257,7 +257,7 @@ button {
     margin-top: 15px;
 }
 
-button:hover {
+button2:hover {
     background-color: #555;
 }
 
@@ -414,7 +414,10 @@ button:hover {
 
       <!-- Account and Cart Actions -->
       <div class="account-actions">
-        <input type="text" class="search-bar" placeholder="Search">
+      <form action="{{ route('products.index') }}" method="GET">
+        <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
+        <button type="submit"><i class="fas fa-search"></i></button>
+     </form>
 
         <a href="{{ route('wishlist.index') }}" class="wishlist">
           <i class="fas fa-heart"></i>
@@ -444,7 +447,8 @@ button:hover {
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send</button>
+        <button type="submit" class="button2">Send</button>
+
     </form>
 
     @if(session('success'))

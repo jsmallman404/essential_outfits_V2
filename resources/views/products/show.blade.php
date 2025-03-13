@@ -295,7 +295,10 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
   
         <!-- Account and Cart Actions -->
         <div class="account-actions">
-          <input type="text" class="search-bar" placeholder="Search">
+        <form action="{{ route('products.index') }}" method="GET">
+        <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
+        <button type="submit"><i class="fas fa-search"></i></button>
+     </form>
   
           <a href="{{ route('wishlist.index') }}" class="wishlist">
             <i class="fas fa-heart"></i>

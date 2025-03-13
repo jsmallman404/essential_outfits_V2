@@ -327,7 +327,10 @@ header {
 
       <!-- Account and Cart Actions -->
       <div class="account-actions">
-        <input type="text" class="search-bar" placeholder="Search">
+      <form action="{{ route('products.index') }}" method="GET">
+        <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
+        <button type="submit"><i class="fas fa-search"></i></button>
+     </form>
 
         <a href="{{ route('wishlist.index') }}" class="wishlist">
           <i class="fas fa-heart"></i>
