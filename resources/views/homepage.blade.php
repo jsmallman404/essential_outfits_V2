@@ -16,10 +16,12 @@
     <div class="slideshow-content">
       <h1>Essential Outfits</h1>
       <p>Providing you effortless fashion from the best streetwear brands.</p>
-      <a href="#products" class="view-products-btn">View Products</a>
+
+      <a href="{{ route('products.index') }}" class="view-products-btn">View Products</a>
+      
     </div>
     <div class="slideshow-images">
-    <img src="{{ asset('images/osb4tt.png') }}" alt="Slide 1">
+    <img src="{{ asset('images/osb4tt.png') }}" alt="Slide 1" class="active">
     <img src="{{ asset('images/glogang.png') }}" alt="Slide 2">
     <img src="{{ asset('images/jaded.png') }}" alt="Slide 3">
     <img src="{{ asset('images/thuggunnababy.png') }}" alt="Slide 4">
