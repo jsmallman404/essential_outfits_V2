@@ -175,8 +175,8 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
         textarea {height: 100px;}
         .stars {display: flex;justify-content: space-between;width: 180px;margin-bottom: 12px;}
         .star {cursor: pointer;font-size: 24px;color: #FFD700;}
-        button {background-color: #4CAF50;color: white;padding: 10px 20px;border: none;border-radius: 4px;cursor: pointer;width: 100%;font-size: 16px;}
-        button:hover {background-color: #45a049;}
+        .button2 {background-color: #4CAF50;color: white;padding: 10px 20px;border: none;border-radius: 4px;cursor: pointer;width: 100%;font-size: 16px;}
+        .button2:hover {background-color: #45a049;}
 
 
         .footer {
@@ -353,7 +353,7 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
     </div>
     <label for="description">Review Description:</label>
     <textarea id="description" name="description" required></textarea>
-    <button type="submit">Submit Review</button>
+    <button type="submit" class="button2">Send</button>
 </form>
 <div class="reviews" id="reviews">
     <h2>Customer Reviews</h2>
