@@ -1,9 +1,11 @@
 <?php
+
 $product_id = isset($_GET['id']) ? $_GET['id'] : 'Unknown';
 $product_name = isset($_GET['name']) ? urldecode($_GET['name']) : 'Unknown Product';
 $product_price = isset($_GET['price']) ? $_GET['price'] : 'N/A';
 $product_image = isset($_GET['image']) ? urldecode($_GET['image']) : 'placeholder.jpg';
 $product_description = isset($_GET['description']) ? htmlspecialchars($_GET['description']) : 'N/A';
+$logo = isset($_GET['logo']) ? $_GET['logo'] : 'images/essentiallogo1.png';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,6 +179,56 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
         button:hover {background-color: #45a049;}
 
 
+        .footer {
+    margin-top: 50px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.footer-about, .footer-contact, .footer-socials {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+}
+
+.footer h3, .footer h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.footer p, .footer a {
+    font-size: 1rem;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
 
 
 
@@ -189,7 +241,7 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
         <!-- Logo -->
         <div class="logo">
           <a href="{{ url('/') }}">
-            <img src="essentiallogo1.png" alt="Logo">
+          <img src="<?php echo htmlspecialchars($logo); ?>" alt="Logo">
           </a>
         </div>
   
@@ -341,4 +393,27 @@ document.getElementById("reviewForm").addEventListener("submit", function(event)
 });
 </script>
 </body>
+
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h4>Essential Outfits</h4>
+        <p>Providing you effortless fashion from the best streetwear brands.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p> <a href="mailto:queriesessential@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
+      </div>
+      <div class="footer-socials">
+        <h4>Follow Us</h4>
+        <a href="https://instagram.com/essentialoutfits.xyz" target="_blank">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Essential Outfits. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+
+
 </html>
