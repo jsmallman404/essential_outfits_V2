@@ -44,8 +44,6 @@
     </div>
   </div>
 
- 
-
     <!-- Added Contact and About buttons -->
 
     <a href="{{ route('contact') }}" class="nav-link">Contact</a>
