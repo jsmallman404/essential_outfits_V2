@@ -160,8 +160,99 @@ public function destroy($id)
 
     return view('admin.edit_stock', compact('product'));
 }
+public function edit($id)
+{
+    $product = Product::findOrFail($id); 
+    return view('admin.editProduct', compact('product')); 
+}
 
+public function update(Request $request, $id)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'category' => 'required|string',
+        'brand' => 'required|string',
+        'color' => 'required|string',
+        'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+    ]);
 
+    try {
+        $product = Product::findOrFail($id);
+
+        // Handle Image Upload
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+                $imagePaths[] = $path;
+            }
+            $product->images = json_encode($imagePaths); 
+        }
+
+        $product->update([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'category' => $validated['category'],
+            'brand' => $validated['brand'],
+            'color' => $validated['color'],
+            'images' => $product->images, 
+        ]);
+
+        return redirect()->route('admin.products')->with('success', 'Product updated successfully!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Failed to update product: ' . $e->getMessage());
+    }
+}
+public function addImage(Request $request, $id)
+{
+    $validated = $request->validate([
+        'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    try {
+        $product = Product::findOrFail($id);
+
+        $existingImages = is_array($product->images) ? $product->images : json_decode($product->images, true) ?? [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('products', 'public');
+                $existingImages[] = $path;
+            }
+        }
+        $product->update([
+            'images' => json_encode($existingImages),
+        ]);
+
+        return redirect()->back()->with('success', 'Image(s) added successfully!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Failed to add images: ' . $e->getMessage());
+    }
+}
+public function removeImage(Request $request, $id)
+{
+    try {
+        $product = Product::findOrFail($id);
+
+        $existingImages = is_array($product->images) ? $product->images : json_decode($product->images, true) ?? [];
+
+        $imageToRemove = $request->input('image');
+
+        if (in_array($imageToRemove, $existingImages)) {
+            Storage::disk('public')->delete($imageToRemove);
+            $existingImages = array_diff($existingImages, [$imageToRemove]); 
+        }
+
+        $product->update(['images' => json_encode(array_values($existingImages))]);
+
+        return redirect()->back()->with('success', 'Image removed successfully!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Failed to remove image: ' . $e->getMessage());
+    }
+}
 
 
 
