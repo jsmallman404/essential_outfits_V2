@@ -43,11 +43,6 @@
       <a href="/accessories/women">Women accessories</a>
     </div>
   </div>
-<<<<<<< HEAD
-=======
-
- 
->>>>>>> main
 
     <!-- Added Contact and About buttons -->
 
