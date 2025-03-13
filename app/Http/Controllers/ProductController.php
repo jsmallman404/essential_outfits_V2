@@ -9,11 +9,25 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $products = Product::with('variants')->get();
-        return view('products.index', compact('products'));
+    public function show($id)
+{
+    $product = Product::findOrFail($id); // Fetch the product or return 404
+    return view('products.show', compact('product'));
+}
+
+public function index(Request $request)
+{
+    $query = Product::query();
+
+    if ($request->has('product_id')) {
+        $query->where('id', $request->input('product_id'));
     }
+
+    $products = $query->get();
+
+    return view('products.index', compact('products'));
+}
+
 
     public function adminIndex()
     {
@@ -192,5 +206,7 @@ public function removeImage(Request $request, $id)
 
     return redirect()->back()->with('success', 'Image removed successfully.');
 }
+
+
 }
 
