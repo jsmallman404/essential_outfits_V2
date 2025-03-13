@@ -30,6 +30,7 @@ class CustomerController extends Controller
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'post_code' => 'nullable|string|max:10',
+            'role' => 'required|in:user,admin',
         ]);
 
         $user->update([
@@ -38,6 +39,7 @@ class CustomerController extends Controller
             'address' => $request->address,
             'city' => $request->city,
             'post_code' => $request->post_code,
+            'role' => $request->input('role')
         ]);
 
         return redirect()->route('customer.editProfile')->with('success', 'Profile updated successfully.');
