@@ -70,7 +70,7 @@
                         <input type="text" class="form-control" id="post_code" name="post_code" value="{{ auth()->user()->post_code ?? '' }}">
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    <button type="submit" class="btn btn-success w-100">Save Changes</button>
                     <a href="{{ route('dashboard') }}" class="btn btn-secondary w-100 mt-2">Back to Dashboard</a>
                 </div>
             </div>
@@ -78,4 +78,3 @@
     </div>
 </body>
 </html>
-
