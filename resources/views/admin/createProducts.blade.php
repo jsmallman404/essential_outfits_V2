@@ -63,7 +63,6 @@
     </div>
 
     <script>
-        // Handle form submission
         document.getElementById('productForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -99,10 +98,9 @@
             });
         });
 
-        // Handle multiple image preview
         document.getElementById("imageInput").addEventListener("change", function(event) {
             var previewContainer = document.getElementById("imagePreview");
-            previewContainer.innerHTML = ''; // Clear previous images
+            previewContainer.innerHTML = ''; 
 
             Array.from(event.target.files).forEach(file => {
                 var reader = new FileReader();
@@ -117,7 +115,6 @@
             });
         });
 
-        // Dynamic size field functionality
         function addSizeField() {
             const sizesContainer = document.getElementById('sizes-container');
             const index = document.querySelectorAll('.size-entry').length;

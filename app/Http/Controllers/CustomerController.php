@@ -25,7 +25,7 @@ class CustomerController extends Controller
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($user->id), // Ensure unique email except for the current user
+                Rule::unique('users', 'email')->ignore($user->id), 
             ],
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
