@@ -31,8 +31,18 @@ class ProductController extends Controller
             $query->where('id', $request->input('product_id'));
         }
 
-        $products = $query->get();
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
 
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        $products = $query->get();
         return view('products.index', compact('products'));
     }
 
