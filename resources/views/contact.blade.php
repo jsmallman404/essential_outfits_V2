@@ -351,6 +351,17 @@ textarea {
     color: #888;
 }
 
+#star-rating .star {
+    font-size: 24px;
+    color: #ddd; /* default unselected color */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#star-rating .star.selected {
+    color: #FFD700; /* gold color for selected stars */
+}
+
 
 
     </style>
@@ -458,6 +469,48 @@ textarea {
 @endif
 
 </div>
+<!-- Add this section after your existing contact form markup -->
+<div class="container mt-5">
+  <h2 class="text-center">Review Our Website</h2>
+  @if(session('review_success'))
+    <div class="alert alert-success">{{ session('review_success') }}</div>
+  @endif
+  <form action="{{ route('website-reviews.store') }}" method="POST">
+    @csrf
+    <div class="mb-3 text-center">
+      <label for="rating" class="form-label">Rating:</label>
+      <div id="star-rating">
+        <i class="fas fa-star star" data-value="1"></i>
+        <i class="fas fa-star star" data-value="2"></i>
+        <i class="fas fa-star star" data-value="3"></i>
+        <i class="fas fa-star star" data-value="4"></i>
+        <i class="fas fa-star star" data-value="5"></i>
+      </div>
+      <input type="hidden" name="rating" id="rating" value="0" required>
+    </div>
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment:</label>
+      <textarea name="comment" id="comment" class="form-control" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+  </form>
+</div>
+
+<script>
+  // JavaScript to handle star rating selection
+  const stars = document.querySelectorAll('#star-rating .star');
+  const ratingInput = document.getElementById('rating');
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      const ratingValue = star.getAttribute('data-value');
+      ratingInput.value = ratingValue;
+      stars.forEach(s => s.classList.remove('selected'));
+      for (let i = 0; i < ratingValue; i++) {
+        stars[i].classList.add('selected');
+      }
+    });
+  });
+</script>
 
 </body>
 
