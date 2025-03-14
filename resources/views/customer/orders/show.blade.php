@@ -21,8 +21,9 @@
                 <span class="badge 
                     @if($order->status == 'Pending') bg-warning 
                     @elseif($order->status == 'Active') bg-success 
-                    @elseif($order->status == 'Canceled') bg-danger
+                    @elseif($order->status == 'Cancelled') bg-danger 
                     @elseif($order->status == 'Return Requested') bg-warning
+                    @elseif($order->status == 'Shipped') bg-success
                     @endif">
                     {{ $order->status }}
                 </span>
@@ -44,7 +45,13 @@
                 <tbody>
                     @foreach ($order->orderItems as $item)
                     <tr>
-                        <td>{{ optional($item->product)->name ?? 'Deleted Product' }}</td>
+                        <td>
+                            @if(optional($item->product))
+                                <a href="{{ route('products.show', ['id' => $item->product->id]) }}">{{ $item->product->name }}</a>
+                            @else
+                                Deleted Product
+                            @endif
+                        </td>
                         <td>{{ optional($item->productVariant)->size ?? 'N/A' }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>£{{ number_format(optional($item->product)->price ?? 0, 2) }}</td>

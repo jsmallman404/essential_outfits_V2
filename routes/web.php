@@ -26,6 +26,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
     Route::post('/admin/orders/{order}/accept', [AdminOrderController::class, 'accept'])->name('admin.orders.accept');
     Route::post('/admin/orders/{order}/cancel', [AdminOrderController::class, 'cancel'])->name('admin.orders.cancel');
+    Route::post('/admin/orders/{order}/ship', [AdminOrderController::class, 'ship'])->name('admin.orders.ship');
     Route::delete('/admin/orders/{order}', [AdminOrderController::class, 'destroy'])->name('admin.orders.delete');
     Route::get('/admin/products/{id}/edit-stock', [ProductController::class, 'editStock'])->name('admin.editStock');
     Route::put('/admin/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('admin.updateStock');

@@ -48,20 +48,18 @@
         @endif
 
         @if($order->status == 'Active')
+        <form action="{{ route('admin.orders.ship', $order->id) }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-success">Confrim Shipped</button>
+        </form>
+        @endif
+
+        @if($order->status == 'Active')
         <form action="{{ route('admin.orders.cancel', $order->id) }}" method="POST" class="d-inline">
             @csrf
             <button type="submit" class="btn btn-danger">Cancel Order</button>
         </form>
         @endif
-        
-        <form action="{{ route('admin.orders.delete', $order->id) }}" method="POST" class="d-inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">
-                Delete Order
-            </button>
-        </form>
-
 
         <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Back to Orders</a>
     </div>

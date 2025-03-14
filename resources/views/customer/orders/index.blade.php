@@ -51,8 +51,9 @@
                                     <span class="badge 
                                         @if($order->status == 'Pending') bg-warning 
                                         @elseif($order->status == 'Active') bg-success 
-                                        @elseif($order->status == 'Canceled') bg-danger 
+                                        @elseif($order->status == 'Cancelled') bg-danger 
                                         @elseif($order->status == 'Return Requested') bg-warning
+                                        @elseif($order->status == 'Shipped') bg-success
                                         @endif">
                                         {{ $order->status }}
                                     </span>
