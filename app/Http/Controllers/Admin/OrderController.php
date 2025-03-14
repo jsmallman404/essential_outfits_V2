@@ -42,6 +42,16 @@ class OrderController extends Controller
 
         return redirect()->back()->with('error', 'Order cannot be canceled.');
     }
+
+    public function ship(Order $order)
+    {
+        if ($order->status === 'Active') {
+            $order->update(['status' => 'Shipped']);
+            return redirect()->back()->with('success', 'Order Shipped to Customer');
+        }
+
+        return redirect()->back()->with('error', 'Order cannot be shipped');
+    }
     public function destroy($id)
 {
     $order = Order::findOrFail($id);
