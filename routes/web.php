@@ -10,6 +10,7 @@ use App\Http\Controllers\StockController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AdminReturnController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
@@ -94,6 +95,9 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/reviews/{id}', [ProductReviewController::class, 'show'])->name('reviews.show');
+Route::get('/reviews/{id}/create', [ProductReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
+Route::post('/reviews', [ProductReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
 
 
 

@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\ProductReview;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function show($id) {
     $product = Product::findOrFail($id);
-    return view('products.show', compact('product'));
-    }
+    $reviews = ProductReview::where('product_id', $id)->get();
+    $averageRating = $reviews->avg('rating') ?? 0;
+
+    return view('products.show', compact('product', 'averageRating'));
+}
 
     public function index(Request $request) {
         $query = Product::query();
