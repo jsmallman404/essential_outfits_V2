@@ -135,4 +135,9 @@ Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'remov
 
 
 
+//reviews
+use App\Http\Controllers\ReviewController;
+
+Route::get('/reviews', [ReviewController::class, 'index']);
+Route::post('/reviews', [ReviewController::class, 'store']);
 
