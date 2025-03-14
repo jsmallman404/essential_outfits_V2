@@ -12,6 +12,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AdminReturnController;
+use App\Http\Controllers\AdminWebsiteReviewController;
+use App\Http\Controllers\WebsiteReviewController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
@@ -50,6 +52,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/returns/{returnRequest}/accept', [AdminReturnController::class, 'accept'])->name('admin.returns.accept');
     Route::post('/admin/returns/{returnRequest}/reject', [AdminReturnController::class, 'reject'])->name('admin.returns.reject');
     Route::post('/admin/returns/{returnRequest}/received', [AdminReturnController::class, 'markAsReceived'])->name('admin.returns.received');
+    Route::get('/admin/website-reviews', [AdminWebsiteReviewController::class, 'index'])->name('admin.website-reviews.index');
 });
 
 Route::get('/about', function () {
@@ -106,6 +109,8 @@ Route::post('/reviews', [ProductReviewController::class, 'store'])->name('review
 
 //contact 
 use App\Http\Controllers\ContactController;
+Route::get('/website-reviews/create', [WebsiteReviewController::class, 'create'])->name('website-reviews.create');
+Route::post('/website-reviews', [WebsiteReviewController::class, 'store'])->name('website-reviews.store');
 
 Route::get('/contact', function () {
     return view('contact');

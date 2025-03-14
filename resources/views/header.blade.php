@@ -3,7 +3,7 @@
       <!-- Logo -->
       <div class="logo">
         <a href="#">
-          <img src="images/essentiallogo1.png" alt="Logo">
+        <img src="{{ asset('images/essentiallogo1.png') }}" alt="Logo">
         </a>
       </div>
 
