@@ -226,19 +226,72 @@
         @endif
 
         <div class="row">
-            <div class="col-md-3">
+<div class="col-md-3">
     <div class="filter-menu p-3 mb-4 bg-light rounded">
         <h4>Filter Products</h4>
         <form id="filterForm" action="{{ route('products.index') }}" method="GET">
             <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <select name="category" id="category" class="form-select">
-                    <option value="">All Categories</option>
-                    <option value="Men" {{ request('category') == 'Men' ? 'selected' : '' }}>Men</option>
-                    <option value="Women" {{ request('category') == 'Women' ? 'selected' : '' }}>Women</option>
-                    <option value="Accessories" {{ request('category') == 'Accessories' ? 'selected' : '' }}>Accessories</option>
-                </select>
+                <label class="form-label">Gender</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="gender[]" value="Male" id="genderMale" 
+                           {{ is_array(request('gender')) && in_array('Male', request('gender')) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="genderMale">
+                        Male ({{ $genderCounts->firstWhere('gender', 'Male')->count ?? 0 }})
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="gender[]" value="Female" id="genderFemale" 
+                           {{ is_array(request('gender')) && in_array('Female', request('gender')) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="genderFemale">
+                        Female ({{ $genderCounts->firstWhere('gender', 'Female')->count ?? 0 }})
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="gender[]" value="Unisex" id="genderUnisex" 
+                           {{ is_array(request('gender')) && in_array('Unisex', request('gender')) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="genderUnisex">
+                        Unisex ({{ $genderCounts->firstWhere('gender', 'Unisex')->count ?? 0 }})
+                    </label>
+                </div>
             </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categories</label>
+                @foreach($categories as $category)
+                    @php
+                        $catCount = $categoryCounts->firstWhere('category', $category->category)->count ?? 0;
+                    @endphp
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="categories[]" 
+                               value="{{ $category->category }}" 
+                               id="category_{{ $category->category }}"
+                               {{ is_array(request('categories')) && in_array($category->category, request('categories')) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="category_{{ $category->category }}">
+                            {{ $category->category }} ({{ $catCount }})
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Brands</label>
+                @foreach($brands as $brand)
+                    @php
+                        $brandCount = $brandCounts->firstWhere('brand', $brand->brand)->count ?? 0;
+                    @endphp
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="brands[]" 
+                               value="{{ $brand->brand }}" 
+                               id="brand_{{ $brand->brand }}"
+                               {{ is_array(request('brands')) && in_array($brand->brand, request('brands')) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="brand_{{ $brand->brand }}">
+                            {{ $brand->brand }} ({{ $brandCount }})
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+
+
             <div class="mb-3">
                 <label for="min_price" class="form-label">Min Price</label>
                 <input type="number" name="min_price" id="min_price" class="form-control" placeholder="0" value="{{ request('min_price') }}">
@@ -253,13 +306,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('filterForm').addEventListener('change', function() {
+        this.submit();
+    });
+    document.getElementById('clearFilters').addEventListener('click', function() {
+        window.location.href = "{{ route('products.index') }}";
+    });
+</script>
             <div class="col-md-9">
                 <div class="row">
                     @foreach($products as $product)
                         <div class="col-md-4 mb-4">
                             <div class="product-card">
                                 @php
-                                    // Decode JSON if it's stored as a JSON string
                                     $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
                                 @endphp
 

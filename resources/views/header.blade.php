@@ -2,7 +2,7 @@
         <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a href="#">
+        <a href="/">
         <img src="{{ asset('images/essentiallogo1.png') }}" alt="Logo">
         </a>
       </div>
