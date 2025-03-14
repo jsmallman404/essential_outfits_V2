@@ -99,7 +99,6 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
 @include('header')
 <body>
   <div>
-    <h2 class="centered-heading">Shop All Mens</h2>
     <style>
       .centered-heading {font-size: 3rem;color: #333;font-weight: bold;text-align: center;}
     </style>
@@ -109,37 +108,43 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
           @endif
           <body>
   <div>
-    <h2 class="centered-heading">Product: {{ $product->name }}</h2>
     <style>
       .centered-heading {font-size: 3rem;color: #333;font-weight: bold;text-align: center;}
     </style>
   </div>
   <div class="product-container">
       <div class="product-card">
-          <h1>{{ $product->name }}</h1>
           @php
-            $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-          @endphp
-          @if(is_array($images) && count($images) > 0)
-  <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+  $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+@endphp
+
+@if(is_array($images) && count($images) > 0)
+  <div id="productCarousel" class="carousel slide" data-bs-interval="false">
     <div class="carousel-inner">
       @foreach($images as $index => $image)
         <div class="carousel-item @if($index === 0) active @endif">
-          <img src="{{ asset('storage/' . ltrim($image, '/') ) }}" class="d-block w-100" alt="Product Image">
+          <img src="{{ asset('storage/' . ltrim($image, '/')) }}" class="d-block w-100" alt="Product Image">
         </div>
       @endforeach
     </div>
   </div>
-  <div class="carousel-arrows mt-2 text-center">
+
+  <div class="text-center mt-2">
     <button class="btn btn-secondary me-2" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-      <i class="fas fa-chevron-left"></i> Prev Img
+      <i class="fas fa-chevron-left"></i> Prev
     </button>
-    <button class="btn btn-secondary" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-      Next Img <i class="fas fa-chevron-right"></i>
+    <button class="btn btn-secondary ms-2" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+      Next <i class="fas fa-chevron-right"></i>
     </button>
   </div>
+  <script>
+  var productCarousel = document.getElementById('productCarousel');
+  var carousel = new bootstrap.Carousel(productCarousel, {
+    interval: false,
+    ride: false
+  });
+</script>
 @endif
-          <p>Price: £{{ $product->price }}</p>
           <p>
             <a href="{{ route('reviews.show', ['id' => $product->id]) }}" style="text-decoration: none; color: inherit;">
                 Average Rating: <strong>{{ number_format($averageRating, 1) }}</strong> / 5
@@ -157,6 +162,10 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
           </p>
       </div>
       <div class="product-description">
+          <div>
+          <h1>{{ $product->name }}</h1>
+          </div>
+          <h2>£{{ $product->price }}</h2>
           <p>Description: {{ $product->description }}</p>
           <form action="{{ route('cart.add', $product->id) }}" method="POST">
           @csrf
