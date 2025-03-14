@@ -158,7 +158,18 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
       </div>
       <div class="product-description">
           <p>Description: {{ $product->description }}</p>
-      </div>
+          <form action="{{ route('cart.add', $product->id) }}" method="POST">
+          @csrf
+            <label for="variant_id">Select Size:</label>
+            <select name="variant_id" class="form-control mb-2" required>
+            @foreach($product->variants as $variant)
+            <option value="{{ $variant->id }}">
+              {{ $variant->size }} ({{ $variant->stock }} left)
+            </option>
+            @endforeach
+            </select>
+              <button type="submit" class="btn">Add to Cart</button>
+          </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
