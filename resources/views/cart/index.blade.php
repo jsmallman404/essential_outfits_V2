@@ -52,9 +52,16 @@
                             $subtotal = ($product->price ?? 0) * $cartItem->quantity; 
                         @endphp
                         <tr>
-                            <td>
-                                <img src="{{ asset('storage/images/' . $product->image) }}" width="50" alt="{{ $product->name }}">
-                            </td>
+                        <td>
+                            @php
+                            $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                            @endphp
+                            @if(is_array($images) && count($images) > 0)
+                            <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50" alt="{{ $product->name }}">
+                            @else
+                            <img src="{{ asset('storage/images/default.jpg') }}" width="50" alt="{{ $product->name }}">
+                            @endif
+                        </td>
                             <td>{{ $product->name ?? 'Unknown Product' }}</td>
                             <td>{{ $variant->size ?? 'N/A' }}</td>
                             <td>£{{ number_format($product->price ?? 0, 2) }}</td>
