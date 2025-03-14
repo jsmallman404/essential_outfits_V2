@@ -1,12 +1,3 @@
-<?php
-
-$product_id = isset($_GET['id']) ? $_GET['id'] : 'Unknown';
-$product_name = isset($_GET['name']) ? urldecode($_GET['name']) : 'Unknown Product';
-$product_price = isset($_GET['price']) ? $_GET['price'] : 'N/A';
-$product_image = isset($_GET['image']) ? urldecode($_GET['image']) : 'placeholder.jpg';
-$product_description = isset($_GET['description']) ? htmlspecialchars($_GET['description']) : 'N/A';
-$logo = isset($_GET['logo']) ? $_GET['logo'] : 'images/essentiallogo1.png';
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +5,7 @@ $logo = isset($_GET['logo']) ? $_GET['logo'] : 'images/essentiallogo1.png';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <title>Your Page Title</title>
+    <title>Show Product</title>
 
     <style>
 /* Header Styling */
@@ -228,93 +219,8 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
     font-size: 0.9rem;
     color: #888;
 }
-
-
-
-
-
     </style>
 </head>
-
-<header>
-  <div class="header-content">
-        <!-- Logo -->
-        <div class="logo">
-          <a href="{{ url('/') }}">
-          <img src="<?php echo htmlspecialchars($logo); ?>" alt="Logo">
-          </a>
-        </div>
-  
-   <!-- Navigation Bar -->
-  <nav class="nav-buttons">
-    <div class="dropdown">
-      <a href="{{ route('products.index') }}">Men</a>
-      <div class="dropdown-content">
-        <a href="/men/shopall">Shop All</a>
-        <a href="/men/Jackets&coats">Jackets & Coats</a>
-        <a href="/men/Hoodies">Hoodies</a>
-        <a href="/men/Sweatshit">Sweatshits</a>
-        <a href="/men/T-shirts">T-shirts</a>
-        <a href="/men/Tracksuit Bottoms">Tracksuit Bottoms</a>
-        <a href="/men/Jeans">Jeans</a>
-        <a href="/men/shoes">Shoes</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <a href="#">Women</a>
-      <div class="dropdown-content">
-        <a href="/women/shopall">Shop All</a>
-        <a href="/women/Jackets&coats">Jackets & Coats</a>
-        <a href="/women/Hoodies">Hoodies</a>
-        <a href="/women/Sweatshit">Sweatshits</a>
-        <a href="/women/T-shirts">T-shirts</a>
-        <a href="/women/Tracksuit Bottoms">Tracksuit Bottoms</a>
-        <a href="/women/Jeans">Jeans</a>
-        <a href="/women/shoes">Shoes</a>
-      </div>
-    </div>
-    <div class="dropdown">
-      <a href="#">Accessories</a>
-      <div class="dropdown-content">
-        <a href="/accessories/Shopall">Shop All</a>
-        <a href="/accessories/men">Men accessories</a>
-        <a href="/accessories/women">Women accessories</a>
-      </div>
-    </div>
-  
-   
-  
-      <!-- Added Contact and About buttons -->
-  
-      <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-      <a href="{{ route('about') }}">About Us</a>
-  
-  </nav>
-  
-  
-  
-        <!-- Account and Cart Actions -->
-        <div class="account-actions">
-        <form action="{{ route('products.index') }}" method="GET">
-        <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
-        <button type="submit"><i class="fas fa-search"></i></button>
-     </form>
-  
-          <a href="{{ route('wishlist.index') }}" class="wishlist">
-            <i class="fas fa-heart"></i>
-          </a>
-          
-          <a href="{{ route('cart.index') }}" class="cart">
-            <i class="fas fa-shopping-cart"></i> 
-          </a>
-  
-          <a href="{{ route('login') }}" class="nav-link">
-            <i class="fas fa-user"></i> my account
-          </a>
-        </div>
-      </div>
-                  
-  </header>
 
 <body>
   <div>
@@ -326,75 +232,38 @@ body {background-color: #ded4c0;font-family: 'Arial', sans-serif;color: #333;}
   @if(session('success'))
               <div class="alert alert-success">{{ session('success') }}</div>
           @endif
-  <body>
+          <body>
+  <div>
+    <h2 class="centered-heading">Product: {{ $product->name }}</h2>
+    <style>
+      .centered-heading {font-size: 3rem;color: #333;font-weight: bold;text-align: center;}
+    </style>
+  </div>
   <div class="product-container">
       <div class="product-card">
-          <h1><?php echo htmlspecialchars($product_name); ?></h1>
-          <img src="<?php echo htmlspecialchars($product_image); ?>" alt="Product Image" style="max-width: 300px;">
-          <p>Price: £<?php echo htmlspecialchars($product_price); ?></p>
+          <h1>{{ $product->name }}</h1>
+          <img src="{{ $product->image }}" alt="Product Image" style="max-width: 300px;">
+          <p>Price: £{{ $product->price }}</p>
+          <p>
+            <a href="{{ route('reviews.show', ['id' => $product->id]) }}" style="text-decoration: none; color: inherit;">
+                Average Rating: <strong>{{ number_format($averageRating, 1) }}</strong> / 5
+                <br>
+                @for ($i = 1; $i <= 5; $i++)
+                    @if($averageRating >= $i)
+                        <i class="fas fa-star" style="color: #FFD700;"></i>
+                    @elseif($averageRating >= $i - 0.5)
+                        <i class="fas fa-star-half-alt" style="color: #FFD700;"></i>
+                    @else
+                        <i class="far fa-star" style="color: #FFD700;"></i>
+                    @endif
+                @endfor
+            </a>
+          </p>
       </div>
       <div class="product-description">
-          <p>Description: <?php echo htmlspecialchars($product_description); ?></p>
+          <p>Description: {{ $product->description }}</p>
       </div>
   </div>
-
-<div class="container">
-<h1>Submit Your Review</h1>
-<form id="reviewForm" action="#" method="post">
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" required>
-    <label for="stars">Rating:</label>
-    <div class="stars" id="stars">
-        <span class="star" onclick="rate(1)">&#9733;</span>
-        <span class="star" onclick="rate(2)">&#9733;</span>
-        <span class="star" onclick="rate(3)">&#9733;</span>
-        <span class="star" onclick="rate(4)">&#9733;</span>
-        <span class="star" onclick="rate(5)">&#9733;</span>
-    </div>
-    <label for="description">Review Description:</label>
-    <textarea id="description" name="description" required></textarea>
-    <button type="submit" class="button2">Send</button>
-</form>
-<div class="reviews" id="reviews">
-    <h2>Customer Reviews</h2>
-</div>
-</div>
-<script>
-let rating = 0;
-function rate(starCount) {
-    rating = starCount;
-    const stars = document.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-        if (index < starCount) {
-            star.style.color = '#FFD700';
-        } else {
-            star.style.color = '#ddd';
-        }
-    });
-}
-document.getElementById("reviewForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const name = document.getElementById("name").value;
-    const description = document.getElementById("description").value;
-    if (name && description && rating > 0) {
-        const review = document.createElement("div");
-        review.classList.add("review");
-        const reviewContent = `
-            <h3>${name}</h3>
-            <p class="stars-view">Rating: ${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</p>
-            <p>${description}</p>
-        `;
-        review.innerHTML = reviewContent;
-        document.getElementById("reviews").appendChild(review);
-        document.getElementById("reviewForm").reset();
-        rating = 0;
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => star.style.color = '#ddd');
-    } else {
-        alert("Please fill out all fields and provide a rating.");
-    }
-});
-</script>
 </body>
 
 <footer class="footer">
