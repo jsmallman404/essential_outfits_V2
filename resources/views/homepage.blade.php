@@ -56,19 +56,14 @@
     color: #888;
 }
 </style>
-
 </head>
 <body>
 @include('header')
 
-  <!-- Slideshow Section -->
   <section class="slideshow">
     <div class="slideshow-content">
       <h1>Essential Outfits</h1>
       <p>Providing you effortless fashion from the best streetwear brands.</p>
-
-      <a href="{{ route('products.index') }}" class="view-products-btn">View Products</a>
-      
     </div>
     <div class="slideshow-images">
     <img src="{{ asset('images/osb4tt.png') }}" alt="Slide 1" class="active">
@@ -78,7 +73,6 @@
     </div>
   </section>
 
-  <!-- Main Product Display Section -->
   <main id="products" class="product-container">
     <h1 class="bestsellers">BESTSELLERS.</h1>
     <div class="product-card">

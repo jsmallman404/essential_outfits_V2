@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductReview;
@@ -18,38 +19,78 @@ class ProductController extends Controller
     return view('products.show', compact('product', 'averageRating'));
 }
 
-    public function index(Request $request) {
-        $query = Product::query();
-        
-        if ($request->has('search')) {
-            $searchTerm = $request->input('search');
-            $query->where('name', 'LIKE', "%{$searchTerm}%")
-                ->orWhere('description', 'LIKE', "%{$searchTerm}%");
-        }
-
-        if ($request->has('product_id')) {
-            $query->where('id', $request->input('product_id'));
-        }
-
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
-        }
-
-        if ($request->filled('min_price')) {
-            $query->where('price', '>=', $request->min_price);
-        }
-
-        if ($request->filled('max_price')) {
-            $query->where('price', '<=', $request->max_price);
-        }
-        $products = $query->get();
-        return view('products.index', compact('products'));
+public function index(Request $request)
+{
+    $query = Product::query();
+    
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        $query->where(function($q) use ($searchTerm) {
+            $q->where('name', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('description', 'LIKE', "%{$searchTerm}%");
+        });
+    }
+    
+    if ($request->has('product_id')) {
+        $query->where('id', $request->input('product_id'));
+    }
+    
+    if ($request->filled('categories') && is_array($request->categories)) {
+        $query->whereIn('category', $request->categories);
+    }
+    
+    if ($request->filled('gender') && is_array($request->gender)) {
+        $query->whereIn('gender', $request->gender);
+    }
+    if ($request->filled('brands') && is_array($request->brands)) {
+        $query->whereIn('brand', $request->brands);
+    }
+    if ($request->filled('min_price')) {
+        $query->where('price', '>=', $request->min_price);
     }
 
-    public function adminIndex() {
-        $products = Product::with('variants')->get();
-        return view('admin.productsIndex', compact('products'));
+    if ($request->filled('max_price')) {
+        $query->where('price', '<=', $request->max_price);
     }
+
+    $products = $query->get();
+    $categories = Product::select('category')->distinct()->get();
+    $brands = Product::select('brand')->distinct()->get();
+
+    $genderCounts = Product::select('gender', DB::raw('count(*) as count'))
+        ->groupBy('gender')
+        ->get();
+
+    $categoryCounts = Product::select('category', DB::raw('count(*) as count'))
+        ->groupBy('category')
+        ->get();
+
+    $brandCounts = Product::select('brand', DB::raw('count(*) as count'))
+        ->groupBy('brand')
+        ->get();
+
+    return view('products.index', compact('products', 'categories', 'brands', 'genderCounts', 'categoryCounts', 'brandCounts'));
+}
+
+public function adminIndex(Request $request)
+{
+    $query = Product::query();
+
+    if ($request->filled('search')) {
+        $searchTerm = $request->input('search');
+        $query->where(function ($q) use ($searchTerm) {
+            $q->where('name', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('description', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('color', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('gender', 'LIKE', "%{$searchTerm}%")
+              ->orWhere('brand', 'LIKE', "%{$searchTerm}%");
+        });
+    }
+
+    $products = $query->get();
+
+    return view('admin.productsIndex', compact('products'));
+}
 
     public function create() {
         return view('admin.createProducts');
@@ -63,6 +104,7 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'category' => 'required|string',
             'brand' => 'required|string',
+            'gender' => 'required|string',
             'color' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'sizes' => 'nullable|array',
@@ -77,6 +119,7 @@ class ProductController extends Controller
                 'price' => $validated['price'],
                 'category' => $validated['category'],
                 'brand' => $validated['brand'],
+                'gender' => $validated['gender'],
                 'color' => $validated['color'],
                 'images' => [] 
             ]);
@@ -169,8 +212,9 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/', 'min:0'],
             'category' => 'required|string',
+            'gender' => 'required|string',
             'brand' => 'required|string',
             'color' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
@@ -193,6 +237,7 @@ class ProductController extends Controller
                 'description' => $validated['description'],
                 'price' => $validated['price'],
                 'category' => $validated['category'],
+                'gender' => $validated['gender'],
                 'brand' => $validated['brand'],
                 'color' => $validated['color'],
                 'images' => $product->images, 

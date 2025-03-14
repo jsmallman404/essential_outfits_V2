@@ -16,7 +16,16 @@
         <div class="text-center mb-4">
             <a href="{{ route('admin.createProduct') }}" class="btn btn-success">Add New Product</a>
         </div>
-
+        
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <form action="{{ route('admin.products') }}" method="GET" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Search products..." value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-outline-primary">Search</button>
+                </form>
+            </div>
+        </div>
+        
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -27,6 +36,9 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Category</th>
+                    <th>Gender</th>
+                    <th>Brand</th>
+                    <th>Color</th>
                     <th>Price</th>
                     <th>Sizes</th>
                     <th>Actions</th>
@@ -35,19 +47,19 @@
             <tbody>
                 @foreach($products as $product)
                     <tr>
-                    <td>
-    @php
-        $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-    @endphp
-
-    @if(is_array($images))
-        @foreach($images as $image)
-            <img src="{{ asset('storage/' . ltrim($image, '/') ) }}" width="50">
-        @endforeach
-    @endif
-</td>
+                        <td>
+                            @php
+                                $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                            @endphp
+                            @if(is_array($images) && count($images) > 0)
+                                <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50">
+                            @endif
+                        </td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->category }}</td>
+                        <td>{{ $product->gender }}</td>
+                        <td>{{ $product->brand }}</td>
+                        <td>{{ $product->color }}</td>
                         <td>£{{ $product->price }}</td>
                         <td>
                             @foreach($product->variants as $variant)
@@ -61,7 +73,8 @@
                                 @csrf    
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
-                                Delete</button>
+                                    Delete
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -16,10 +16,12 @@ class Product extends Model
         'category',
         'color',
         'brand',
+        'gender',
         'images'
     ];
     protected $casts = [
         'images' => 'array',
+        'price' => 'decimal:2'
     ];
     public function variants()
     {

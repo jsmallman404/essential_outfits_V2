@@ -24,12 +24,22 @@
 
             <div class="mb-3">
                 <label>Price</label>
-                <input type="number" name="price" class="form-control" value="{{ $product->price }}" required>
+                <input type="number" name="price" step="0.01" value="{{ old('price') }}">
             </div>
 
             <div class="mb-3">
                 <label>Category</label>
                 <input type="text" name="category" class="form-control" value="{{ $product->category }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select name="gender" id="gender" class="form-select"  value="{{ $product->category }}" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
+                    <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
+                    <option value="Unisex" {{ old('gender') == 'Unisex' ? 'selected' : '' }}>Unisex</option>
+                </select>
             </div>
 
             <div class="mb-3">
