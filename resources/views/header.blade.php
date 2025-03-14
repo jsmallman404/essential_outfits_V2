@@ -43,7 +43,7 @@
       <a href="/accessories/women">Women accessories</a>
     </div>
   </div>
-  <a href="{{ route('products.index') }}">All TEST Products</a>
+  <a href="{{ route('products.index') }}">All Products</a>
     <!-- Added Contact and About buttons -->
 
     <a href="{{ route('contact') }}" class="nav-link">Contact</a>
