@@ -209,13 +209,27 @@ header {
             }
         }
 
-        .footer {
-    margin-top: 50px;
+ /* Ensure the entire page takes at least the full viewport height */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+}
+
+/* Ensure the main content takes up all available space */
+.container {
+    flex: 1; /* Pushes the footer down */
+}
+
+/* Sticky Footer */
+.footer {
     background-color: #1a1a1a;
     color: #fff;
     padding: 20px 0;
     text-align: center;
     font-family: Arial, sans-serif;
+    margin-top: auto; /* Forces the footer to bottom */
 }
 
 .footer-container {
@@ -258,13 +272,7 @@ header {
     font-size: 0.9rem;
     color: #888;
 }
-
-
-
-
-
-
-    </style>
+ </style>
 </head>
 <header>
         <div class="header-content">
