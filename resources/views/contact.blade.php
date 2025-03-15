@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store - Products</title>
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
@@ -300,56 +301,6 @@ textarea {
 }
 
 
-
-.footer {
-    margin-top: 50px;
-    background-color: #1a1a1a;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px;
-}
-
-.footer-about, .footer-contact, .footer-socials {
-    flex: 1;
-    min-width: 250px;
-    margin: 10px;
-}
-
-.footer h3, .footer h4 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #f5f5f5;
-    font-weight: bold;
-}
-
-.footer p, .footer a {
-    font-size: 1rem;
-    color: #ccc;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.footer-bottom {
-    margin-top: 20px;
-    border-top: 1px solid #444;
-    padding-top: 10px;
-    font-size: 0.9rem;
-    color: #888;
-}
 
 #star-rating .star {
     font-size: 24px;
