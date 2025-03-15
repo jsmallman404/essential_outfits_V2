@@ -11,7 +11,13 @@
       <div class="footer-socials">
         <h4>Follow Us</h4>
         <a href="https://instagram.com/essentialoutfits.xyz">
-          <img src="{{ asset('images/instagram.jpg') }}" alt="Instagram" class="instagram-icon">
+          <img src="{{ asset('images/instagram.jpg') }}" alt="Instagram" class="socials-icon">
+        </a>
+        <a href="https://instagram.com/essentialoutfits.xyz">
+          <img src="{{ asset('images/facebook.jpg') }}" alt="Instagram" class="socials-icon">
+        </a>
+        <a href="https://instagram.com/essentialoutfits.xyz">
+          <img src="{{ asset('images/x.png') }}" alt="Instagram" class="socials-icon">
         </a>
       </div>
     </div>
