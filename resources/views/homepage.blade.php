@@ -8,7 +8,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-  .footer2 {
+  .footer {
     background-color: #1a1a1a;
     color: #fff;
     padding: 20px 0;
@@ -16,7 +16,7 @@
     font-family: Arial, sans-serif;
 }
 
-.footer2-container {
+.footer-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -25,30 +25,30 @@
     padding: 10px;
 }
 
-.footer2-about, .footer2-contact, .footer2-socials {
+.footer-about, .footer-contact, .footer-socials {
     flex: 1;
     min-width: 250px;
     margin: 10px;
 }
 
-.footer2 h3, .footer2 h4 {
+.footer h3, .footer h4 {
     margin-bottom: 10px;
     font-size: 1.2rem;
     color: #f5f5f5;
 }
 
-.footer2 p, .footer2 a {
+.footer p, .footer a {
     font-size: 1rem;
     color: #ccc;
     text-decoration: none;
 }
 
-.footer2 a:hover {
+.footer a:hover {
     color: #fff;
     text-decoration: underline;
 }
 
-.footer2-bottom {
+.footer-bottom {
     margin-top: 20px;
     border-top: 1px solid #444;
     padding-top: 10px;
@@ -103,27 +103,9 @@
       </div>
     </div>
   </main>
-  
 
-  <footer class="footer2">
-    <div class="footer2-container">
-      <div class="footer2-about">
-        <h4>Essential Outfits</h4>
-        <p>Providing you effortless fashion from the best streetwear brands.</p>
-      </div>
-      <div class="footer2-contact">
-        <h4>Contact Us</h4>
-        <p> <a href="mailto:queriesessential@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
-      </div>
-      <div class="footer2-socials">
-        <h4>Follow Us</h4>
-        <a href="https://instagram.com/essentialoutfits.xyz" target="_blank">Instagram</a>
-      </div>
-    </div>
-    <div class="footer2-bottom">
-      <p>&copy; 2024 Essential Outfits. All Rights Reserved.</p>
-    </div>
-  </footer>
+  @include('footer')
+  
   <script>
 document.addEventListener("DOMContentLoaded", function () {
     let images = document.querySelectorAll(".slideshow-images img");
