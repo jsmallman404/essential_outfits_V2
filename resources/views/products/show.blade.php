@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <title>Show Product</title>
 
     <style>
+
         body, h1, h2, h3, p, a, div {margin: 0;padding: 0;box-sizing: border-box;}
         body {
             background-color: #ded4c0;
@@ -84,6 +86,7 @@
             font-size: 0.9rem;
             color: #888;
         }
+
     </style>
 
 </head>
@@ -159,6 +162,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

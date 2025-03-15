@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store - Products</title>
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
@@ -170,49 +171,7 @@
             text-align: center;
             margin-top: 2rem;
         }
-        .footer {
-            margin-top: 50px;
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .footer-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px;
-        }
-        .footer-about, .footer-contact, .footer-socials {
-            flex: 1;
-            min-width: 250px;
-            margin: 10px;
-        }
-        .footer h3, .footer h4 {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-            color: #f5f5f5;
-            font-weight: bold;
-        }
-        .footer p, .footer a {
-            font-size: 1rem;
-            color: #ccc;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-        .footer-bottom {
-            margin-top: 20px;
-            border-top: 1px solid #444;
-            padding-top: 10px;
-            font-size: 0.9rem;
-            color: #888;
-        }
+        
     </style>
 </head>
 <body>
@@ -383,25 +342,7 @@
             <a href="{{ route('cart.index') }}" class="btn btn-warning">View Cart</a>
         </div>
     </div>
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-about">
-                <h4>Essential Outfits</h4>
-                <p>Providing you effortless fashion from the best streetwear brands.</p>
-            </div>
-            <div class="footer-contact">
-                <h4>Contact Us</h4>
-                <p><a href="mailto:queriesessential@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
-            </div>
-            <div class="footer-socials">
-                <h4>Follow Us</h4>
-                <a href="https://instagram.com/essentialoutfits.xyz" target="_blank">Instagram</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Essential Outfits. All Rights Reserved.</p>
-        </div>
-    </footer>
+    @include('footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.getElementById('filterForm').addEventListener('change', function() {

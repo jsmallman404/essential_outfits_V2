@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
     <title>Essential Outfits</title>
     <style>
@@ -273,87 +274,11 @@ body {
     color: #888;
 }
  </style>
+
 </head>
-<header>
-        <div class="header-content">
-      <!-- Logo -->
-      <div class="logo">
-        <a href="{{ url('/') }}">
-          <img src="images/essentiallogo1.png" alt="Logo">
-        </a>
-      </div>
 
- <!-- Navigation Bar -->
-<nav class="nav-buttons">
-  <div class="dropdown">
-    <a href="{{ route('products.index') }}">Men</a>
-    <div class="dropdown-content">
-      <a href="/men/shopall">Shop All</a>
-      <a href="/men/Jackets&coats">Jackets & Coats</a>
-      <a href="/men/Hoodies">Hoodies</a>
-      <a href="/men/Sweatshit">Sweatshits</a>
-      <a href="/men/T-shirts">T-shirts</a>
-      <a href="/men/Tracksuit Bottoms">Tracksuit Bottoms</a>
-      <a href="/men/Jeans">Jeans</a>
-      <a href="/men/shoes">Shoes</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="#">Women</a>
-    <div class="dropdown-content">
-      <a href="/women/shopall">Shop All</a>
-      <a href="/women/Jackets&coats">Jackets & Coats</a>
-      <a href="/women/Hoodies">Hoodies</a>
-      <a href="/women/Sweatshit">Sweatshits</a>
-      <a href="/women/T-shirts">T-shirts</a>
-      <a href="/women/Tracksuit Bottoms">Tracksuit Bottoms</a>
-      <a href="/women/Jeans">Jeans</a>
-      <a href="/women/shoes">Shoes</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="#">Accessories</a>
-    <div class="dropdown-content">
-      <a href="/accessories/Shopall">Shop All</a>
-      <a href="/accessories/men">Men accessories</a>
-      <a href="/accessories/women">Women accessories</a>
-    </div>
-  </div>
-
- 
-
-    <!-- Added Contact and About buttons -->
-
-    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-    <a href="{{ route('about') }}">About Us</a>
-
-</nav>
-
-
-
-      <!-- Account and Cart Actions -->
-      <div class="account-actions">
-      <form action="{{ route('products.index') }}" method="GET">
-        <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
-        <button type="submit"><i class="fas fa-search"></i></button>
-     </form>
-
-        <a href="{{ route('wishlist.index') }}" class="wishlist">
-          <i class="fas fa-heart"></i>
-        </a>
-        
-        <a href="{{ route('cart.index') }}" class="cart">
-          <i class="fas fa-shopping-cart"></i> 
-        </a>
-
-        <a href="{{ route('login') }}" class="nav-link">
-          <i class="fas fa-user"></i> my account
-        </a>
-      </div>
-    </div>
-                
-</header>
 <body class="about-page">
+  @include('header')
     <main>
         <img src="images/aboutus.jpg" id="fashion" alt="About Us">
         <div class="text-container">
@@ -363,29 +288,7 @@ body {
     </main>
 </body>
 
-
-<footer class="footer">
-    <div class="footer-container">
-      <div class="footer-about">
-        <h4>Essential Outfits</h4>
-        <p>Providing you effortless fashion from the best streetwear brands.</p>
-      </div>
-      <div class="footer-contact">
-        <h4>Contact Us</h4>
-        <p> <a href="mailto:queriesessential@gmail.com">Email: essentialsenqueries@gmail.com</a></p>
-      </div>
-      <div class="footer-socials">
-        <h4>Follow Us</h4>
-        <a href="https://instagram.com/essentialoutfits.xyz" target="_blank">Instagram</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 Essential Outfits. All Rights Reserved.</p>
-    </div>
-  </footer>
-
-
-
+@include('footer')
 
 </html>
 
