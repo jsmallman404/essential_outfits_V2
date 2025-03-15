@@ -210,8 +210,71 @@ header {
             }
         }
 
-        
-    </style>
+ /* Ensure the entire page takes at least the full viewport height */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+}
+
+/* Ensure the main content takes up all available space */
+.container {
+    flex: 1; /* Pushes the footer down */
+}
+
+/* Sticky Footer */
+.footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: auto; /* Forces the footer to bottom */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.footer-about, .footer-contact, .footer-socials {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+}
+
+.footer h3, .footer h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.footer p, .footer a {
+    font-size: 1rem;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    font-size: 0.9rem;
+    color: #888;
+}
+ </style>
+
 </head>
 
 <body class="about-page">
