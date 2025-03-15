@@ -10,7 +10,9 @@
       </div>
       <div class="footer-socials">
         <h4>Follow Us</h4>
-        <a href="https://instagram.com/essentialoutfits.xyz" target="_blank">Instagram</a>
+        <a href="https://instagram.com/essentialoutfits.xyz">
+          <img src="{{ asset('images/instagram.jpg') }}" alt="Instagram" class="instagram-icon">
+        </a>
       </div>
     </div>
     <div class="footer-bottom">
