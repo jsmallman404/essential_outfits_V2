@@ -13,11 +13,11 @@
         <a href="https://instagram.com/essentialoutfits.xyz">
           <img src="{{ asset('images/instagram.jpg') }}" alt="Instagram" class="socials-icon">
         </a>
-        <a href="https://instagram.com/essentialoutfits.xyz">
-          <img src="{{ asset('images/facebook.jpg') }}" alt="Instagram" class="socials-icon">
+        <a href="https://www.facebook.com/profile.php?id=61574136091154">
+          <img src="{{ asset('images/facebook.jpg') }}" alt="Facebook" class="socials-icon">
         </a>
-        <a href="https://instagram.com/essentialoutfits.xyz">
-          <img src="{{ asset('images/x.png') }}" alt="Instagram" class="socials-icon">
+        <a href="https://x.com/3ssentialFits">
+          <img src="{{ asset('images/x.png') }}" alt="X" class="socials-icon">
         </a>
       </div>
     </div>
