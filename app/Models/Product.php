@@ -17,7 +17,8 @@ class Product extends Model
         'color',
         'brand',
         'gender',
-        'images'
+        'images',
+        'is_featured'
     ];
     protected $casts = [
         'images' => 'array',

@@ -59,5 +59,28 @@ class WishlistController extends Controller
 
         return redirect()->back()->with('success', 'Product removed from wishlist.');
     }
+
+    public function toggle($productId)
+    {
+        if (!Auth::check()) {
+            return response()->json(['status' => 'error', 'message' => 'Please login to modify your wishlist.'], 401);
+        }
+    
+        $user = Auth::user();
+        $wishlistItem = Wishlist::where('user_id', $user->id)->where('product_id', $productId)->first();
+    
+        if ($wishlistItem) {
+            $wishlistItem->delete();
+            return response()->json(['status' => 'removed']);
+        } else {
+            Wishlist::create([
+                'user_id' => $user->id,
+                'product_id' => $productId
+            ]);
+            return response()->json(['status' => 'added']);
+        }
+    }
+    
+
 }
           
