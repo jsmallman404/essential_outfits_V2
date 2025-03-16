@@ -15,17 +15,11 @@ use App\Http\Controllers\AdminReturnController;
 use App\Http\Controllers\AdminWebsiteReviewController;
 use App\Http\Controllers\WebsiteReviewController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
-use Illuminate\Support\Facades\Session;
-use App\Models\Product;
 
 
 Route::get('/', function () {
-    $featuredProducts = Product::where('is_featured', true)->get();
-    $wishlist = Session::get('wishlist', []); 
-
-    return view('homepage', compact('featuredProducts', 'wishlist'));
-})->name('home');
-
+    return view('homepage');
+});
 
 Auth::routes();
 
@@ -149,14 +143,6 @@ Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addToWishl
 Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'removeFromWishlist'])
     ->name('wishlist.remove');
 
-    Route::middleware(['auth'])->group(function () {
-        Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-        Route::post('/wishlist/toggle/{id}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
-    });
 
-
-
-//admin featured products
-Route::put('/admin/products/update-featured/{id}', [AdminController::class, 'updateFeatured'])->name('admin.updateFeatured');
 
 
