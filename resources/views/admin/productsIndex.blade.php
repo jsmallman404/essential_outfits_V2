@@ -79,7 +79,33 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
+
+            </td>
+            <td>
+                 <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit Product</a>   
+                        <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
+                            <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
+                                @csrf    
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
+                                    Delete
+                                </button>
+                            </form>
+                     </td>
+            <td>
+                <form action="{{ route('admin.updateFeatured', $product->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="checkbox" name="is_featured" value="1" 
+                        onchange="this.form.submit()" {{ $product->is_featured ? 'checked' : '' }}>
+                </form>
+            </td>
+            
+        </tr>
+    @endforeach
+</tbody>
+
+
         </table>
     </div>
 </body>
