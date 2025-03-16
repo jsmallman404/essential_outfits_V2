@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Http\Middleware\CheckAdmin;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -65,4 +66,14 @@ class AdminController extends Controller
 
     return redirect()->route('admin.users.index')->with('success', 'User details updated successfully.');
 }
+
+    // Function to update the is_featured column
+    public function updateFeatured(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->is_featured = $request->has('is_featured'); 
+        $product->save();
+
+        return redirect()->back()->with('success', 'Featured products updated successfully!');
+    }
 }
