@@ -45,39 +45,41 @@
                 </tr>
             </thead>
             <tbody>
-    @foreach($products as $product)
-        <tr>
-            <td>
-                @php
-                    $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-                @endphp
-                @if(is_array($images) && count($images) > 0)
-                    <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50">
-                @endif
-            </td>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->category }}</td>
-            <td>{{ $product->gender }}</td>
-            <td>{{ $product->brand }}</td>
-            <td>{{ $product->color }}</td>
-            <td>£{{ $product->price }}</td>
-            <td>
-                @foreach($product->variants as $variant)
-                    {{ $variant->size }} ({{ $variant->stock }} left)<br>
+                @foreach($products as $product)
+                    <tr>
+                        <td>
+                            @php
+                                $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                            @endphp
+                            @if(is_array($images) && count($images) > 0)
+                                <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50">
+                            @endif
+                        </td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->category }}</td>
+                        <td>{{ $product->gender }}</td>
+                        <td>{{ $product->brand }}</td>
+                        <td>{{ $product->color }}</td>
+                        <td>£{{ $product->price }}</td>
+                        <td>
+                            @foreach($product->variants as $variant)
+                                {{ $variant->size }} ({{ $variant->stock }} left)<br>
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit Product</a>   
+                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
+                            <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
+                                @csrf    
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
-            </td>
-            <td>
-                <form action="{{ route('admin.updateFeatured', $product->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <input type="checkbox" name="is_featured" value="1" 
-                        onchange="this.form.submit()" {{ $product->is_featured ? 'checked' : '' }}>
-                </form>
-            </td>
-        </tr>
-    @endforeach
-</tbody>
-
+            </tbody>
         </table>
     </div>
 </body>

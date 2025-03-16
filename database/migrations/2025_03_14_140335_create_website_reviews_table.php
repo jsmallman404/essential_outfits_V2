@@ -14,7 +14,7 @@ return new class extends Migration
         $table->integer('rating')->nullable();  // Optional rating (1-5)
         $table->text('comment');
         $table->timestamps();
-    });
+    });php artisan migrate
 }
 
     /**
