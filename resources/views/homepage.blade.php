@@ -150,8 +150,8 @@
     <div class="product-card">
         @php
             $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-            $wishlist = $wishlist ?? []; // ✅ Prevents undefined variable error
-            $inWishlist = in_array($product->id, $wishlist); // ✅ Check if product is in wishlist
+            $wishlist = $wishlist ?? []; //  Prevents undefined variable error
+            $inWishlist = in_array($product->id, $wishlist); //  Check if product is in wishlist
         @endphp
 
         @if(is_array($images) && count($images) > 0)
