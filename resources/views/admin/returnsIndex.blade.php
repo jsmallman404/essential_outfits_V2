@@ -5,26 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Returns</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #ded4c0;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 900px;
+        }
+        h1 {
+            color: #5a4e3a;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #8b7e68;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-custom:hover {
+            background-color: #6c5f4b;
+            transform: scale(1.05);
+        }
+        .filter-buttons .btn {
+            margin-right: 5px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .filter-buttons .btn.active {
+            font-weight: bold;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .table th {
+            background-color: #8b7e68;
+            color: white;
+            text-align: center;
+        }
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .alert {
+            text-align: center;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Manage Returns</h1>
+    <div class="container">
+        <h1>Manage Returns</h1>
 
         <div class="text-center mt-4">
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-custom">Back to Dashboard</a>
         </div>
 
-        <div class="text-center mb-4">
-            <a href="{{ route('admin.returns.index', ['filter' => 'all']) }}" class="btn btn-secondary {{ $filter == 'all' ? 'active' : '' }}">All Returns</a>
-            <a href="{{ route('admin.returns.index', ['filter' => 'requested']) }}" class="btn btn-warning {{ $filter == 'requested' ? 'active' : '' }}">Requested</a>
-            <a href="{{ route('admin.returns.index', ['filter' => 'accepted']) }}" class="btn btn-success {{ $filter == 'accepted' ? 'active' : '' }}">Accepted</a>
+        <div class="text-center mb-4 filter-buttons">
+            <a href="{{ route('admin.returns.index', ['filter' => 'all']) }}" 
+               class="btn btn-secondary {{ $filter == 'all' ? 'active' : '' }}">All Returns</a>
+            <a href="{{ route('admin.returns.index', ['filter' => 'requested']) }}" 
+               class="btn btn-warning {{ $filter == 'requested' ? 'active' : '' }}">Requested</a>
+            <a href="{{ route('admin.returns.index', ['filter' => 'accepted']) }}" 
+               class="btn btn-success {{ $filter == 'accepted' ? 'active' : '' }}">Accepted</a>
         </div>
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Return ID</th>
@@ -57,14 +116,14 @@
                             </span>
                         </td>
                         <td>
-                            <a href="{{ route('admin.returns.show', $return->id) }}" class="btn btn-info btn-sm">Manage Return</a>
+                            <a href="{{ route('admin.returns.show', $return->id) }}" class="btn btn-info btn-sm">Manage</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center pagination">
             {{ $returns->links() }}
         </div>
     </div>
