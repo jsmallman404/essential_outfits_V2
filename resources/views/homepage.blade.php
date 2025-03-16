@@ -14,63 +14,114 @@
   background-color: #ded4c0 !important;
 }
     
-    .product-card {
-      background-color: #ded4c0;
-      border-radius: 10px;
-      overflow: hidden;
-      width: 300px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-      padding: 1rem;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .product-card img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    
-    .product-info h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: #333;
-    }
-    
-    .product-info p {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-    
-    .product-info button {
-      padding: 0.5rem 1.5rem;
-      border: none;
-      background-color: #222;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-      margin: 5px;
-    }
-    
-    .product-info button:hover {
-      background-color: #444;
-    }
-    
-    .bestsellers {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-      color: #795809;
-    }
+/* Bestsellers Heading Styling */
+.bestsellers-container {
+    text-align: center;
+    margin-bottom: 2rem; /* Space between title and products */
+}
+
+.bestsellers {
+    font-size: 3.5rem; /* Large but professional */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333;
+    font-family: 'Oswald', sans-serif; /* Modern, urban font */
+    border-bottom: 4px solid #795809;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* Product Container */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+/* Grid Layout for Products */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+}
+
+/* Product Card */
+.product-card {
+    background-color: #ded4c0;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Fix Image Sizing */
+.product-card img {
+    width: 100%; /* Ensure full width */
+    height: 250px; /* Fixed height for consistency */
+    object-fit: cover; /* Ensures the image fills the area without distortion */
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover img {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Wishlist Button */
+.wishlist-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.wishlist-btn .fa-heart {
+    transition: color 0.3s;
+}
+
+.wishlist-btn .fas.fa-heart {
+    color: red; 
+}
+
+.wishlist-btn .far.fa-heart {
+    color: black; /* When not in wishlist */
+}
+
+/* View Product Button */
+.product-info button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    background-color: #333; /* Match Bestsellers color */
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    margin: 5px;
+}
+
+.product-info button:hover {
+    background-color: #5c4506; /* Darker shade on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+
+
   </style>
 </head>
 <body>
@@ -90,7 +141,10 @@
   </section>
 
   <main id="products" class="product-container">
-    <h1 class="bestsellers">BESTSELLERS</h1>
+  
+      <div class="bestsellers-container">
+        <h1 class="bestsellers">BESTSELLERS</h1>
+    </div>
 
     @foreach($featuredProducts as $product)
     <div class="product-card">
@@ -143,9 +197,7 @@
                                         </select>
                                         <button type="submit" class="btn">Add to Cart</button>
                                     </form>
-        
-          
-        </div>
+         </div>
       </div>
     @endforeach
 
