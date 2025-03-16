@@ -8,6 +8,108 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<style>
+    body {
+    background-color: #ded4c0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    max-width: 600px;
+}
+
+h1 {
+    color: #5a4e3a;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #8b7e68;
+    padding: 10px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #6c5f4b;
+    box-shadow: 0px 0px 5px rgba(140, 110, 80, 0.5);
+}
+
+label {
+    font-weight: bold;
+    color: #5a4e3a;
+}
+
+.btn-custom {
+    background-color: #8b7e68;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover {
+    background-color: #6c5f4b;
+    transform: scale(1.05);
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+
+#imagePreview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#imagePreview img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.size-entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.size-input {
+    width: 100px !important;
+}
+
+#loadingMessage {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+    </style>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Add New Product</h1>

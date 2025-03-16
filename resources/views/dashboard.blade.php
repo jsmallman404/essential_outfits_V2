@@ -15,35 +15,63 @@
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     
     <style>
-        body {
-            background-color: #ded4c0; /* Background color */
-        }
-        .dashboard-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .dashboard-container h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .dashboard-container p {
-            color: #555;
-            font-size: 16px;
-        }
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .button-group button {
-            width: 100%;
-        }
+       body {
+    background-color: #ded4c0; /* Background color */
+}
+
+.dashboard-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.dashboard-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.dashboard-container p {
+    color: #555;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-group button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Default buttons - #8b7e68 */
+.button-group button:not(.btn-admin):not(.btn-logout) {
+    background-color: #8b7e68;
+}
+
+.button-group button:not(.btn-admin):not(.btn-logout):hover {
+    background-color: #6c5f4b;
+    transform: scale(1.05);
+}
+
+
+
     </style>
 </head>
 

@@ -6,6 +6,95 @@
     <title>Edit Product Stock</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+    background-color: #ded4c0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    max-width: 700px;
+}
+
+h1 {
+    color: #5a4e3a;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.alert {
+    text-align: center;
+    font-size: 14px;
+}
+
+.table th {
+    background-color: #8b7e68;
+    color: white;
+    text-align: center;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #8b7e68;
+    padding: 8px;
+    text-align: center;
+}
+
+.form-control:focus {
+    border-color: #6c5f4b;
+    box-shadow: 0px 0px 5px rgba(140, 110, 80, 0.5);
+}
+
+.btn-custom {
+    background-color: #8b7e68;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover {
+    background-color: #6c5f4b;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+}
+
+.btn-secondary {
+    background-color: #5a4e3a;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #483a2b;
+}
+
+.table .remove-variant {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+    </style>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Edit Stock - {{ $product->name }}</h1>

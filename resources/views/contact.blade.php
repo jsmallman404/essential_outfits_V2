@@ -312,6 +312,25 @@ textarea {
 #star-rating .star.selected {
     color: #FFD700; /* gold color for selected stars */
 }
+
+
+/* review buton */
+.btn-reviews {
+    background-color: #8b7e68; /* Taupe/Brown color */
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-reviews:hover {
+    background-color: #6c5f4b;
+    transform: scale(1.05);
+}
+
     </style>
 </head>
 
@@ -362,8 +381,14 @@ textarea {
       <textarea name="comment" id="comment" class="form-control" rows="4" required></textarea>
     </div>
     <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+    <a href="{{ url('/admin/website-reviews') }}" class="btn-reviews">
+    <i class="fas fa-star"></i> View Website Reviews
+</a>
   </form>
 </div>
+
+
+
 
 <script>
   // JavaScript to handle star rating selection
