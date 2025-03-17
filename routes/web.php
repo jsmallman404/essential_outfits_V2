@@ -22,6 +22,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//Featured products 
+Route::get('/', [ProductController::class, 'home'])->name('home');
+
+Route::put('/admin/products/{id}/update-featured', [ProductController::class, 'updateFeatured'])->name('admin.updateFeatured');
+
+
 
 Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');

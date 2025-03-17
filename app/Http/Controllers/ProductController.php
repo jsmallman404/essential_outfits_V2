@@ -9,6 +9,7 @@ use App\Models\ProductVariant;
 use App\Models\ProductReview;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProductController extends Controller
 {
     public function show($id) {
@@ -295,5 +296,26 @@ public function adminIndex(Request $request)
             return redirect()->back()->with('error', 'Failed to remove image: ' . $e->getMessage());
         }
     }
+
+    //FEATURED PRODUCTS//
+    public function home()
+{
+    // Fetch only featured products for the homepage
+    $featuredProducts = Product::where('is_featured', 1)->get();
+
+    return view('homepage', compact('featuredProducts'));
+}
+
+public function updateFeatured(Request $request, $id)
+{
+    $product = Product::findOrFail($id);
+    $product->is_featured = $request->is_featured;
+    $product->save();
+
+    return response()->json(['success' => true, 'message' => 'Featured status updated!']);
+}
+
+
+
 }
 

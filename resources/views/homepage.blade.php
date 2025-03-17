@@ -142,65 +142,32 @@
 
   <main id="products" class="product-container">
   
-      <div class="bestsellers-container">
-        <h1 class="bestsellers">BESTSELLERS</h1>
-    </div>
+  <div class="container mt-5">
+        <h1 class="text-center">Featured Products</h1>
 
-    @foreach($featuredProducts as $product)
-    <div class="product-card">
-        @php
-            $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-            $wishlist = $wishlist ?? []; //  Prevents undefined variable error
-            $inWishlist = in_array($product->id, $wishlist); //  Check if product is in wishlist
-        @endphp
-
-        @if(is_array($images) && count($images) > 0)
-            <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" alt="{{ $product->name }}">
-        @else
-            <img src="{{ asset('images/default-placeholder.png') }}" alt="No Image Available">
-        @endif
-
-        <div class="product-info">
-            <h2>{{ $product->name }}</h2>
-            <p>£{{ number_format($product->price, 2) }}</p>
-
+        <div class="row">
+        @foreach($featuredProducts as $product)
+    <div class="col-md-4 mb-4">
+        <div class="card">
             @php
-    $inWishlist = Auth::check() && Auth::user()->wishlist()->where('product_id', $product->id)->exists();
-@endphp
+                $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+            @endphp
+            @if(is_array($images) && count($images) > 0)
+                <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" class="card-img-top" alt="{{ $product->name }}">
+            @else
+                <img src="{{ asset('images/default-placeholder.png') }}" class="card-img-top" alt="No Image Available">
+            @endif
 
-<form id="wishlist-form-{{ $product->id }}" action="{{ $inWishlist ? route('wishlist.remove', $product->id) : route('wishlist.add', $product->id) }}" method="POST" class="wishlist-form" data-product-id="{{ $product->id }}">
-    @csrf
-    @if($inWishlist)
-        @method('DELETE')
-    @endif
-    <button type="button" class="wishlist-btn" style="border: none; background: none; cursor: pointer;">
-        <i id="wishlist-icon-{{ $product->id }}" class="{{ $inWishlist ? 'fas' : 'far' }} fa-heart wishlist-icon" style="font-size: 24px; color: {{ $inWishlist ? 'red' : 'black' }};"></i>
-    </button>
-</form>
-
-
-       
-
-
-
-          <button onclick="window.location.href='{{ route('products.show', $product->id) }}'">View Product</button>
-       
-          <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                        @csrf
-                                        <label for="variant_id">Select Size:</label>
-                                        <select name="variant_id" class="form-control mb-2" required>
-                                            @foreach($product->variants as $variant)
-                                                <option value="{{ $variant->id }}">
-                                                    {{ $variant->size }} ({{ $variant->stock }} left)
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit" class="btn">Add to Cart</button>
-                                    </form>
-         </div>
-      </div>
-    @endforeach
-
+            <div class="card-body">
+                <h5 class="card-title">{{ $product->name }}</h5>
+                <p class="card-text">£{{ number_format($product->price, 2) }}</p>
+                <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">View Product</a>
+            </div>
+        </div>
+    </div>
+@endforeach
+        </div>
+    </div>
   </main>
 
   @include('footer')

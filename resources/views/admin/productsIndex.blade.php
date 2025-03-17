@@ -45,68 +45,76 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($products as $product)
-                    <tr>
-                        <td>
-                            @php
-                                $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
-                            @endphp
-                            @if(is_array($images) && count($images) > 0)
-                                <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50">
-                            @endif
-                        </td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->category }}</td>
-                        <td>{{ $product->gender }}</td>
-                        <td>{{ $product->brand }}</td>
-                        <td>{{ $product->color }}</td>
-                        <td>£{{ $product->price }}</td>
-                        <td>
-                            @foreach($product->variants as $variant)
-                                {{ $variant->size }} ({{ $variant->stock }} left)<br>
-                            @endforeach
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit Product</a>   
-                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
-                            <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
-                                @csrf    
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
-                                    Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+    @foreach($products as $product)
+        <tr>
+            <td>
+                @php
+                    $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                @endphp
+                @if(is_array($images) && count($images) > 0)
+                    <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="50">
+                @endif
+            </td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->category }}</td>
+            <td>{{ $product->gender }}</td>
+            <td>{{ $product->brand }}</td>
+            <td>{{ $product->color }}</td>
+            <td>£{{ $product->price }}</td>
+            <td>
+                @foreach($product->variants as $variant)
+                    {{ $variant->size }} ({{ $variant->stock }} left)<br>
                 @endforeach
-
             </td>
             <td>
-                 <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit Product</a>   
-                        <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
-                            <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
-                                @csrf    
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?');">
-                                    Delete
-                                </button>
-                            </form>
-                     </td>
-            <td>
-                <form action="{{ route('admin.updateFeatured', $product->id) }}" method="POST">
+                <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Edit Stock</a>
+                <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display:inline-block;">
                     @csrf
-                    @method('PUT')
-                    <input type="checkbox" name="is_featured" value="1" 
-                        onchange="this.form.submit()" {{ $product->is_featured ? 'checked' : '' }}>
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                        Delete
+                    </button>
                 </form>
             </td>
-            
+            <td>
+                <!-- Featured Product Checkbox -->
+                <input type="checkbox" class="feature-toggle" data-product-id="{{ $product->id }}" 
+                    {{ $product->is_featured ? 'checked' : '' }}>
+            </td>
         </tr>
     @endforeach
 </tbody>
 
 
+
         </table>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".feature-toggle").on("change", function () {
+            let productId = $(this).data("product-id");
+            let isChecked = $(this).prop("checked") ? 1 : 0;
+
+            $.ajax({
+                url: "/admin/products/" + productId + "/update-featured",
+                type: "POST", // Use POST since Laravel does not support PUT in AJAX easily
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    is_featured: isChecked,
+                    _method: "PUT" // Laravel requires _method for PUT requests in AJAX
+                },
+                success: function (response) {
+                    alert("Product featured status updated!");
+                },
+                error: function () {
+                    alert("Something went wrong. Please try again.");
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
