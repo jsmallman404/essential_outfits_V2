@@ -212,43 +212,45 @@ public function adminIndex(Request $request)
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => ['required', 'regex:/^\d+(\.\d{1,2})?$/', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
             'category' => 'required|string',
             'gender' => 'required|string',
             'brand' => 'required|string',
             'color' => 'required|string',
             'images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
-
+    
         try {
             $product = Product::findOrFail($id);
-
+            
             if ($request->hasFile('images')) {
                 $imagePaths = [];
                 foreach ($request->file('images') as $image) {
                     $path = $image->store('products', 'public');
                     $imagePaths[] = $path;
                 }
-                $product->images = json_encode($imagePaths); 
+                $existingImages = json_decode($product->images, true) ?? [];
+                $product->images = json_encode(array_merge($existingImages, $imagePaths));
             }
-
+    
             $product->update([
                 'name' => $validated['name'],
-                'description' => $validated['description'],
+                'description' => $validated['description'] ?? $product->description,
                 'price' => $validated['price'],
                 'category' => $validated['category'],
                 'gender' => $validated['gender'],
                 'brand' => $validated['brand'],
                 'color' => $validated['color'],
-                'images' => $product->images, 
+                'images' => $product->images,
             ]);
-
+    
             return redirect()->route('admin.products')->with('success', 'Product updated successfully!');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'Product not found.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to update product: ' . $e->getMessage());
         }
     }
-
     public function addImage(Request $request, $id) {
         $validated = $request->validate([
             'images.*' => 'required|image|mimes:jpg,jpeg,png|max:2048',
