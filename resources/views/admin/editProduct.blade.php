@@ -112,6 +112,7 @@ label {
         
         <form action="{{ route('admin.updateProduct', $product->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT') 
             <div class="mb-3">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
@@ -124,7 +125,7 @@ label {
 
             <div class="mb-3">
                 <label>Price</label>
-                <input type="number" name="price" step="0.01" value="{{ old('price') }}">
+                <input type="number" name="price" step="0.01" class="form-control" value="{{ old('price', $product->price) }}" required>
             </div>
 
             <div class="mb-3">
@@ -134,12 +135,12 @@ label {
 
             <div class="mb-3">
                 <label for="gender" class="form-label">Gender</label>
-                <select name="gender" id="gender" class="form-select"  value="{{ $product->category }}" required>
-                    <option value="">Select Gender</option>
-                    <option value="Male" {{ old('gender') == 'Male' ? 'selected' : '' }}>Male</option>
-                    <option value="Female" {{ old('gender') == 'Female' ? 'selected' : '' }}>Female</option>
-                    <option value="Unisex" {{ old('gender') == 'Unisex' ? 'selected' : '' }}>Unisex</option>
-                </select>
+                <select name="gender" id="gender" class="form-select" required>
+    <option value="">Select Gender</option>
+    <option value="Male" {{ $product->gender == 'Male' ? 'selected' : '' }}>Male</option>
+    <option value="Female" {{ $product->gender == 'Female' ? 'selected' : '' }}>Female</option>
+    <option value="Unisex" {{ $product->gender == 'Unisex' ? 'selected' : '' }}>Unisex</option>
+</select>
             </div>
 
             <div class="mb-3">
