@@ -107,7 +107,7 @@
 
             @if(auth()->check() && auth()->user()->role == 'admin')
         <form action="{{ route('admin.dashboard') }}" method="GET">
-            <button type="submit" class="btn btn-warning">Admin</button>
+            <button type="submit" class="btn btn-warning"><i class="fas fa-gear"></i>Admin</button>
         </form>
         @endif
 
