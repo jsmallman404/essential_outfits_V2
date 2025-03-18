@@ -1,6 +1,5 @@
 <header>
     <div class="header-content">
-      <!-- Logo -->
       <div class="logo">
         <a href="/">
         <img src="{{ asset('images/essentiallogo1.png') }}" alt="Logo">
@@ -14,9 +13,8 @@
 
       <nav class="nav-buttons">
         <div class="dropdown">
-          <a href="#">Men</a>
+          <a href="{{ route('products.index', ['gender' => 'Male']) }}">Mens</a>
           <div class="dropdown-content">
-            <a href="{{ route('products.index', ['gender' => 'Male']) }}">Shop All</a>
             @foreach($categories as $category)
               @if($category->gender === 'Male' || $category->gender === 'Unisex')
                 <a href="{{ route('products.index', ['gender' => 'Male', 'categories[]' => $category->category]) }}">{{ $category->category }}</a>
@@ -26,24 +24,11 @@
         </div>
         
         <div class="dropdown">
-          <a href="#">Women</a>
+          <a href="{{ route('products.index', ['gender' => 'Female']) }}">Womens</a>
           <div class="dropdown-content">
-            <a href="{{ route('products.index', ['gender' => 'Female']) }}">Shop All</a>
             @foreach($categories as $category)
               @if($category->gender === 'Female' || $category->gender === 'Unisex')
                 <a href="{{ route('products.index', ['gender' => 'Female', 'categories[]' => $category->category]) }}">{{ $category->category }}</a>
-              @endif
-            @endforeach
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <a href="#">Accessories</a>
-          <div class="dropdown-content">
-            <a href="{{ route('products.index', ['categories[]' => 'Accessories']) }}">Shop All</a>
-            @foreach($categories as $category)
-              @if($category->gender === 'Accessories')
-                <a href="{{ route('products.index', ['categories[]' => $category->category]) }}">{{ $category->category }}</a>
               @endif
             @endforeach
           </div>
@@ -57,13 +42,11 @@
             @endforeach
           </div>
         </div>
-
-        <!-- Added Contact and About buttons -->
+        <a href="{{ route('products.index') }}">All Products</a>
         <a href="{{ route('contact') }}" class="nav-link">Contact</a>
         <a href="{{ route('about') }}">About Us</a>
       </nav>
 
-      <!-- Account and Cart Actions -->
       <div class="account-actions">
       <form action="{{ route('products.index') }}" method="GET">
         <input type="text" class="search-bar" name="search" placeholder="Search products..." required>
