@@ -71,9 +71,10 @@
           <i class="fas fa-shopping-cart"></i> 
         </a>
 
-        <a href="{{ route('login') }}" class="nav-link">
-          <i class="fas fa-user"></i> my account
-        </a>
+    <a href="{{ route('login') }}" class="nav-link">
+    <i class="fas fa-user"></i> 
+    {{ Auth::check() ? Auth::user()->name : 'Signup/login' }}
+    </a>
       </div>
     </div>
                 
