@@ -12,7 +12,6 @@
           $brands = \App\Models\Product::select('brand')->distinct()->get();
       @endphp
 
-      <!-- Navigation Bar -->
       <nav class="nav-buttons">
         <div class="dropdown">
           <a href="#">Men</a>
