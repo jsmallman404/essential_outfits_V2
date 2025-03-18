@@ -104,20 +104,16 @@
             @endphp
 
             @if(is_array($images) && count($images) > 0)
-                <div id="productCarousel" class="carousel slide" data-bs-interval="false">
-                    <div class="carousel-inner">
+                <div class="product-gallery">
+                    <!-- Main Large Image -->
+                    <img id="mainImage" src="{{ asset('storage/' . ltrim($images[0], '/')) }}" class="large-image d-block w-100" alt="Main Product Image">
+
+                    <!-- Thumbnail Images -->
+                    <div class="thumbnails d-flex justify-content-center mt-2">
                         @foreach($images as $index => $image)
-                            <div class="carousel-item @if($index === 0) active @endif">
-                                <img src="{{ asset('storage/' . ltrim($image, '/')) }}" class="d-block w-100" alt="Product Image">
-                            </div>
+                            <img src="{{ asset('storage/' . ltrim($image, '/')) }}" class="thumbnail mx-1" onclick="changeImage(this)" style="width: 70px; height: auto; cursor: pointer; border-radius: 5px;">
                         @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
                 </div>
             @endif
         </div>
@@ -172,6 +168,12 @@
     </div>
 
 </div>
+
+<script>
+    function changeImage(element) {
+        document.getElementById('mainImage').src = element.src;
+    }
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
