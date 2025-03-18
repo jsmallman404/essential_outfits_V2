@@ -179,7 +179,6 @@
         @include('header')
     </header>
     <div class="container">
-        <h2 class="text-center">All Products</h2>
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
