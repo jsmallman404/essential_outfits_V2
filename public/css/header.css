@@ -1,132 +1,165 @@
 /* Header Styling */
 header {
-    background-color: #ded4c0; 
-    border-bottom: 1px solid #ddd; 
-    padding: 10px 20px;
+  background-color: #ded4c0; 
+  border-bottom: 1px solid #ddd; 
+  padding: 10px 20px;
+  width: 100%;
 }
 
 .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .logo img {
-    width: 150px;
-    height: auto;
-    display: block;
+  width: 150px;
+  height: auto;
+  display: block;
 }
 
 /* Navigation Bar Styling */
 .nav-buttons {
-  display: flex;
-  justify-content: center;
-  background-color: #ded4c0; /* Light beige background */
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
+display: flex;
+justify-content: center;
+background-color: #ded4c0; /* Light beige background */
+padding: 10px 20px;
+border-bottom: 1px solid #ddd;
+flex-wrap: wrap;
 }
 
 .nav-buttons .dropdown {
-  position: relative; /* Position relative to anchor dropdown content */
-  margin: 0 15px; /* Spacing between dropdowns */
+position: relative; /* Position relative to anchor dropdown content */
+margin: 0 15px; /* Spacing between dropdowns */
 }
 
 .nav-buttons a {
-  text-decoration: none;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #555;
-  padding: 5px 10px;
-  display: block;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover */
+text-decoration: none;
+font-size: 1.2em;
+font-weight: bold;
+color: #555;
+padding: 5px 10px;
+display: block;
+transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover */
 }
 
 .nav-buttons a:hover {
-  color: #000; /* Darker text on hover */
-  background-color: #f0f0f0; /* Subtle hover effect */
-  border-radius: 5px; /* Rounded effect for hover */
+color: #000; /* Darker text on hover */
+background-color: #f0f0f0; /* Subtle hover effect */
+border-radius: 5px; /* Rounded effect for hover */
 }
 
 /* Dropdown Content Styling */
 .dropdown-content {
-  display: none; /* Hidden by default */
-  position: absolute; /* Position relative to parent dropdown */
-  top: 100%; /* Position directly below the parent link */
-  left: 0;
-  background-color: #fff; /* White background */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
-  min-width: 200px; /* Minimum dropdown width */
-  z-index: 1000; /* High z-index to ensure it is on top */
-  border-radius: 8px; /* Rounded corners for modern look */
-  overflow: hidden; /* Clip any overflowing child elements */
+display: none; /* Hidden by default */
+position: absolute; /* Position relative to parent dropdown */
+top: 100%; /* Position directly below the parent link */
+left: 0;
+background-color: #fff; /* White background */
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
+min-width: 200px; /* Minimum dropdown width */
+z-index: 1000; /* High z-index to ensure it is on top */
+border-radius: 8px; /* Rounded corners for modern look */
+overflow: hidden; /* Clip any overflowing child elements */
 }
 
 .dropdown-content a {
-  padding: 12px 20px; /* Increase padding for spacing */
-  font-size: 1em;
-  color: #555; /* Neutral text color */
-  text-decoration: none;
-  display: block; /* Stack items vertically */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+padding: 12px 20px; /* Increase padding for spacing */
+font-size: 1em;
+color: #555; /* Neutral text color */
+text-decoration: none;
+display: block; /* Stack items vertically */
+transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
 }
 
 .dropdown-content a:hover {
-  background-color: #ded4c0; /* Highlight color on hover */
-  color: #000;
+background-color: #ded4c0; /* Highlight color on hover */
+color: #000;
 }
 
 /* Show Dropdown Content on Hover */
 .dropdown:hover .dropdown-content {
-  display: block; /* Show dropdown when hovering over parent */
+display: block; /* Show dropdown when hovering over parent */
 }
 
 /* Responsive Styling */
-@media (max-width: 768px) {
-  .nav-buttons {
-    flex-direction: column; /* Stack navigation links vertically */
-    align-items: flex-start;
-    padding: 20px;
-  }
+@media (max-width: 1024px) {
+.nav-buttons {
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
 
-  .dropdown {
-    margin: 10px 0; /* Add spacing between stacked dropdowns */
-  }
+.dropdown {
+  margin: 10px 0;
+}
+}
+
+@media (max-width: 768px) {
+.nav-buttons {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  display: none;
+}
+
+.dropdown {
+  margin: 10px 0; /* Add spacing between stacked dropdowns */
+}
+
+.hamburger {
+  display: block;
+  font-size: 2em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #333;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+
+.nav-buttons.active {
+  display: flex;
+}
 }
 
 /* Account Actions */
 .account-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .account-actions a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 14px;
-    color: #555;
-    transition: color 0.3s ease;
-    gap: 5px; /* Space between icon and text */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  color: #555;
+  transition: color 0.3s ease;
+  gap: 5px; /* Space between icon and text */
 }
 
 .account-actions a:hover {
-    color: #000;
+  color: #000;
 }
 
 .account-actions .search-bar {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f6ef;
-    width: 150px; /* Initial width */
-    transition: width 0.3s ease;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f6ef;
+  width: 150px; /* Initial width */
+  transition: width 0.3s ease;
 }
 
 .account-actions .search-bar:hover,
 .account-actions .search-bar:focus {
-    width: 250px; /* Expand on hover/focus */
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 250px; /* Expand on hover/focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
