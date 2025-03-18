@@ -115,7 +115,14 @@ body {
             @foreach($wishlistItems as $wishlistItem)
                 <div class="col-md-4 mb-4">
                     <div class="wishlist-card">
-                        <img src="{{ asset('storage/' . $wishlistItem->product->image) }}" class="card-img-top">
+                    @php
+                        $images = is_array($wishlistItem->product->images) ? $wishlistItem->product->images : json_decode($wishlistItem->product->images, true);
+                    @endphp
+                        @if(!empty($images) && is_array($images) && isset($images[0]))
+                            <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="100" height="100" style="object-fit: cover;">
+                        @else
+                            <img src="{{ asset('images/default-placeholder.png') }}" width="100" height="100" style="object-fit: cover;">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $wishlistItem->product->name }}</h5>
                             <p class="card-text">£{{ $wishlistItem->product->price }}</p>
