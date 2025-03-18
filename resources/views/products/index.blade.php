@@ -340,8 +340,16 @@
                                         <label for="variant_id">Select Size:</label>
                                         <select name="variant_id" class="form-control mb-2" required>
                                             @foreach($product->variants as $variant)
+                                                @php
+                                                    $stockText = '';
+                                                    if ($variant->stock == 0) {
+                                                        $stockText = '<span style="color: red; font-weight: bold;">- Out of Stock</span>';
+                                                    } elseif ($variant->stock < 5) {
+                                                        $stockText = ' - Only ' . $variant->stock . ' Left';
+                                                    }
+                                                @endphp
                                                 <option value="{{ $variant->id }}">
-                                                    {{ $variant->size }} ({{ $variant->stock }} left)
+                                                    {{ $variant->size }} {!! $stockText !!}
                                                 </option>
                                             @endforeach
                                         </select>
