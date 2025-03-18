@@ -186,6 +186,7 @@
         
         <div class="d-flex justify-content-end mb-3">
             <form method="GET" action="{{ route('products.index') }}">
+
                 @foreach(request()->except('sort') as $key => $value)
                     @if(is_array($value))
                         @foreach($value as $item)
