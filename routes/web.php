@@ -151,6 +151,7 @@ Route::post('/wishlist/add/{productId}', [WishlistController::class, 'addToWishl
 Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'removeFromWishlist'])
     ->name('wishlist.remove');
 
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.details');
 
 
 

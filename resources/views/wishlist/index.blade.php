@@ -127,9 +127,10 @@ body {
                             <h5 class="card-title">{{ $wishlistItem->product->name }}</h5>
                             <p class="card-text">£{{ $wishlistItem->product->price }}</p>
                             
-                            <a href="{{ url('/products?product_id=' . $wishlistItem->product->id) }}" class="btn btn-primary">
+                            <a href="{{ route('product.details', ['id' => $wishlistItem->product->id]) }}" class="btn btn-primary">
     View Product
 </a>
+
 
 
 
