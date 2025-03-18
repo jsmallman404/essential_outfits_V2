@@ -1,5 +1,5 @@
 <header>
-        <div class="header-content">
+    <div class="header-content">
       <!-- Logo -->
       <div class="logo">
         <a href="/">
@@ -7,53 +7,61 @@
         </a>
       </div>
 
- <!-- Navigation Bar -->
-<nav class="nav-buttons">
-  <div class="dropdown">
-    <a href="{{ route('products.index') }}">Men</a>
-    <div class="dropdown-content">
-      <a href="/men/shopall">Shop All</a>
-      <a href="/men/Jackets&coats">Jackets & Coats</a>
-      <a href="/men/Hoodies">Hoodies</a>
-      <a href="/men/Sweatshit">Sweatshits</a>
-      <a href="/men/T-shirts">T-shirts</a>
-      <a href="/men/Tracksuit Bottoms">Tracksuit Bottoms</a>
-      <a href="/men/Jeans">Jeans</a>
-      <a href="/men/shoes">Shoes</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="#">Women</a>
-    <div class="dropdown-content">
-      <a href="/women/shopall">Shop All</a>
-      <a href="/women/Jackets&coats">Jackets & Coats</a>
-      <a href="/women/Hoodies">Hoodies</a>
-      <a href="/women/Sweatshit">Sweatshits</a>
-      <a href="/women/T-shirts">T-shirts</a>
-      <a href="/women/Tracksuit Bottoms">Tracksuit Bottoms</a>
-      <a href="/women/Jeans">Jeans</a>
-      <a href="/women/shoes">Shoes</a>
-    </div>
-  </div>
-  <div class="dropdown">
-    <a href="#">Accessories</a>
-    <div class="dropdown-content">
-      <a href="/accessories/Shopall">Shop All</a>
-      <a href="/accessories/men">Men accessories</a>
-      <a href="/accessories/women">Women accessories</a>
-    </div>
-  </div>
-  <a href="{{ route('products.index') }}">Shop All</a>
-    <!-- Added Contact and About buttons -->
+      @php
+          $categories = \App\Models\Product::select('category', 'gender')->distinct()->get();
+      @endphp
 
-    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
-    <a href="{{ route('about') }}">About Us</a>
+      <!-- Navigation Bar -->
+      <nav class="nav-buttons">
+        <div class="dropdown">
+          <a href="#">Men</a>
+          <div class="dropdown-content">
+            <a href="{{ route('products.index', ['gender' => 'Male']) }}">Shop All</a>
+            @foreach($categories as $category)
+              @if($category->gender === 'Male' || $category->gender === 'Unisex')
+                <a href="{{ route('products.index', ['gender' => 'Male', 'categories[]' => $category->category]) }}">{{ $category->category }}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+        
+        <div class="dropdown">
+          <a href="#">Women</a>
+          <div class="dropdown-content">
+            <a href="{{ route('products.index', ['gender' => 'Female']) }}">Shop All</a>
+            @foreach($categories as $category)
+              @if($category->gender === 'Female' || $category->gender === 'Unisex')
+                <a href="{{ route('products.index', ['gender' => 'Female', 'categories[]' => $category->category]) }}">{{ $category->category }}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
 
+        <div class="dropdown">
+          <a href="#">Accessories</a>
+          <div class="dropdown-content">
+            <a href="{{ route('products.index', ['categories[]' => 'Accessories']) }}">Shop All</a>
+            @foreach($categories as $category)
+              @if($category->gender === 'Accessories')
+                <a href="{{ route('products.index', ['categories[]' => $category->category]) }}">{{ $category->category }}</a>
+              @endif
+            @endforeach
+          </div>
+        </div>
 
+        <div class="dropdown">
+          <a href="#">Brands</a>
+          <div class="dropdown-content">
+            @foreach($brands as $brand)
+              <a href="{{ route('products.index', ['brands[]' => $brand->brand]) }}">{{ $brand->brand }}</a>
+            @endforeach
+          </div>
+        </div>
 
-</nav>
-
-
+        <!-- Added Contact and About buttons -->
+        <a href="{{ route('contact') }}" class="nav-link">Contact</a>
+        <a href="{{ route('about') }}">About Us</a>
+      </nav>
 
       <!-- Account and Cart Actions -->
       <div class="account-actions">

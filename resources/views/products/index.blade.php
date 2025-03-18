@@ -189,25 +189,31 @@
     <div class="filter-menu p-3 mb-4 bg-light rounded">
         <h4>Filter Products</h4>
         <form id="filterForm" action="{{ route('products.index') }}" method="GET">
+            @php
+                $requestedGenders = request()->query('gender');
+                if (!is_array($requestedGenders)) {
+                    $requestedGenders = $requestedGenders ? [$requestedGenders] : [];
+                }
+            @endphp
             <div class="mb-3">
                 <label class="form-label">Gender</label>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="gender[]" value="Male" id="genderMale" 
-                           {{ is_array(request('gender')) && in_array('Male', request('gender')) ? 'checked' : '' }}>
+                           {{ in_array('Male', $requestedGenders) ? 'checked' : '' }}>
                     <label class="form-check-label" for="genderMale">
                         Male ({{ $genderCounts->firstWhere('gender', 'Male')->count ?? 0 }})
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="gender[]" value="Female" id="genderFemale" 
-                           {{ is_array(request('gender')) && in_array('Female', request('gender')) ? 'checked' : '' }}>
+                           {{ in_array('Female', $requestedGenders) ? 'checked' : '' }}>
                     <label class="form-check-label" for="genderFemale">
                         Female ({{ $genderCounts->firstWhere('gender', 'Female')->count ?? 0 }})
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="gender[]" value="Unisex" id="genderUnisex" 
-                           {{ is_array(request('gender')) && in_array('Unisex', request('gender')) ? 'checked' : '' }}>
+                           {{ in_array('Unisex', $requestedGenders) ? 'checked' : '' }}>
                     <label class="form-check-label" for="genderUnisex">
                         Unisex ({{ $genderCounts->firstWhere('gender', 'Unisex')->count ?? 0 }})
                     </label>
@@ -275,8 +281,29 @@
     });
 </script>
             <div class="col-md-9">
+                @php
+                    $requestedGenders = request()->query('gender');
+                    if (!is_array($requestedGenders)) {
+                        $requestedGenders = $requestedGenders ? [$requestedGenders] : [];
+                    }
+                    $requestedCategories = (array) request()->query('categories', []);
+                    $requestedBrands = (array) request()->query('brands', []);
+
+                    $filteredProducts = $products->filter(function ($product) use ($requestedGenders, $requestedCategories, $requestedBrands) {
+                        // Ensure gender filtering works (case insensitive)
+                        $matchesGender = empty($requestedGenders) || in_array(strtolower(trim($product->gender)), array_map('strtolower', $requestedGenders));
+
+                        // Ensure category filtering works
+                        $matchesCategory = empty($requestedCategories) || in_array($product->category, $requestedCategories);
+
+                        // Ensure brand filtering works
+                        $matchesBrand = empty($requestedBrands) || in_array($product->brand, $requestedBrands);
+
+                        return $matchesGender && $matchesCategory && $matchesBrand;
+                    });
+                @endphp
                 <div class="row">
-                    @foreach($products as $product)
+                    @foreach($filteredProducts as $product)
                         <div class="col-md-4 mb-4">
                             <div class="product-card">
                                 @php
