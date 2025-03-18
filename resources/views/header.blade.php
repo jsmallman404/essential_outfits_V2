@@ -9,6 +9,7 @@
 
       @php
           $categories = \App\Models\Product::select('category', 'gender')->distinct()->get();
+          $brands = \App\Models\Product::select('brand')->distinct()->get();
       @endphp
 
       <!-- Navigation Bar -->
