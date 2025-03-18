@@ -356,7 +356,7 @@
                                         <button type="submit" class="btn">Add to Cart</button>
                                     </form>
 
-                                    <form action="{{ route('products.show', $product->id) }}" method="GET" target="_blank">
+                                    <form action="{{ route('products.show', $product->id) }}" method="GET">
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <input type="hidden" name="name" value="{{ urlencode($product->name) }}">
                                         <input type="hidden" name="price" value="{{ $product->price }}">
