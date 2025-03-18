@@ -183,6 +183,17 @@
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
+        
+        <div class="d-flex justify-content-end mb-3">
+            <form method="GET" action="{{ route('products.index') }}">
+                <label for="sort" class="me-2">Sort By:</label>
+                <select name="sort" id="sort" class="form-select d-inline w-auto" onchange="this.form.submit()">
+                    <option value="">Select</option>
+                    <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
+                    <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
+                </select>
+            </form>
+        </div>
 
         <div class="row">
 <div class="col-md-3">
@@ -288,19 +299,25 @@
                     }
                     $requestedCategories = (array) request()->query('categories', []);
                     $requestedBrands = (array) request()->query('brands', []);
-
+                    
                     $filteredProducts = $products->filter(function ($product) use ($requestedGenders, $requestedCategories, $requestedBrands) {
                         // Ensure gender filtering works (case insensitive)
                         $matchesGender = empty($requestedGenders) || in_array(strtolower(trim($product->gender)), array_map('strtolower', $requestedGenders));
-
+                        
                         // Ensure category filtering works
                         $matchesCategory = empty($requestedCategories) || in_array($product->category, $requestedCategories);
-
+                        
                         // Ensure brand filtering works
                         $matchesBrand = empty($requestedBrands) || in_array($product->brand, $requestedBrands);
-
+                        
                         return $matchesGender && $matchesCategory && $matchesBrand;
                     });
+                    
+                    if (request('sort') == 'price_asc') {
+                        $filteredProducts = $filteredProducts->sortBy('price');
+                    } elseif (request('sort') == 'price_desc') {
+                        $filteredProducts = $filteredProducts->sortByDesc('price');
+                    }
                 @endphp
                 <div class="row">
                     @foreach($filteredProducts as $product)
