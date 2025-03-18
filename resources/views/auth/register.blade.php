@@ -36,7 +36,9 @@
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" onkeyup="checkPasswordStrength()" />
+                <div id="password-strength-message" style="margin-top: 5px;"></div>
+                <small>Password must contain at least one number, one symbol, and be at least 8 characters long.</small>
             </div>
 
             <div class="mt-4">
@@ -73,6 +75,34 @@
         </form>
     </x-authentication-card>
 </x-guest-layout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordInput = document.getElementById("password");
+        const strengthMessage = document.getElementById("password-strength-message");
+
+        passwordInput.addEventListener("keyup", function () {
+            const password = passwordInput.value;
+            let strength = "Weak";
+            let color = "red";
+
+            const hasNumber = /\d/.test(password);
+            const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const isLongEnough = password.length >= 8;
+
+            if (isLongEnough && hasNumber && hasSymbol) {
+                strength = "Strong";
+                color = "green";
+            } else if (isLongEnough && (hasNumber || hasSymbol)) {
+                strength = "Medium";
+                color = "orange";
+            }
+
+            strengthMessage.textContent = `Password Strength: ${strength}`;
+            strengthMessage.style.color = color;
+        });
+    });
+</script>
 
 </body>
 @include('footer')
