@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <style>
         body {
             background-color: #ded4c0;
@@ -40,6 +43,7 @@
     </style>
 </head>
 <body>
+    @include('header')
     <div class="container d-flex justify-content-center">
         <div class="dashboard-container text-center">
             <h1>Admin Dashboard</h1>
@@ -64,4 +68,5 @@
         </div>
     </div>
 </body>
+@include('footer')
 </html>
