@@ -113,7 +113,7 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/reviews/{id}', [ProductReviewController::class, 'show'])->name('reviews.show');
 Route::get('/reviews/{id}/create', [ProductReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
 Route::post('/reviews', [ProductReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
-
+Route::get('/product/{id}/total-sold', [ProductController::class, 'getTotalSold'])->name('product.totalSold');
 
 
 
