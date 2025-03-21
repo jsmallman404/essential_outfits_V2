@@ -161,6 +161,17 @@ public function adminIndex(Request $request)
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }
 
+    public function getTotalSold($productId)
+{
+    $totalSold = \DB::table('products')
+        ->join('product_variants', 'product_variants.product_id', '=', 'products.id')
+        ->join('order_items', 'order_items.product_variant_id', '=', 'product_variants.id')
+        ->where('products.id', $productId)
+        ->sum('order_items.quantity');
+
+    return $totalSold;
+}
+
     public function updateStock(Request $request, $id) {
         $product = Product::findOrFail($id);
         if ($request->has('remove_variants')) {

@@ -121,16 +121,7 @@
                         <td>{{ $product->brand }}</td>
                         <td>{{ $product->color }}</td>
                         <td>£{{ $product->price }}</td>
-                        <td>
-                            @php
-                                $salesCount = \DB::table('order_items')
-                                    ->join('orders', 'order_items.order_id', '=', 'orders.id')
-                                    ->where('order_items.product_id', $product->id)
-                                    ->where('orders.status', 'completed')
-                                    ->sum('order_items.quantity');
-                            @endphp
-                            {{ $salesCount }}
-                        </td>
+                        <td>{{ Http::get(route('product.totalSold', ['id' => $product->id]))->body() }}</td>
                         <td>
                             @foreach($product->variants as $variant)
                                 {{ $variant->size }} ({{ $variant->stock }} left)<br>
