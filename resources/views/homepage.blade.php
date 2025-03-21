@@ -27,34 +27,37 @@
 
   <main id="products" class="product-container">
     <h1 class="bestsellers">BESTSELLERS.</h1>
-    <div class="product-card">
-      <img src="images/blackbomber.png" alt="Product 1">
-      <div class="product-info">
-        <h2>Racer Worldwide - Black Waxed Bomber</h2>
-        <p>£120</p>
-        <button>View Details</button>
-        <button class="add-to-wishlist-btn" data-product="Racer Worldwide - Black Waxed Bomber">Add to Wishlist</button>
-      </div>
+    <div class="row">
+        @foreach($bestSellers as $product)
+            <div class="col-md-4 mb-4">
+                <div class="product-card">
+                    @php
+                        $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
+                    @endphp
+
+                    @if(!empty($images) && is_array($images) && isset($images[0]))
+                        <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="100%" height="300" style="object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/default-placeholder.png') }}" width="100%" height="300" style="object-fit: cover;">
+                    @endif
+
+                    <div class="product-info">
+                        <h2>{{ $product->name }}</h2>
+                        <p>£{{ $product->price }}</p>
+                        <form action="{{ route('products.show', $product->id) }}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-primary w-100 mb-2">View Details</button>
+                        </form>
+                        <form method="POST" action="{{ route('wishlist.add', $product->id) }}">
+                            @csrf
+                            <button class="add-to-wishlist-btn btn btn-outline-dark w-100" data-product="{{ $product->name }}">Add to Wishlist</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
-    <div class="product-card">
-      <img src="images/marlyn.png" alt="Product 2">
-      <div class="product-info">
-        <h2>OSBATT - Marlyn T-Shirt 4th Anniversary Edition</h2>
-        <p>£45</p>
-        <button>View Details</button>
-        <button class="add-to-wishlist-btn" data-product="Racer Worldwide - Black Patch Hoodie">Add to Wishlist</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="images/jadedhoodie.png" alt="Product 3">
-      <div class="product-info">
-        <h2> Jaded London - Deep Red Fade Mini Monster Hoodie        </h2>
-        <p>£68 £63</p>
-        <button>View Details</button>
-        <button class="add-to-wishlist-btn" data-product="Racer Worldwide - Cargo Coated Pants">Add to Wishlist</button>
-      </div>
-    </div>
-  </main>
+</main>
 
   @include('footer')
   
@@ -64,12 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
 
     function changeSlide() {
-        images[currentIndex].classList.remove("active"); // Remove active class from current image
-        currentIndex = (currentIndex + 1) % images.length; // Move to next image
-        images[currentIndex].classList.add("active"); // Show new active image
+        images[currentIndex].classList.remove("active"); 
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add("active"); 
     }
 
-    setInterval(changeSlide, 3000); // Change image every 3 seconds
+    setInterval(changeSlide, 3000); 
 });
 </script>
 

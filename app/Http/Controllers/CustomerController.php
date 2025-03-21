@@ -16,31 +16,25 @@ class CustomerController extends Controller
         return view('customer.editProfile', compact('user'));
     }
 
-    public function updateProfile(Request $request, $id)
+    public function updateProfile(Request $request)
     {
         $user = Auth::user();
-
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'nullable|string|max:255',
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($user->id), 
+                Rule::unique('users', 'email')->ignore($user->id),
             ],
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'post_code' => 'nullable|string|max:10',
-            'role' => 'required|in:user,admin',
         ]);
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'address' => $request->address,
-            'city' => $request->city,
-            'post_code' => $request->post_code,
-            'role' => $request->input('role')
-        ]);
+        $user->update(array_filter($validatedData));
+
+        return redirect()->route('customer.editProfile')->with('success', 'Profile updated successfully.');
+
 
         return redirect()->route('customer.editProfile')->with('success', 'Profile updated successfully.');
     }
