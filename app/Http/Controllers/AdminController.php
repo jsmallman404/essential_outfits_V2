@@ -28,7 +28,8 @@ class AdminController extends Controller
               ->orWhere('email', 'like', '%' . $request->search . '%');
         });
     }
-    $users = $query->paginate(10);
+    
+    $users = $query->get();
     return view('admin.users.index', compact('users'));
 }
 

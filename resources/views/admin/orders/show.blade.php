@@ -115,7 +115,7 @@
             </form>
             @endif
 
-            <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Back to Orders</a>
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-custom">Back to Orders</a>
         </div>
     </div>
 

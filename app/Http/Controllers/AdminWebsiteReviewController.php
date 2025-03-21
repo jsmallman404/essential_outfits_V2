@@ -10,6 +10,7 @@ class AdminWebsiteReviewController extends Controller
     public function index()
     {
         $reviews = WebsiteReview::orderBy('created_at', 'desc')->get();
-        return view('admin.websiteReviews', compact('reviews'));
+        $averageWebsiteRating = WebsiteReview::avg('rating') ?? 0;
+        return view('admin.websiteReviews', compact('reviews', 'averageWebsiteRating'));
     }
 }

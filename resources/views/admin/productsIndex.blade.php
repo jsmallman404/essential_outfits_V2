@@ -69,14 +69,18 @@
         </div>
 
         <div class="text-center my-4">
-            <a href="{{ route('admin.createProduct') }}" class="btn btn-success">Add New Product</a>
+            <a href="{{ route('admin.createProduct') }}" class="btn btn-custom">Add New Product</a>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-12">
-                <form action="{{ route('admin.products') }}" method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Search products..." value="{{ request('search') }}">
-                    <button type="submit" class="btn btn-outline-primary">Search</button>
+                <form action="{{ route('admin.products') }}" method="GET" class="row g-2">
+                    <div class="col-md-9">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name, category, gender, or color..." value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-custom w-100">Search</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -94,8 +98,9 @@
                     <th>Gender</th>
                     <th>Brand</th>
                     <th>Color</th>
-                    <th>Price</th>
-                    <th>Sizes</th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'price', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Price</a></th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'sales', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Sales</a></th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'stock', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Stock Level</a></th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -117,17 +122,27 @@
                         <td>{{ $product->color }}</td>
                         <td>£{{ $product->price }}</td>
                         <td>
+                            @php
+                                $salesCount = \DB::table('order_items')
+                                    ->join('orders', 'order_items.order_id', '=', 'orders.id')
+                                    ->where('order_items.product_id', $product->id)
+                                    ->where('orders.status', 'completed')
+                                    ->sum('order_items.quantity');
+                            @endphp
+                            {{ $salesCount }}
+                        </td>
+                        <td>
                             @foreach($product->variants as $variant)
                                 {{ $variant->size }} ({{ $variant->stock }} left)<br>
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>   
-                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Stock</a>
+                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-custom">Edit</a>   
+                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-custom">Stock</a>
                             <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
                                 @csrf    
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                                <button type="submit" class="btn btn-custom" onclick="return confirm('Are you sure?');">
                                     Delete
                                 </button>
                             </form>
