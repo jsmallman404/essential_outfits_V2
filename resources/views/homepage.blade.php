@@ -7,7 +7,25 @@
   <link rel="stylesheet" href="{{ asset('css/brandstyles.css') }}">
   <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .product-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
 
+    .product-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        padding: 16px;
+        text-align: center;
+    }
+  </style>
 </head>
 <body>
 @include('header')
@@ -27,9 +45,9 @@
 
   <main id="products" class="container text-center">
     <h1 class="bestsellers text-center mb-4">BESTSELLERS</h1>
-    <div class="row justify-content-center">
+    <div class="product-container">
         @foreach($bestSellers as $product)
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+            <div class="d-flex align-items-stretch">
                 <div class="product-card w-100 d-flex flex-column align-items-center">
                     @php
                         $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
