@@ -228,7 +228,7 @@
     
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" onsubmit="return validatePassword();">
             @csrf
 
             <div>
@@ -316,6 +316,22 @@
             strengthMessage.style.color = color;
         });
     });
+    
+    function validatePassword() {
+        const password = document.getElementById("password").value;
+        const strengthMessage = document.getElementById("password-strength-message");
+        const hasNumber = /\d/.test(password);
+        const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const isLongEnough = password.length >= 8;
+
+        if (!isLongEnough || !hasNumber || !hasSymbol) {
+            strengthMessage.textContent = "Password must be at least 8 characters long and include at least one number and one special character.";
+            strengthMessage.style.color = "red";
+            return false;
+        }
+
+        return true;
+    }
 </script>
 
 
