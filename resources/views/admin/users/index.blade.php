@@ -91,11 +91,11 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('admin.viewUser', $user->id) }}" class="btn btn-info btn-sm">View</a>
+                            <a href="{{ route('admin.viewUser', $user->id) }}" class="btn btn-custom">View</a>
                             <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" style="display: inline-block;">
                                 @csrf    
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');">
+                                <button type="submit" class="btn btn-custom" onclick="return confirm('Are you sure you want to delete this user?');">
                                     Delete
                                 </button>
                             </form>
@@ -104,10 +104,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <div class="text-center mt-4">
-            {{ $users->links() }}
-        </div>
     </div>
 </body>
 @include('footer')

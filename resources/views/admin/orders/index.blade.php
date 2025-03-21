@@ -98,11 +98,11 @@
                     <td>
                     <span class="badge bg-{{ $order->status == 'Pending' ? 'warning' : ($order->status == 'Active' || $order->status == 'Shipped' ? 'success' : 'danger') }}">
                     {{ $order->status }}
-                        </span>
+                        </span> 
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>
-                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-custom">View</a>
                     </td>
                 </tr>
                 @endforeach
