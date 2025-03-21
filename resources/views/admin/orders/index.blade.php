@@ -74,7 +74,7 @@
                 <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
                 <option value="Active" {{ request('status') == 'Active' ? 'selected' : '' }}>Active</option>
                 <option value="Shipped" {{ request('status') == 'Shipped' ? 'selected' : '' }}>Shipped</option>
-                <option value="Canceled" {{ request('status') == 'Canceled' ? 'selected' : '' }}>Canceled</option>
+                <option value="Cancelled" {{ request('status') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
             </select>
         </form>
 
@@ -97,6 +97,7 @@
                     <td>£{{ number_format($order->total_price, 2) }}</td>
                     <td>
                     <span class="badge bg-{{ $order->status == 'Pending' ? 'warning' : ($order->status == 'Active' || $order->status == 'Shipped' ? 'success' : 'danger') }}">
+                    {{ $order->status }}
                         </span>
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
