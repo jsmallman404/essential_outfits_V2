@@ -25,25 +25,25 @@
     </div>
   </section>
 
-  <main id="products" class="product-container">
-    <h1 class="bestsellers">BESTSELLERS.</h1>
-    <div class="row">
+  <main id="products" class="container">
+    <h1 class="bestsellers text-center mb-4">BESTSELLERS</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         @foreach($bestSellers as $product)
-            <div class="col-md-4 mb-4">
-                <div class="product-card">
+            <div class="col">
+                <div class="product-card h-100 d-flex flex-column">
                     @php
                         $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
                     @endphp
 
                     @if(!empty($images) && is_array($images) && isset($images[0]))
-                        <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" width="100%" height="300" style="object-fit: cover;">
+                        <img src="{{ asset('storage/' . ltrim($images[0], '/')) }}" class="img-fluid" style="height: 300px; object-fit: cover;">
                     @else
-                        <img src="{{ asset('images/default-placeholder.png') }}" width="100%" height="300" style="object-fit: cover;">
+                        <img src="{{ asset('images/default-placeholder.png') }}" class="img-fluid" style="height: 300px; object-fit: cover;">
                     @endif
 
-                    <div class="product-info">
-                        <h2>{{ $product->name }}</h2>
-                        <p>£{{ $product->price }}</p>
+                    <div class="product-info text-center p-3">
+                        <h2 class="h5">{{ $product->name }}</h2>
+                        <p class="mb-2">£{{ $product->price }}</p>
                         <form action="{{ route('products.show', $product->id) }}" method="GET">
                             @csrf
                             <button type="submit" class="btn btn-primary w-100 mb-2">View Details</button>
