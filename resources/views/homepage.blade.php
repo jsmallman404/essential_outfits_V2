@@ -25,12 +25,12 @@
     </div>
   </section>
 
-  <main id="products" class="container">
+  <main id="products" class="container text-center">
     <h1 class="bestsellers text-center mb-4">BESTSELLERS</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row justify-content-center">
         @foreach($bestSellers as $product)
-            <div class="col">
-                <div class="product-card h-100 d-flex flex-column">
+            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                <div class="product-card w-100 d-flex flex-column align-items-center">
                     @php
                         $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
                     @endphp
