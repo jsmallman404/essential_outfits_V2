@@ -37,12 +37,12 @@ class OrderController extends Controller
         $order = Order::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
         if ($order->status !== 'Pending') {
-            return redirect()->route('customer.orders')->with('error', 'Only pending orders can be canceled.');
+            return redirect()->route('customer.orders')->with('error', 'Only pending orders can be cancelled.');
         }
 
-        $order->status = 'Canceled';
+        $order->status = 'Cancelled';
         $order->save();
 
-        return redirect()->route('customer.orders')->with('success', 'Order has been canceled.');
+        return redirect()->route('customer.orders')->with('success', 'Order has been cancelled.');
     }
 }
