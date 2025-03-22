@@ -115,6 +115,7 @@
         }
         .container {
             margin-top: 50px;
+            
         }
         h2 {
             font-size: 3rem;
@@ -134,10 +135,15 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
         .product-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
+            
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+
+    }
         .product-info {
             padding: 1rem;
             text-align: center;
@@ -201,16 +207,52 @@
             white-space: nowrap;
             padding: 8px 0;
         }
+
+        html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 20px; 
+}
+
+.black-button {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+        }
+        .black-button:hover {
+            background-color: #333;
+        }
+
+
+
     </style>
 </head>
 <body>
     <header>
         @include('header')
     </header>
+    <main>
     <div class="container">
         <h2>My Wishlist</h2>
         @if($wishlistItems->isEmpty())
-            <p class="wishlist-empty">Your wishlist is empty. Start adding your favourite products!</p>
+    <p class="wishlist-empty" style="text-align: center; margin-top: 20px;">Your wishlist is empty. Start adding your favourite products!</p>
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="{{ route('products.index') }}" class="black-button btn btn-dark" style="padding: 10px 20px; font-size: 1rem; border-radius: 5px; text-decoration: none;">
+            View Products
+        </a>
+    </div>
         @else
             <div class="row">
                 @foreach($wishlistItems as $wishlistItem)
@@ -244,6 +286,7 @@
             </div>
         @endif
     </div>
+    </main>
     @include('footer')
 </body>
 </html>
