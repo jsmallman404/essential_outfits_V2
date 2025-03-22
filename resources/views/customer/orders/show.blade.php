@@ -14,7 +14,6 @@
         }
     </style>
 <body>
-    <!-- Include Header -->
     @include('header')
 
     <div class="container mt-5">
@@ -85,7 +84,7 @@
             </div>
         @endif
 
-        <!-- Show Return Requests if Status is "Return Requested" -->
+
         @if($order->status == 'Return Requested' && $order->returnRequests->where('order_id', $order->id)->count() > 0)
     <h4 class="mt-5 text-center">Return Requests</h4>
     <div class="table-responsive">

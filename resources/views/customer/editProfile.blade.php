@@ -109,8 +109,8 @@
                     </div>
                 </div>
             </form>
-        </div> <!-- Close container -->
-    </div> <!-- Close content-wrapper -->
+        </div> 
+    </div> 
     @include('footer')
 </body>
 </html>

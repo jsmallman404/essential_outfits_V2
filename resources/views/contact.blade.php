@@ -357,7 +357,6 @@ textarea {
 @endif
 
 </div>
-<!-- Add this section after your existing contact form markup -->
 <div class="container mt-5">
   <h2 class="text-center">Review Our Website</h2>
   @if(session('review_success'))
@@ -391,7 +390,6 @@ textarea {
 
 
 <script>
-  // JavaScript to handle star rating selection
   const stars = document.querySelectorAll('#star-rating .star');
   const ratingInput = document.getElementById('rating');
   stars.forEach(star => {

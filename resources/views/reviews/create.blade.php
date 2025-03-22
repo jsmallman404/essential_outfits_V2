@@ -79,7 +79,6 @@
     </div>
     
     <script>
-        // JavaScript to handle star rating selection
         const stars = document.querySelectorAll('#star-rating .star');
         const ratingInput = document.getElementById('rating');
         
@@ -87,11 +86,7 @@
             star.addEventListener('click', () => {
                 const ratingValue = star.getAttribute('data-value');
                 ratingInput.value = ratingValue;
-                
-                // Remove "selected" class from all stars
                 stars.forEach(s => s.classList.remove('selected'));
-                
-                // Add "selected" class to stars up to the clicked star
                 for (let i = 0; i < ratingValue; i++) {
                     stars[i].classList.add('selected');
                 }

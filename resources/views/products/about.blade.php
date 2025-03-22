@@ -23,15 +23,14 @@
         justify-content: flex-start;
         max-width: 80%;
         margin: 50px auto;
-        gap: 30px; /* More spacing between image and text */
-    }
+        gap: 30px; 
 
     #fashion {
-    width: 48%; /* Keeps the image at 40% width */
+    width: 48%; 
     max-width: 600px;
     height: auto;    
-    margin-left: -150px; /* Moves the image fully to the left */
-    margin-top: -50px; /* Moves the image up */
+    margin-left: -150px; 
+    margin-top: -50px; 
 }
 
 
@@ -55,7 +54,6 @@
         line-height: 1.6;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
         .about-page main {
             flex-direction: column;
@@ -63,7 +61,7 @@
         }
 
         #fashion {
-            width: 80%; /* Makes image larger on smaller screens */
+            width: 80%; 
         }
 
         .text-container {

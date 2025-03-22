@@ -97,7 +97,6 @@
 
 <div class="container mt-5">
     <div class="row">
-        <!-- Product Images (Left) -->
         <div class="col-md-6">
             @php
                 $images = is_array($product->images) ? $product->images : json_decode($product->images, true);
@@ -105,10 +104,7 @@
 
             @if(is_array($images) && count($images) > 0)
                 <div class="product-gallery">
-                    <!-- Main Large Image -->
                     <img id="mainImage" src="{{ asset('storage/' . ltrim($images[0], '/')) }}" class="large-image d-block w-100" alt="Main Product Image">
-
-                    <!-- Thumbnail Images -->
                     <div class="thumbnails d-flex justify-content-center mt-2">
                         @foreach($images as $index => $image)
                             <img src="{{ asset('storage/' . ltrim($image, '/')) }}" class="thumbnail mx-1" onclick="changeImage(this)" style="width: 70px; height: auto; cursor: pointer; border-radius: 5px;">
@@ -118,14 +114,12 @@
             @endif
         </div>
 
-        <!-- Product Details (Right) -->
         <div class="col-md-6">
             <div class="product-description">
                 <h1>{{ $product->name }}</h1>
                 <h2>£{{ $product->price }}</h2>
                 <p>Description: {{ $product->description }}</p>
 
-                <!-- Rating -->
                 <p>
                     <a href="{{ route('reviews.show', ['id' => $product->id]) }}" style="text-decoration: none; color: inherit;">
                         Average Rating: <strong>{{ number_format($averageRating, 1) }}</strong> / 5
@@ -141,7 +135,6 @@
                         @endfor
                     </a>
                 </p>
-
                 @php
                                         $inWishlist = Auth::check() && Auth::user()->wishlist()->where('product_id', $product->id)->exists();
                                     @endphp
@@ -156,8 +149,6 @@
                                         </button>
                                     </form>
 
-
-                <!-- Size Selection -->
                 <form action="{{ route('cart.add', $product->id) }}" method="POST">
                     @csrf
                     <label for="variant_id">Select Size:</label>
