@@ -338,7 +338,7 @@ textarea {
   @include('header')
 <div class="container">
     <h1>Contact Us</h1>
-    <p>Email: queriesessential@gmail.com</p>
+    <p>Email: essentialsenqueries@gmail.com</p>
     <p>Phone: +44 7713345678</p>
 
     <form action="{{ route('contact.submit') }}" method="POST">
