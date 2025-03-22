@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AdminReturnController;
 use App\Http\Controllers\AdminWebsiteReviewController;
 use App\Http\Controllers\WebsiteReviewController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 
 
@@ -22,6 +23,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
@@ -110,7 +113,7 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/reviews/{id}', [ProductReviewController::class, 'show'])->name('reviews.show');
 Route::get('/reviews/{id}/create', [ProductReviewController::class, 'create'])->name('reviews.create')->middleware('auth');
 Route::post('/reviews', [ProductReviewController::class, 'store'])->name('reviews.store')->middleware('auth');
-
+Route::get('/product/{id}/total-sold', [ProductController::class, 'getTotalSold'])->name('product.totalSold');
 
 
 

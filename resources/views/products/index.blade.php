@@ -171,6 +171,19 @@
             text-align: center;
             margin-top: 2rem;
         }
+        .black-button {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: -30px;
+        }
+        .black-button:hover {
+            background-color: #333;
+        }
         
     </style>
 </head>
@@ -301,7 +314,7 @@
             </div>
         </form>
         <div class="d-flex gap-2">
-            <button type="button" id="clearFilters" class="btn btn-primary w-50">Clear Filters</button>
+            <button type="button" id="clearFilters" class="black-button btn btn-primary w-50">Clear Filters</button>
         </div>
     </div>
 </div>
@@ -411,10 +424,6 @@
                     @endforeach
                 </div>
             </div>
-        </div>
-
-        <div class="view-cart-btn">
-            <a href="{{ route('cart.index') }}" class="btn btn-warning">View Cart</a>
         </div>
     </div>
     @include('footer')

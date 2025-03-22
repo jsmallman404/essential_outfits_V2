@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Products</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <style>
         body {
             background-color: #ded4c0;
@@ -57,6 +60,7 @@
     </style>
 </head>
 <body>
+    @include('header')
     <div class="container">
         <h1 class="text-center">Manage Products</h1>
 
@@ -65,14 +69,18 @@
         </div>
 
         <div class="text-center my-4">
-            <a href="{{ route('admin.createProduct') }}" class="btn btn-success">Add New Product</a>
+            <a href="{{ route('admin.createProduct') }}" class="btn btn-custom">Add New Product</a>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-12">
-                <form action="{{ route('admin.products') }}" method="GET" class="d-flex">
-                    <input type="text" name="search" class="form-control me-2" placeholder="Search products..." value="{{ request('search') }}">
-                    <button type="submit" class="btn btn-outline-primary">Search</button>
+                <form action="{{ route('admin.products') }}" method="GET" class="row g-2">
+                    <div class="col-md-9">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name, category, gender, or color..." value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-custom w-100">Search</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -90,8 +98,9 @@
                     <th>Gender</th>
                     <th>Brand</th>
                     <th>Color</th>
-                    <th>Price</th>
-                    <th>Sizes</th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'price', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Price</a></th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'sales', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Sales</a></th>
+                    <th><a href="{{ route('admin.products', array_merge(request()->query(), ['sort' => 'stock', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}" class="text-white">Stock Level</a></th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -112,18 +121,19 @@
                         <td>{{ $product->brand }}</td>
                         <td>{{ $product->color }}</td>
                         <td>£{{ $product->price }}</td>
+                        <td>{{ Http::get(route('product.totalSold', ['id' => $product->id]))->body() }}</td>
                         <td>
                             @foreach($product->variants as $variant)
                                 {{ $variant->size }} ({{ $variant->stock }} left)<br>
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>   
-                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-warning btn-sm">Stock</a>
+                            <a href="{{ route('admin.editProduct', $product->id) }}" class="btn btn-custom">Edit</a>   
+                            <a href="{{ route('admin.editStock', $product->id) }}" class="btn btn-custom">Stock</a>
                             <form action="{{ route('admin.deleteProduct', $product->id) }}" method="POST" style="display: inline-block;">
                                 @csrf    
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                                <button type="submit" class="btn btn-custom" onclick="return confirm('Are you sure?');">
                                     Delete
                                 </button>
                             </form>
@@ -134,4 +144,5 @@
         </table>
     </div>
 </body>
+@include('footer')
 </html>

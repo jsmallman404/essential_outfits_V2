@@ -73,7 +73,8 @@
                 <option value="">All Orders</option>
                 <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
                 <option value="Active" {{ request('status') == 'Active' ? 'selected' : '' }}>Active</option>
-                <option value="Canceled" {{ request('status') == 'Canceled' ? 'selected' : '' }}>Canceled</option>
+                <option value="Shipped" {{ request('status') == 'Shipped' ? 'selected' : '' }}>Shipped</option>
+                <option value="Cancelled" {{ request('status') == 'Cancelled' ? 'selected' : '' }}>Cancelled</option>
             </select>
         </form>
 
@@ -95,13 +96,13 @@
                     <td>{{ $order->user->name }}</td>
                     <td>£{{ number_format($order->total_price, 2) }}</td>
                     <td>
-                        <span class="badge bg-{{ $order->status == 'Pending' ? 'warning' : ($order->status == 'Active' ? 'success' : 'danger') }}">
-                            {{ $order->status }}
-                        </span>
+                    <span class="badge bg-{{ $order->status == 'Pending' ? 'warning' : ($order->status == 'Active' || $order->status == 'Shipped' ? 'success' : 'danger') }}">
+                    {{ $order->status }}
+                        </span> 
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>
-                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-custom">View</a>
                     </td>
                 </tr>
                 @endforeach

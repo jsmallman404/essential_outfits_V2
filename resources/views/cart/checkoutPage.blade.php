@@ -6,7 +6,30 @@
     <title>Checkout</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+
+    <script>
+        function toggleCardDetails() {
+            var cardDetails = document.getElementById("card-details");
+            if (document.getElementById("card").checked) {
+                cardDetails.style.display = "block";
+                document.getElementById("card_number").setAttribute("required", "true");
+                document.getElementById("expiry_date").setAttribute("required", "true");
+                document.getElementById("cvv").setAttribute("required", "true");
+            } else {
+                cardDetails.style.display = "none";
+                document.getElementById("card_number").removeAttribute("required");
+                document.getElementById("expiry_date").removeAttribute("required");
+                document.getElementById("cvv").removeAttribute("required");
+            }
+        }
+    </script>
 </head>
+@include('header')
 <body>
 
 
@@ -84,6 +107,31 @@
 
         <h4 class="text-end">Total: £{{ number_format($total, 2) }}</h4>
 
+        
+        <h4>Payment Details</h4>
+        <div class="card p-3 mb-4">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" checked onclick="toggleCardDetails()">
+                <label class="form-check-label" for="card">Credit/Debit Card</label>
+                <p class="text-muted mt-2">Your payment details are not saved with us for security reasons.</p>
+            </div>
+            <div id="card-details" style="display: block;" class="mt-3">
+                <div class="mb-3">
+                    <label for="card_number" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div class="mb-3">
+                    <label for="expiry_date" class="form-label">Expiry Date</label>
+                    <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
+                </div>
+            </div>
+        </div>
+
+
         <div class="d-flex justify-content-between mt-3">
             <a href="{{ route('cart.index') }}" class="btn btn-secondary">Back to Cart</a>
             <form action="{{ route('cart.checkout') }}" method="POST">
@@ -93,6 +141,7 @@
         </div>
     </form>
 </div>
+@include('footer')
 
 </body>
 </html>

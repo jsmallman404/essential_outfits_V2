@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ asset('css/header.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
   <style>
       body {
           background-color: #ded4c0;
@@ -44,6 +45,22 @@
   @include('header')
 
   <div class="container">
+    <div class="text-center mb-4">
+        <h3>Average Website Rating</h3>
+        <p>
+            <strong>{{ number_format($averageWebsiteRating, 1) }}</strong> / 5
+            <br>
+            @for ($i = 1; $i <= 5; $i++)
+                @if($averageWebsiteRating >= $i)
+                    <i class="fas fa-star" style="color: #FFD700;"></i>
+                @elseif($averageWebsiteRating >= $i - 0.5)
+                    <i class="fas fa-star-half-alt" style="color: #FFD700;"></i>
+                @else
+                    <i class="far fa-star" style="color: #FFD700;"></i>
+                @endif
+            @endfor
+        </p>
+    </div>
     <h1>Website Reviews</h1>
     @if($reviews->isEmpty())
       <p class="text-center">No reviews yet.</p>
@@ -75,8 +92,12 @@
         </tbody>
       </table>
     @endif
+    <div class="mt-4 text-center">
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+@include('footer')
 </html>
