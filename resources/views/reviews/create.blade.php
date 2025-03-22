@@ -245,6 +245,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    
     gap: 40px; 
     padding: 40px 20px;
 }
@@ -253,6 +254,11 @@ textarea {
     flex: 0 0 400px; 
     display: flex;
     justify-content: center;
+    
+    
+    margin-top: 40px; 
+
+
 }
 
 
@@ -335,7 +341,7 @@ textarea {
         <div class="container mt-5">
             <h1 class="text-center">Submit a Review for {{ $product->name }}</h1>
             
-            <form action="{{ route('reviews.store') }}" method="POST">
+            <form action="{{ route('reviews.store') }}" method="POST"id="review-form">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 
@@ -357,8 +363,8 @@ textarea {
                 </div>
                 
                 <div class="text-center">
-                    <button type="submit" class="button2">Submit Review</button>
-                </div>
+    <button type="submit" class="button2" id="submit-btn">Submit Review</button>
+</div>
             </form>
         </div>
     </div>
@@ -367,6 +373,9 @@ textarea {
 
 const stars = document.querySelectorAll('#star-rating .star');
 const ratingInput = document.getElementById('rating');
+const reviewForm = document.querySelector('form');
+const commentInput = document.getElementById('comment');
+const form = document.getElementById('review-form');
 
 
 stars.forEach(star => {
@@ -399,6 +408,24 @@ stars.forEach(star => {
             stars[i].classList.add('active');
         }
     });
+});
+
+document.getElementById('submit-btn').addEventListener('click', function(event) { 
+    event.preventDefault();  
+    if (!commentInput.value){
+        alert("Please provide a Comment")
+        
+    }
+    if (ratingInput.value == 0){
+        alert("Please Provide a Rating")     
+    }
+
+    if(commentInput.value && ratingInput.value > 0  ){
+        form.submit();  
+    }
+    
+
+
 });
 
     </script>
