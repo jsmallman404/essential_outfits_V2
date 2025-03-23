@@ -55,7 +55,6 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/returns/{returnRequest}/accept', [AdminReturnController::class, 'accept'])->name('admin.returns.accept');
     Route::post('/admin/returns/{returnRequest}/reject', [AdminReturnController::class, 'reject'])->name('admin.returns.reject');
     Route::post('/admin/returns/{returnRequest}/received', [AdminReturnController::class, 'markAsReceived'])->name('admin.returns.received');
-    Route::get('/admin/website-reviews', [AdminWebsiteReviewController::class, 'index'])->name('admin.website-reviews.index');
 });
 
 Route::get('/about', function () {
@@ -156,5 +155,5 @@ Route::delete('/wishlist/remove/{productId}', [WishlistController::class, 'remov
 
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.details');
 
-
+Route::get('/admin/website-reviews', [AdminWebsiteReviewController::class, 'index'])->name('admin.website-reviews.index');
 
