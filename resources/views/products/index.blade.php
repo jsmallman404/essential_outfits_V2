@@ -270,7 +270,32 @@
     
 }
 
+.black-button {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+        }
+        .black-button:hover {
+            background-color: #333;
+        }
 
+        html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 20px; 
+}    
 
 
 
@@ -621,11 +646,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-
-
-
 
 
 
