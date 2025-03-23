@@ -123,90 +123,7 @@
             text-align: center;
             color: #795809;
         }
-        .product-card {
-            background-color: #ded4c0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-        .product-card img {
-            
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;
 
-    }
-        .product-info {
-            padding: 1rem;
-            text-align: center;
-        }
-        .product-info h5 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .product-info p {
-            font-size: 1rem;
-            color: #555;
-        }
-        .product-info button {
-            padding: 0.5rem 1.5rem;
-            border: none;
-            background-color: #222;
-            color: #ded4c0;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-        .product-info button:hover {
-            background-color: #444;
-        }
-        .view-cart-btn {
-            display: block;
-            text-align: center;
-            margin-top: 2rem;
-        }
-        .black-button {
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .black-button:hover {
-            background-color: #333;
-        }
-        .card-body {
-            justify-content: space-between;
-        }
-        .buttons-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-            margin-left: auto;
-            margin-right: auto;
-            width: fit-content;
-            margin-bottom: 10px;
-        }
-        .buttons-container a,
-        .buttons-container form button {
-            width: 150px;
-            text-align: center;
-            white-space: nowrap;
-            padding: 8px 0;
-        }
 
         html, body {
     height: 100%;
@@ -219,6 +136,104 @@
 main {
     flex: 1;
     padding-bottom: 20px; 
+}
+.product-card {
+            background-color: #ded4c0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .product-card img {
+    width: 100%;             
+    height: auto;            
+    aspect-ratio: 1 / 1;     
+    object-fit: cover;       
+}
+
+        .card-body {
+            padding: 1rem;
+            text-align: center;
+            
+        }
+        .card-body h5 {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    text-align: center;
+    word-wrap: break-word; 
+    line-height: 1.2; 
+    width: 100%; 
+    max-width: 100%; 
+    margin: 0 auto; 
+    overflow-wrap: break-word; 
+    height: 40px; 
+    max-height: none; 
+}
+
+
+
+
+
+        .card-body p {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 5px;
+            margin-bottom: -5px;
+        }
+
+
+
+.btn-container {
+    display: flex;
+    gap: 15px;  
+    width: 100%;  
+    justify-content: space-evenly;  
+    align-items: center;  
+    margin-top: 5px;
+}
+
+
+.btn-container .btn {
+    background-color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px 20px;  
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    min-width: 150px;
+    
+    box-sizing: border-box;  
+    color: #ddd;
+}
+
+.flex-fill{
+    flex: 1;
+}
+
+
+.btn-container .btn-remove {
+    background-color: black;  
+}
+
+
+.btn-container .btn-view {
+    background-color: rgb(0, 0, 0);  
+}
+
+
+.btn-container .btn-remove:hover {
+    background-color: #333;
+}
+
+.btn-container .btn-view:hover {
+    background-color: #333;
 }
 
 .black-button {
@@ -267,16 +282,16 @@ main {
                                 <img src="{{ asset('images/default-placeholder.png') }}" width="100" height="100" style="object-fit: cover;">
                             @endif
                             <div class="card-body">
-                                <h3 class="card-title">{{ $wishlistItem->product->name }}</h3>
+                                <h5 class="card-title">{{ $wishlistItem->product->name }}</h5>
                                 <p class="card-text">£{{ $wishlistItem->product->price }}</p>
-                                <div class="buttons-container">
-                                    <a href="{{ route('product.details', ['id' => $wishlistItem->product->id]) }}" class="black-button btn btn-primary">
+                                <div class="btn-container">
+                                    <a href="{{ route('product.details', ['id' => $wishlistItem->product->id]) }}" class="btn btn-view">
                                         View Product
                                     </a>
-                                    <form action="{{ route('wishlist.remove', $wishlistItem->product->id) }}" method="POST" style="display:inline;">
+                                    <form action="{{ route('wishlist.remove', $wishlistItem->product->id) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="black-button btn btn-danger">Remove</button>
+                                        <button type="submit" class=" btn btn-remove">Remove</button>
                                     </form>
                                 </div>
                             </div>
@@ -288,5 +303,55 @@ main {
     </div>
     </main>
     @include('footer')
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    
+    let productTitles = document.querySelectorAll(".card-title ");
+
+    function adjustFontSize(h5) {
+        if (!h5) return;
+
+        let textLength = h5.innerText.trim().length;
+
+        if (textLength > 50) {
+            h5.style.fontSize = "0.95rem";
+        } else if (textLength > 35) {
+            h5.style.fontSize = "1.15rem"; 
+        } else if (textLength > 17) {
+            h5.style.fontSize = "1.35rem"; 
+        } else if (textLength > 16) {
+            h5.style.fontSize = "1.7rem";
+        } else {
+            h5.style.fontSize = "1.7rem"; 
+        }
+    }
+
+    productTitles.forEach(function (h5) {
+        adjustFontSize(h5);
+    });
+
+    let observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            if (mutation.type === "childList" || mutation.type === "characterData") {
+                productTitles = document.querySelectorAll(".product-info h5"); 
+                adjustFontSize(h5);
+            }
+        });
+    });
+
+    let parentContainer = document.querySelector(".product-info").parentNode;
+
+    if (parentContainer) {
+        observer.observe(parentContainer, {
+            childList: true, 
+            subtree: true, 
+        });
+    } else {
+        console.error(" Parent container not found! Check the parent div.");
+    }
+});
+
+    </script>
 </body>
 </html>
