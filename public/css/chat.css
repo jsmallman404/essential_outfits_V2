@@ -36,20 +36,20 @@
     position: relative;
 }
 
-/* Close Button (optional) */
-.chat-header::after {
-    content: '✖';
+.chat-minimize {
     position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
     font-size: 14px;
-    transition: color 0.3s;
+    cursor: pointer;
+    padding: 5px;
 }
 
-.chat-header::after:hover {
-    color: #ff4b4b;
+.chat-minimize:hover {
+    color: #ffcd8f;
 }
 
 /* Chat Messages */

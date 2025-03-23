@@ -84,7 +84,13 @@
 
 <!-- Chatbot Window -->
 <div class="chat-container">
-  <div class="chat-header">Chat Assistant</div>
+  <div class="chat-header">
+    Chat Assistant
+    <button class="chat-minimize" title="Minimize Chat">
+      <i class="fas fa-minus"></i>
+    </button>
+
+  </div>
   <div class="chat-messages"></div>
   <div class="chat-input">
     <input type="text" id="chat-input-text" placeholder="Ask me anything...">
@@ -138,7 +144,7 @@ document.querySelector(".chat-toggle").addEventListener("click", function () {
             chatContainer.classList.add("show");
             // Clear previous messages if needed: chatBox.innerHTML = "";
             if (chatBox.childElementCount === 0) {
-                showGreetingMessage(); // 👈 Show greeting only if chat is empty
+                showGreetingMessage(); //  Show greeting only if chat is empty
             }
         }, 10);
     }
@@ -249,6 +255,21 @@ window.addEventListener("load", function () {
         }
     }, 500);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chatMinimize = document.querySelector(".chat-minimize");
+    const chatContainer = document.querySelector(".chat-container");
+
+    if (chatMinimize && chatContainer) {
+        chatMinimize.addEventListener("click", function () {
+            chatContainer.classList.remove("show");
+            setTimeout(() => {
+                chatContainer.style.display = "none";
+            }, 300);
+        });
+    }
+});
+
 
 </script>
 
