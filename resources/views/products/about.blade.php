@@ -23,15 +23,15 @@
         justify-content: flex-start;
         max-width: 80%;
         margin: 50px auto;
-        gap: 30px; /* More spacing between image and text */
+        gap: 30px; 
     }
 
     #fashion {
-    width: 48%; /* Keeps the image at 40% width */
+    width: 48%; 
     max-width: 600px;
     height: auto;    
-    margin-left: -150px; /* Moves the image fully to the left */
-    margin-top: -50px; /* Moves the image up */
+    margin-left: -150px; 
+    margin-top: -50px; 
 }
 
 
@@ -63,7 +63,7 @@
         }
 
         #fashion {
-            width: 80%; /* Makes image larger on smaller screens */
+            width: 80%; 
         }
 
         .text-container {
@@ -75,13 +75,13 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh; 
     margin: 0;
 }
 
 /* Ensure the main content takes up all available space */
 .container {
-    flex: 1; /* Pushes the footer down */
+    flex: 1;
 }
 
 /* Sticky Footer */
@@ -91,7 +91,7 @@ body {
     padding: 20px 0;
     text-align: center;
     font-family: Arial, sans-serif;
-    margin-top: auto; /* Forces the footer to bottom */
+    margin-top: auto; 
 }
 
 .footer-container {

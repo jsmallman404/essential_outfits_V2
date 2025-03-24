@@ -24,15 +24,15 @@ header {
   .nav-buttons {
   display: flex;
   justify-content: center;
-  background-color: #ded4c0; /* Light beige background */
+  background-color: #ded4c0; 
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
   flex-wrap: wrap;
   }
   
   .nav-buttons .dropdown {
-  position: relative; /* Position relative to anchor dropdown content */
-  margin: 0 15px; /* Spacing between dropdowns */
+  position: relative; 
+  margin: 0 15px; 
   }
   
   .nav-buttons a {
@@ -42,46 +42,46 @@ header {
   color: #555;
   padding: 5px 10px;
   display: block;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover */
+  transition: color 0.3s ease, background-color 0.3s ease; 
   }
   
   .nav-buttons a:hover {
-  color: #000; /* Darker text on hover */
-  background-color: #f0f0f0; /* Subtle hover effect */
-  border-radius: 5px; /* Rounded effect for hover */
+  color: #000; 
+  background-color: #f0f0f0; 
+  border-radius: 5px; 
   }
   
   /* Dropdown Content Styling */
   .dropdown-content {
-  display: none; /* Hidden by default */
-  position: absolute; /* Position relative to parent dropdown */
-  top: 100%; /* Position directly below the parent link */
+  display: none; 
+  position: absolute; 
+  top: 100%; 
   left: 0;
-  background-color: #fff; /* White background */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
-  min-width: 200px; /* Minimum dropdown width */
-  z-index: 1000; /* High z-index to ensure it is on top */
-  border-radius: 8px; /* Rounded corners for modern look */
-  overflow: hidden; /* Clip any overflowing child elements */
+  background-color: #fff; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+  min-width: 200px; 
+  z-index: 1000; 
+  border-radius: 8px; 
+  overflow: hidden; 
   }
   
   .dropdown-content a {
-  padding: 12px 20px; /* Increase padding for spacing */
+  padding: 12px 20px; 
   font-size: 1em;
-  color: #555; /* Neutral text color */
+  color: #555; 
   text-decoration: none;
-  display: block; /* Stack items vertically */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+  display: block; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
   }
   
   .dropdown-content a:hover {
-  background-color: #ded4c0; /* Highlight color on hover */
+  background-color: #ded4c0; 
   color: #000;
   }
   
   /* Show Dropdown Content on Hover */
   .dropdown:hover .dropdown-content {
-  display: block; /* Show dropdown when hovering over parent */
+  display: block; 
   }
   
   /* Responsive Styling */
@@ -106,7 +106,7 @@ header {
   }
   
   .dropdown {
-    margin: 10px 0; /* Add spacing between stacked dropdowns */
+    margin: 10px 0; 
   }
   
   .hamburger {
@@ -141,7 +141,7 @@ header {
     font-size: 14px;
     color: #555;
     transition: color 0.3s ease;
-    gap: 5px; /* Space between icon and text */
+    gap: 5px; 
   }
   
   .account-actions a:hover {
@@ -154,14 +154,13 @@ header {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f6ef;
-    width: 150px; /* Initial width */
+    width: 150px; 
     transition: width 0.3s ease;
   }
   
   .account-actions .search-bar:hover,
   .account-actions .search-bar:focus {
-    width: 250px; /* Expand on hover/focus */
+    width: 250px; 
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
-  

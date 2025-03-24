@@ -9,7 +9,7 @@
     bottom: 80px;
     right: 20px;
     width: 320px;
-    background: #ded4c0; /* Matches website color */
+    background: #ded4c0; 
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     flex-direction: column;
@@ -25,7 +25,7 @@
 
 /* Chat Header */
 .chat-header {
-    background: #8b7a5e; /* Darker shade for contrast */
+    background: #8b7a5e; 
     color: white;
     padding: 12px;
     text-align: center;
@@ -59,14 +59,14 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
-    background: #f8f3e9; /* Soft background */
+    background: #f8f3e9; 
     border-bottom: 1px solid #c2b8a5;
 }
 
 /* User Message Bubble */
 .user-message {
     align-self: flex-end;
-    background: #8b7a5e; /* Dark beige-brown */
+    background: #8b7a5e; 
     color: white;
     padding: 8px 12px;
     border-radius: 16px;
@@ -80,7 +80,7 @@
 /* Bot Message Bubble */
 .bot-message {
     align-self: flex-start;
-    background: #e6dfcc; /* Softer warm beige */
+    background: #e6dfcc; 
     color: #5a4b3c;
     padding: 8px 12px;
     border-radius: 16px;
