@@ -24,6 +24,7 @@ class ReturnController extends Controller
             ReturnRequest::create([
                 'order_id' => $orderId,
                 'order_item_id' => $itemId,
+                'return_id' => $itemId,
                 'reason' => $request->reason,
                 'status' => 'Pending',
             ]);

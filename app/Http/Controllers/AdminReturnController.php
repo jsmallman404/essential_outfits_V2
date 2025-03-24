@@ -30,15 +30,24 @@ class AdminReturnController extends Controller
     {
         $returnRequest->update(['status' => 'Accepted']);
 
+        if ($returnRequest->orderItem && $returnRequest->orderItem->order) {
+            $returnRequest->orderItem->order->update(['status' => 'Return Accepted']);
+        }
+
         return redirect()->route('admin.returns.index')->with('success', 'Return request accepted.');
     }
 
     public function reject(ReturnRequest $returnRequest)
     {
         $returnRequest->update(['status' => 'Rejected']);
+        
+        if ($returnRequest->orderItem && $returnRequest->orderItem->order) {
+            $returnRequest->orderItem->order->update(['status' => 'Return Rejected']);
+        }
 
         return redirect()->route('admin.returns.index')->with('success', 'Return request rejected.');
     }
+    
     public function markAsReceived(ReturnRequest $returnRequest)
     {
         if ($returnRequest->status == 'Accepted') {
