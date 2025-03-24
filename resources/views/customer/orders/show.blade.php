@@ -28,6 +28,8 @@
                     @elseif($order->status == 'Active') bg-success 
                     @elseif($order->status == 'Cancelled') bg-danger 
                     @elseif($order->status == 'Return Requested') bg-warning
+                    @elseif($order->status == 'Return Accepted') bg-success
+                    @elseif($order->status == 'Return Rejected') bg-danger
                     @elseif($order->status == 'Shipped') bg-success
                     @endif">
                     {{ $order->status }}
@@ -86,7 +88,7 @@
         @endif
 
         <!-- Show Return Requests if Status is "Return Requested" -->
-        @if($order->status == 'Return Requested' && $order->returnRequests->where('order_id', $order->id)->count() > 0)
+        @if(in_array($order->status, ['Return Requested', 'Return Accepted', 'Return Rejected']) && $order->returnRequests->where('order_id', $order->id)->count() > 0)
     <h4 class="mt-5 text-center">Return Requests</h4>
     <div class="table-responsive">
         <table class="table table-bordered text-center align-middle">

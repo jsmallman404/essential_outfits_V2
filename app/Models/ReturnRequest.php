@@ -9,7 +9,7 @@ class ReturnRequest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'order_item_id', 'reason', 'status'];
+    protected $fillable = ['order_id', 'order_item_id', 'return_id', 'reason', 'status'];
 
     public function order()
     {

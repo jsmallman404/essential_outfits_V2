@@ -59,6 +59,8 @@
                                         @elseif($order->status == 'Active') bg-success 
                                         @elseif($order->status == 'Cancelled') bg-danger 
                                         @elseif($order->status == 'Return Requested') bg-warning
+                                        @elseif($order->status == 'Return Accepted') bg-success
+                                        @elseif($order->status == 'Return Rejected') bg-danger
                                         @elseif($order->status == 'Shipped') bg-success
                                         @endif">
                                         {{ $order->status }}
