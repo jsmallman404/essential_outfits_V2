@@ -161,59 +161,7 @@ header {
         .container {
             margin-top: 50px;
         }
-        h2 {
-            font-size: 3rem;
-            font-weight: bold;
-            text-align: center;
-            color: #795809;
-        }
-        .product-card {
-            background-color: #ded4c0;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-        .product-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-        .product-info {
-            padding: 1rem;
-            text-align: center;
-        }
-        .product-info h5 {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .product-info p {
-            font-size: 1rem;
-            color: #555;
-        }
-        .product-info button {
-            padding: 0.5rem 1.5rem;
-            border: none;
-            background-color: #222;
-            color: #ded4c0;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-        .product-info button:hover {
-            background-color: #444;
-        }
-        .view-cart-btn {
-            display: block;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
+        
 
         .container {
     width: 90%;
@@ -223,6 +171,7 @@ header {
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
+    
     margin-top: 80px; /* Adjusted to prevent overlap with top nav */
 }
 
@@ -244,40 +193,9 @@ textarea {
     height: 100px;
 }
 
-/* Submit Button */
-.button2 {
-    width: 100%;
-    padding: 12px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 15px;
-}
 
-.button2:hover {
-    background-color: #555;
-}
 
-/* ================================
-   Success Message
-================================ */
-.alert-success {
-    margin-top: 20px;
-    color: green;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 5px;
-    background: #eaffea;
-    border: 1px solid green;
-}
 
-/* ================================
-   Responsive Design
-================================ */
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -302,33 +220,101 @@ textarea {
 
 
 
-#star-rating .star {
+#star-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px; 
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+
+
+.star {
     font-size: 24px;
-    color: #ddd; /* default unselected color */
+    color: #ccc;
     cursor: pointer;
-    transition: color 0.3s;
-}
-
-#star-rating .star.selected {
-    color: #FFD700; /* gold color for selected stars */
+    transition: color 0.2s ease-in-out;
 }
 
 
-/* review buton */
-.btn-reviews {
-    background-color: #8b7e68; /* Taupe/Brown color */
-    color: white;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    text-decoration: none;
-    display: inline-block;
+.star:hover,
+.star.hover,
+.star.active {
+    color: #f7d74e; 
 }
 
-.btn-reviews:hover {
-    background-color: #6c5f4b;
-    transform: scale(1.05);
+
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button2 {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color:rgb(0, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.button2:hover {
+  background-color: #333;
+}
+
+
+
+.button3 {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color:rgb(0, 0, 0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.button3:hover {
+  background-color: #333;
+}
+
+
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+  text-align: center;
+  
+}
+
+h2{
+  font-size: 35px;
 }
 
     </style>
@@ -346,24 +332,21 @@ textarea {
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="button2">Send</button>
+        <button type="submit" class="button3">Send</button>
 
     </form>
 
-    @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
 </div>
-<!-- Add this section after your existing contact form markup -->
+
+
+
 <div class="container mt-5">
   <h2 class="text-center">Review Our Website</h2>
   @if(session('review_success'))
     <div class="alert alert-success">{{ session('review_success') }}</div>
   @endif
-  <form action="{{ route('website-reviews.store') }}" method="POST">
+  <form id="review-form" action="{{ route('website-reviews.store') }}" method="POST">
+
     @csrf
     <div class="mb-3 text-center">
       <label for="rating" class="form-label">Rating:</label>
@@ -377,33 +360,96 @@ textarea {
       <input type="hidden" name="rating" id="rating" value="0" required>
     </div>
     <div class="mb-3">
-      <label for="comment" class="form-label">Comment:</label>
-      <textarea name="comment" id="comment" class="form-control" rows="4" required></textarea>
+      <label for="comment">Comment:</label>
+      <textarea name="comment" id="comment" required></textarea>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
-    <a href="{{ url('/admin/website-reviews') }}" class="btn-reviews">
-    <i class="fas fa-star"></i> View Website Reviews
-</a>
+
+    <!-- Button container added here -->
+    <div class="button-container">
+      <button type="submit" class="button2" id="submit-btn">Submit Review</button>
+      <a href="{{ url('/admin/website-reviews') }}" class="button2">
+        View Website Reviews
+      </a>
+    </div>
   </form>
+  
+  @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+
+
+
 </div>
 
 
 
 
+
+
 <script>
-  // JavaScript to handle star rating selection
-  const stars = document.querySelectorAll('#star-rating .star');
-  const ratingInput = document.getElementById('rating');
-  stars.forEach(star => {
-    star.addEventListener('click', () => {
-      const ratingValue = star.getAttribute('data-value');
-      ratingInput.value = ratingValue;
-      stars.forEach(s => s.classList.remove('selected'));
-      for (let i = 0; i < ratingValue; i++) {
-        stars[i].classList.add('selected');
-      }
+
+
+const stars = document.querySelectorAll('#star-rating .star');
+const ratingInput = document.getElementById('rating');
+const reviewForm = document.querySelector('form');
+const commentInput = document.getElementById('comment');
+const form = document.getElementById('review-form');
+
+
+stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+        const ratingValue = star.getAttribute('data-value');
+        
+        stars.forEach((s, index) => {
+            if (index < ratingValue) {
+                s.classList.add('hover');
+            } else {
+                s.classList.remove('hover');
+            }
+        });
     });
-  });
+
+    star.addEventListener('mouseout', () => {
+        stars.forEach(s => {
+            s.classList.remove('hover');
+        });
+    });
+
+    
+    star.addEventListener('click', () => {
+        const ratingValue = star.getAttribute('data-value');
+        ratingInput.value = ratingValue;
+        
+        stars.forEach(s => s.classList.remove('active'));
+        
+        for (let i = 0; i < ratingValue; i++) {
+            stars[i].classList.add('active');
+        }
+    });
+});
+
+document.getElementById('submit-btn').addEventListener('click', function(event) { 
+    event.preventDefault();  
+    if (!commentInput.value){
+        alert("Please provide a Comment")
+        
+    }
+    if (ratingInput.value == 0){
+        alert("Please Provide a Rating")     
+    }
+
+    if(commentInput.value && ratingInput.value > 0  ){
+        form.submit();  
+    }
+    
+
+
+});
+
+ 
 </script>
 
 </body>
