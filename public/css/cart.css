@@ -112,6 +112,6 @@ h4 {
 }
 
 .navbar-brand {
-    display: block; /* Ensures it takes full width */
-    margin-bottom: 20px; /* Adds space below the logo */
+    display: block; 
+    margin-bottom: 20px; 
 }

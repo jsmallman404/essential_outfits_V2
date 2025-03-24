@@ -21,14 +21,14 @@ header {
 .nav-buttons {
   display: flex;
   justify-content: center;
-  background-color: #ded4c0; /* Light beige background */
+  background-color: #ded4c0; 
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
 }
 
 .nav-buttons .dropdown {
-  position: relative; /* Position relative to anchor dropdown content */
-  margin: 0 15px; /* Spacing between dropdowns */
+  position: relative; 
+  margin: 0 15px; 
 }
 
 .nav-buttons a {
@@ -38,58 +38,58 @@ header {
   color: #555;
   padding: 5px 10px;
   display: block;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover */
+  transition: color 0.3s ease, background-color 0.3s ease; 
 }
 
 .nav-buttons a:hover {
-  color: #000; /* Darker text on hover */
-  background-color: #f0f0f0; /* Subtle hover effect */
-  border-radius: 5px; /* Rounded effect for hover */
+  color: #000; 
+  background-color: #f0f0f0; 
+  border-radius: 5px; 
 }
 
 /* Dropdown Content Styling */
 .dropdown-content {
-  display: none; /* Hidden by default */
-  position: absolute; /* Position relative to parent dropdown */
-  top: 100%; /* Position directly below the parent link */
+  display: none; 
+  position: absolute; 
+  top: 100%; 
   left: 0;
-  background-color: #fff; /* White background */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for depth */
-  min-width: 200px; /* Minimum dropdown width */
-  z-index: 1000; /* High z-index to ensure it is on top */
-  border-radius: 8px; /* Rounded corners for modern look */
-  overflow: hidden; /* Clip any overflowing child elements */
+  background-color: #fff; 
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
+  min-width: 200px; 
+  z-index: 1000; 
+  border-radius: 8px; 
+  overflow: hidden; 
 }
 
 .dropdown-content a {
-  padding: 12px 20px; /* Increase padding for spacing */
+  padding: 12px 20px; 
   font-size: 1em;
-  color: #555; /* Neutral text color */
+  color: #555; 
   text-decoration: none;
-  display: block; /* Stack items vertically */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+  display: block; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .dropdown-content a:hover {
-  background-color: #ded4c0; /* Highlight color on hover */
+  background-color: #ded4c0; 
   color: #000;
 }
 
 /* Show Dropdown Content on Hover */
 .dropdown:hover .dropdown-content {
-  display: block; /* Show dropdown when hovering over parent */
+  display: block; 
 }
 
 /* Responsive Styling */
 @media (max-width: 768px) {
   .nav-buttons {
-    flex-direction: column; /* Stack navigation links vertically */
+    flex-direction: column; 
     align-items: flex-start;
     padding: 20px;
   }
 
   .dropdown {
-    margin: 10px 0; /* Add spacing between stacked dropdowns */
+    margin: 10px 0; 
   }
 }
 
@@ -107,7 +107,7 @@ header {
     font-size: 14px;
     color: #555;
     transition: color 0.3s ease;
-    gap: 5px; /* Space between icon and text */
+    gap: 5px; 
 }
 
 .account-actions a:hover {
@@ -120,23 +120,21 @@ header {
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #f9f6ef;
-    width: 150px; /* Initial width */
+    width: 150px; 
     transition: width 0.3s ease;
 }
 
 .account-actions .search-bar:hover,
 .account-actions .search-bar:focus {
-    width: 250px; /* Expand on hover/focus */
+    width: 250px; 
     outline: none;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-/* ================================
-   General Page Styling
-================================ */
+/* General Page Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #DED4C0; /* Theme Background */
+    background-color: #DED4C0; 
     margin: 0;
     padding: 0;
     display: flex;
@@ -145,12 +143,10 @@ body {
     height: 100vh;
 }
 
-/* ================================
-   Top Navigation Bar
-================================ */
+/* Top Navigation Bar */
 .top-nav {
     width: 100%;
-    background-color: #DED4C0; /* Matching the background */
+    background-color: #DED4C0; 
     padding: 10px 0;
     display: flex;
     justify-content: center;
@@ -165,7 +161,7 @@ body {
 .nav-button {
     text-decoration: none;
     font-size: 16px;
-    color: #333; /* Dark color for readability */
+    color: #333; 
     padding: 10px 15px;
     border-radius: 5px;
     transition: background 0.3s ease, color 0.3s ease;
@@ -173,13 +169,11 @@ body {
 
 /* Hover Effect */
 .nav-button:hover {
-    background: #cbbf9c; /* Slightly darker for contrast */
+    background: #cbbf9c; 
     color: #000;
 }
 
-/* ================================
-   Contact Form Container
-================================ */
+/* Contact Form Container */
 .container {
     width: 90%;
     max-width: 600px;
@@ -188,7 +182,7 @@ body {
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
-    margin-top: 80px; /* Adjusted to prevent overlap with top nav */
+    margin-top: 80px; 
 }
 
 /* Form Inputs */
@@ -227,9 +221,7 @@ button:hover {
     background-color: #555;
 }
 
-/* ================================
-   Success Message
-================================ */
+/* Success Message */
 .alert-success {
     margin-top: 20px;
     color: green;
@@ -240,9 +232,7 @@ button:hover {
     border: 1px solid green;
 }
 
-/* ================================
-   Responsive Design
-================================ */
+/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         width: 95%;
